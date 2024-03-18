@@ -7,8 +7,8 @@ init(control(x)).
 
 legal(x, c) :- true(control(x)).
 legal(x, d) :- true(control(x)).
-legal(o, c) :- true(control(x)).
-legal(o, d) :- true(control(x)).
+legal(o, c) :- true(control(o)).
+legal(o, d) :- true(control(o)).
 legal(x, noop) :- true(control(o)).
 legal(o, noop) :- true(control(x)).
 

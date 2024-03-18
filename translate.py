@@ -244,7 +244,7 @@ def parse_rule(rule: str):
 
 # print all the variables for the environment
 def print_environment_vars(maxd:int =3):
-    print('    Vars')
+    print('    Vars:')
     print(f'        counter: 0 .. {maxd};')
     print(f'        init: 0 .. {maxd};')
     print(f'        act_step: boolean;')
@@ -261,7 +261,7 @@ def print_environment_vars(maxd:int =3):
         for observations in see[r]:
             print(f'        see_{r}_{observations}_1: boolean;')
             print(f'        see_{r}_{observations}_1_obs: boolean;')
-            print(f'        next_see_{r}_{observations}_1: boolean;')
+            print(f'        next_sees_{r}_{observations}_1: boolean;')
     # print the goals
     for r in goal.keys():
         for score in goal[r]:
@@ -291,10 +291,10 @@ def print_environment_vars(maxd:int =3):
 def print_evolutions(maxd:int = 3):
     print('    Evolution:')
     print(f'        -- print the counters')
-    print('         ok = true if (ok = true);')
-    print('         (init = init - 1) if (init > 0);')
-    print('         (init = 0) if (init = 0);')
-    print(f'        (counter = counter + 1) if !(init <> 0 or (terminal = true and counter = 0) or counter = {maxd});')
+    print('        ok = true if (ok = true);')
+    print('        (init = init - 1) if (init > 0);')
+    print('        (init = 0) if (init = 0);')
+    print(f'       (counter = counter + 1) if !(init <> 0 or (terminal = true and counter = 0) or counter = {maxd});')
     print(f'        (counter = 0) if (init <> 0 or (terminal = true and counter = 0) or counter = {maxd});')
     print(f'        act_step = false if ((init > 1) or (counter < {maxd} and init = 0 and act_step = false) or (counter = {maxd} and init = 0 and act_step = true));')
     print(f'        act_step = true if !((init > 1) or (counter < {maxd} and init = 0 and act_step = false) or (counter = {maxd} and init = 0 and act_step = true));')    
@@ -313,20 +313,6 @@ def print_evolutions(maxd:int = 3):
             print(f'        {d}=false if !{cond};')
     print()
 
-    print(f'        -- print the dependencies')
-    for d in dependency.keys():
-        rule = dependency[d]
-        if len(rule) == 0:
-            print(f'        {d}=false if (ok = true);')
-        else:
-            cond = '(' + rule[0]
-            for i in range (1, len(rule)):
-                cond = cond + ' or ' + rule[i]
-            cond = cond + ')'
-            print(f'        {d}=true if {cond};')
-            print(f'        {d}=false if !{cond};')
-    print()
-    
     print(f'        -- print the next for actions')
     for r in legal.keys():
         for act in legal[r]:
@@ -370,8 +356,13 @@ def print_evolutions(maxd:int = 3):
     
     # print the evolutions for true
     for b in base:
-        print(f'        true_{b} = next_{b} if ((init = 0 and act_step = true and counter = {maxd}));')
-        print(f'        true_{b} = true_{b} if !((init = 0 and act_step = true and counter = {maxd}));')
+        if b in init:
+            print(f'        true_{b} = next_{b} if ((init = 0 and act_step = true and counter = {maxd}));')
+            print(f'        true_{b} = true if (init = {maxd});')
+            print(f'        true_{b} = true_{b} if !((init = 0 and act_step = true and counter = {maxd}) or (init = {maxd}));')
+        else:
+            print(f'        true_{b} = next_{b} if ((init = 0 and act_step = true and counter = {maxd}));')
+            print(f'        true_{b} = true_{b} if !((init = 0 and act_step = true and counter = {maxd}));')
 
 
     # print the evolutions for recall
@@ -383,7 +374,7 @@ def print_evolutions(maxd:int = 3):
     
     for r in see.keys():
         for observations in see[r]:
-            print(f'        see_{r}_{observations}_1 = next_see_{r}_{observations}_1 if ((init = 0 and act_step = true and counter = {maxd}));')
+            print(f'        see_{r}_{observations}_1 = next_sees_{r}_{observations}_1 if ((init = 0 and act_step = true and counter = {maxd}));')
             print(f'        see_{r}_{observations}_1 = see_{r}_{observations}_1 if !((init = 0 and act_step = true and counter = {maxd}));')
     
 
@@ -404,7 +395,7 @@ def print_init(maxd:int = 3):
         for observations in see[r]:
             print(f'    and Environment.see_{r}_{observations}_1 = false')
             print(f'    and Environment.see_{r}_{observations}_1_obs = false')
-            print(f'    and Environment.next_see_{r}_{observations}_1 = false')
+            print(f'    and Environment.next_sees_{r}_{observations}_1 = false')
     # print the goals
     for r in goal.keys():
         for score in goal[r]:
@@ -434,6 +425,21 @@ def print_init(maxd:int = 3):
     
 def print_agent(agent):
     print(f'Agent player_{agent}')
+    print('    Lobsvars={init,counter,act_step', end='')
+    for observations in see[agent]:
+        print(f', see_{agent}_{observations}_1_obs', end='')
+    # print the goals
+    for score in goal[agent]:
+        print(f', goal_{agent}_{score}_obs', end='')
+    # print the legals
+    for atom in legal[agent]:
+        print(f', legal_{agent}_{atom}_obs', end='')
+    # print the terminal
+    print(f', terminal_obs', end='')
+    # print the does
+    for act in legal[agent]:
+        print(f', done_{agent}_{act}_1_obs', end='')
+    print('};')
     print('    Vars:')
     print()
     print('    end Vars')
@@ -443,7 +449,7 @@ def print_agent(agent):
     print('none};')
     print('    Protocol:')
     for act in legal[agent]:
-        print(f'        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_{agent}_{act}_obs = true): ' + '{' + f'{act}' + '}')
+        print(f'        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_{agent}_{act}_obs = true): ' + '{' + f'{act}' + '};')
     print('        (Environment.counter > 0 or Environment.init > 0 or Environment.act_step = false or Environment.terminal_obs = true) : {none};')
     print('    end Protocol')
     print('    Evolution:\n\n    end Evolution')
@@ -521,3 +527,4 @@ if __name__ == "__main__":
         sys.exit(1)
     
     gdl2slk(sys.argv[1])
+    # debug()

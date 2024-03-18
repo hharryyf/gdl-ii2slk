@@ -1,0 +1,419 @@
+Semantics=SingleAssignment;
+
+Agent Environment
+-- maximum chain length 2
+    Vars:
+        counter: 0 .. 3;
+        init: 0 .. 3;
+        act_step: boolean;
+        ok: boolean;
+        role_o: boolean;
+        role_x: boolean;
+        true_cd: boolean;
+        next_cd: boolean;
+        true_control_x: boolean;
+        next_control_x: boolean;
+        true_dd: boolean;
+        next_dd: boolean;
+        true_xd: boolean;
+        next_xd: boolean;
+        true_cc: boolean;
+        next_cc: boolean;
+        true_control_o: boolean;
+        next_control_o: boolean;
+        true_xc: boolean;
+        next_xc: boolean;
+        true_dc: boolean;
+        next_dc: boolean;
+        see_o_done_1: boolean;
+        see_o_done_1_obs: boolean;
+        next_sees_o_done_1: boolean;
+        see_x_done_1: boolean;
+        see_x_done_1_obs: boolean;
+        next_sees_x_done_1: boolean;
+        goal_x_2: boolean;
+        goal_x_2_obs: boolean;
+        goal_x_0: boolean;
+        goal_x_0_obs: boolean;
+        goal_x_3: boolean;
+        goal_x_3_obs: boolean;
+        goal_x_5: boolean;
+        goal_x_5_obs: boolean;
+        goal_x_4: boolean;
+        goal_x_4_obs: boolean;
+        goal_o_2: boolean;
+        goal_o_2_obs: boolean;
+        goal_o_0: boolean;
+        goal_o_0_obs: boolean;
+        goal_o_3: boolean;
+        goal_o_3_obs: boolean;
+        goal_o_5: boolean;
+        goal_o_5_obs: boolean;
+        goal_o_4: boolean;
+        goal_o_4_obs: boolean;
+        legal_x_c: boolean;
+        legal_x_c_obs: boolean;
+        legal_x_d: boolean;
+        legal_x_d_obs: boolean;
+        legal_x_noop: boolean;
+        legal_x_noop_obs: boolean;
+        legal_o_c: boolean;
+        legal_o_c_obs: boolean;
+        legal_o_d: boolean;
+        legal_o_d_obs: boolean;
+        legal_o_noop: boolean;
+        legal_o_noop_obs: boolean;
+        terminal: boolean;
+        terminal_obs: boolean;
+        does_x_c: boolean;
+        done_x_c_1: boolean;
+        done_x_c_1_obs: boolean;
+        next_done_x_c_1: boolean;
+        does_x_d: boolean;
+        done_x_d_1: boolean;
+        done_x_d_1_obs: boolean;
+        next_done_x_d_1: boolean;
+        does_x_noop: boolean;
+        done_x_noop_1: boolean;
+        done_x_noop_1_obs: boolean;
+        next_done_x_noop_1: boolean;
+        does_o_c: boolean;
+        done_o_c_1: boolean;
+        done_o_c_1_obs: boolean;
+        next_done_o_c_1: boolean;
+        does_o_d: boolean;
+        done_o_d_1: boolean;
+        done_o_d_1_obs: boolean;
+        next_done_o_d_1: boolean;
+        does_o_noop: boolean;
+        done_o_noop_1: boolean;
+        done_o_noop_1_obs: boolean;
+        next_done_o_noop_1: boolean;
+    end Vars
+    Actions = { none };
+    Protocol:
+        Other: {none};
+    end Protocol
+    Evolution:
+        -- print the counters
+         ok = true if (ok = true);
+         (init = init - 1) if (init > 0);
+         (init = 0) if (init = 0);
+        (counter = counter + 1) if !(init <> 0 or (terminal = true and counter = 0) or counter = 3);
+        (counter = 0) if (init <> 0 or (terminal = true and counter = 0) or counter = 3);
+        act_step = false if ((init > 1) or (counter < 3 and init = 0 and act_step = false) or (counter = 3 and init = 0 and act_step = true));
+        act_step = true if !((init > 1) or (counter < 3 and init = 0 and act_step = false) or (counter = 3 and init = 0 and act_step = true));
+
+        -- print the dependencies
+        role_x=true if ((ok = true));
+        role_x=false if !((ok = true));
+        role_o=true if ((ok = true));
+        role_o=false if !((ok = true));
+        legal_x_c=true if (((true_control_x = true)));
+        legal_x_c=false if !(((true_control_x = true)));
+        legal_x_d=true if (((true_control_x = true)));
+        legal_x_d=false if !(((true_control_x = true)));
+        legal_o_c=true if (((true_control_o = true)));
+        legal_o_c=false if !(((true_control_o = true)));
+        legal_o_d=true if (((true_control_o = true)));
+        legal_o_d=false if !(((true_control_o = true)));
+        legal_x_noop=true if (((true_control_o = true)));
+        legal_x_noop=false if !(((true_control_o = true)));
+        legal_o_noop=true if (((true_control_x = true)));
+        legal_o_noop=false if !(((true_control_x = true)));
+        next_control_x=true if (((true_control_o = true)));
+        next_control_x=false if !(((true_control_o = true)));
+        next_control_o=true if (((true_control_x = true)));
+        next_control_o=false if !(((true_control_x = true)));
+        next_xc=true if (((does_x_c = true)));
+        next_xc=false if !(((does_x_c = true)));
+        next_xd=true if (((does_x_d = true)));
+        next_xd=false if !(((does_x_d = true)));
+        next_cc=true if (((does_o_c = true) and (true_xc = true)));
+        next_cc=false if !(((does_o_c = true) and (true_xc = true)));
+        next_dc=true if (((does_o_c = true) and (true_xd = true)));
+        next_dc=false if !(((does_o_c = true) and (true_xd = true)));
+        next_cd=true if (((does_o_d = true) and (true_xc = true)));
+        next_cd=false if !(((does_o_d = true) and (true_xc = true)));
+        next_dd=true if (((does_o_d = true) and (true_xd = true)));
+        next_dd=false if !(((does_o_d = true) and (true_xd = true)));
+        terminal=true if (((true_cc = true)) or ((true_cd = true)) or ((true_dc = true)) or ((true_dd = true)));
+        terminal=false if !(((true_cc = true)) or ((true_cd = true)) or ((true_dc = true)) or ((true_dd = true)));
+        goal_x_3=true if (((true_cc = true)));
+        goal_x_3=false if !(((true_cc = true)));
+        goal_o_3=true if (((true_cc = true)));
+        goal_o_3=false if !(((true_cc = true)));
+        goal_x_2=true if (((true_cd = true)));
+        goal_x_2=false if !(((true_cd = true)));
+        goal_o_5=true if (((true_cd = true)));
+        goal_o_5=false if !(((true_cd = true)));
+        goal_x_5=true if (((true_dc = true)));
+        goal_x_5=false if !(((true_dc = true)));
+        goal_o_2=true if (((true_dc = true)));
+        goal_o_2=false if !(((true_dc = true)));
+        goal_x_4=true if (((true_dd = true)));
+        goal_x_4=false if !(((true_dd = true)));
+        goal_o_4=true if (((true_dd = true)));
+        goal_o_4=false if !(((true_dd = true)));
+        goal_x_0=true if (((true_dd = false) and (true_cc = false) and (true_cd = false) and (true_dc = false)));
+        goal_x_0=false if !(((true_dd = false) and (true_cc = false) and (true_cd = false) and (true_dc = false)));
+        goal_o_0=true if (((true_dd = false) and (true_cc = false) and (true_cd = false) and (true_dc = false)));
+        goal_o_0=false if !(((true_dd = false) and (true_cc = false) and (true_cd = false) and (true_dc = false)));
+        next_sees_o_done_1=true if (((true_control_x = true)));
+        next_sees_o_done_1=false if !(((true_control_x = true)));
+        next_sees_x_done_1=true if (((true_control_x = true)));
+        next_sees_x_done_1=false if !(((true_control_x = true)));
+
+        -- print the next for actions
+        next_done_x_c_1 = true if (does_x_c = true);
+        next_done_x_c_1 = false if !(does_x_c = true);
+        next_done_x_d_1 = true if (does_x_d = true);
+        next_done_x_d_1 = false if !(does_x_d = true);
+        next_done_x_noop_1 = true if (does_x_noop = true);
+        next_done_x_noop_1 = false if !(does_x_noop = true);
+        next_done_o_c_1 = true if (does_o_c = true);
+        next_done_o_c_1 = false if !(does_o_c = true);
+        next_done_o_d_1 = true if (does_o_d = true);
+        next_done_o_d_1 = false if !(does_o_d = true);
+        next_done_o_noop_1 = true if (does_o_noop = true);
+        next_done_o_noop_1 = false if !(does_o_noop = true);
+        -- local observation evolution
+        goal_x_2_obs = goal_x_2_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_x_2_obs = goal_x_2 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_x_0_obs = goal_x_0_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_x_0_obs = goal_x_0 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_x_3_obs = goal_x_3_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_x_3_obs = goal_x_3 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_x_5_obs = goal_x_5_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_x_5_obs = goal_x_5 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_x_4_obs = goal_x_4_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_x_4_obs = goal_x_4 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_2_obs = goal_o_2_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_2_obs = goal_o_2 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_0_obs = goal_o_0_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_0_obs = goal_o_0 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_3_obs = goal_o_3_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_3_obs = goal_o_3 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_5_obs = goal_o_5_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_5_obs = goal_o_5 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_4_obs = goal_o_4_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        goal_o_4_obs = goal_o_4 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_x_c_obs = legal_x_c_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_x_c_obs = legal_x_c if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_x_d_obs = legal_x_d_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_x_d_obs = legal_x_d if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_x_noop_obs = legal_x_noop_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_x_noop_obs = legal_x_noop if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_o_c_obs = legal_o_c_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_o_c_obs = legal_o_c if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_o_d_obs = legal_o_d_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_o_d_obs = legal_o_d if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_o_noop_obs = legal_o_noop_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        legal_o_noop_obs = legal_o_noop if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        see_o_done_1_obs = see_o_done_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        see_o_done_1_obs = see_o_done_1 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        see_x_done_1_obs = see_x_done_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        see_x_done_1_obs = see_x_done_1 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        terminal_obs = terminal_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        terminal_obs = terminal if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_x_c_1_obs = done_x_c_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_x_c_1_obs = done_x_c_1 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_x_d_1_obs = done_x_d_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_x_d_1_obs = done_x_d_1 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_x_noop_1_obs = done_x_noop_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_x_noop_1_obs = done_x_noop_1 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_o_c_1_obs = done_o_c_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_o_c_1_obs = done_o_c_1 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_o_d_1_obs = done_o_d_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_o_d_1_obs = done_o_d_1 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_o_noop_1_obs = done_o_noop_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = 3));
+        done_o_noop_1_obs = done_o_noop_1 if (init = 1 or (init = 0 and act_step = false and counter = 3));
+        does_x_c = true if (player_x.Action = c and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_x_c = false if (counter = 3 and act_step = true);
+        does_x_c = does_x_c  if !((counter = 3 and act_step = true) or (player_x.Action = c and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_x_d = true if (player_x.Action = d and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_x_d = false if (counter = 3 and act_step = true);
+        does_x_d = does_x_d  if !((counter = 3 and act_step = true) or (player_x.Action = d and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_x_noop = true if (player_x.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_x_noop = false if (counter = 3 and act_step = true);
+        does_x_noop = does_x_noop  if !((counter = 3 and act_step = true) or (player_x.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_o_c = true if (player_o.Action = c and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_o_c = false if (counter = 3 and act_step = true);
+        does_o_c = does_o_c  if !((counter = 3 and act_step = true) or (player_o.Action = c and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_o_d = true if (player_o.Action = d and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_o_d = false if (counter = 3 and act_step = true);
+        does_o_d = does_o_d  if !((counter = 3 and act_step = true) or (player_o.Action = d and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_o_noop = true if (player_o.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_o_noop = false if (counter = 3 and act_step = true);
+        does_o_noop = does_o_noop  if !((counter = 3 and act_step = true) or (player_o.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false));
+        true_cd = next_cd if ((init = 0 and act_step = true and counter = 3));
+        true_cd = true_cd if !((init = 0 and act_step = true and counter = 3));
+        true_control_x = next_control_x if ((init = 0 and act_step = true and counter = 3));
+        true_control_x = true if (init = 3);
+        true_control_x = true_control_x if !((init = 0 and act_step = true and counter = 3) or (init = 3));
+        true_dd = next_dd if ((init = 0 and act_step = true and counter = 3));
+        true_dd = true_dd if !((init = 0 and act_step = true and counter = 3));
+        true_xd = next_xd if ((init = 0 and act_step = true and counter = 3));
+        true_xd = true_xd if !((init = 0 and act_step = true and counter = 3));
+        true_cc = next_cc if ((init = 0 and act_step = true and counter = 3));
+        true_cc = true_cc if !((init = 0 and act_step = true and counter = 3));
+        true_control_o = next_control_o if ((init = 0 and act_step = true and counter = 3));
+        true_control_o = true_control_o if !((init = 0 and act_step = true and counter = 3));
+        true_xc = next_xc if ((init = 0 and act_step = true and counter = 3));
+        true_xc = true_xc if !((init = 0 and act_step = true and counter = 3));
+        true_dc = next_dc if ((init = 0 and act_step = true and counter = 3));
+        true_dc = true_dc if !((init = 0 and act_step = true and counter = 3));
+        next_done_x_c_1 = next_done_x_c_1 if ((init = 0 and act_step = true and counter = 3));
+        done_x_c_1 = done_x_c_1 if !((init = 0 and act_step = true and counter = 3));
+        next_done_x_d_1 = next_done_x_d_1 if ((init = 0 and act_step = true and counter = 3));
+        done_x_d_1 = done_x_d_1 if !((init = 0 and act_step = true and counter = 3));
+        next_done_x_noop_1 = next_done_x_noop_1 if ((init = 0 and act_step = true and counter = 3));
+        done_x_noop_1 = done_x_noop_1 if !((init = 0 and act_step = true and counter = 3));
+        next_done_o_c_1 = next_done_o_c_1 if ((init = 0 and act_step = true and counter = 3));
+        done_o_c_1 = done_o_c_1 if !((init = 0 and act_step = true and counter = 3));
+        next_done_o_d_1 = next_done_o_d_1 if ((init = 0 and act_step = true and counter = 3));
+        done_o_d_1 = done_o_d_1 if !((init = 0 and act_step = true and counter = 3));
+        next_done_o_noop_1 = next_done_o_noop_1 if ((init = 0 and act_step = true and counter = 3));
+        done_o_noop_1 = done_o_noop_1 if !((init = 0 and act_step = true and counter = 3));
+        see_o_done_1 = next_sees_o_done_1 if ((init = 0 and act_step = true and counter = 3));
+        see_o_done_1 = see_o_done_1 if !((init = 0 and act_step = true and counter = 3));
+        see_x_done_1 = next_sees_x_done_1 if ((init = 0 and act_step = true and counter = 3));
+        see_x_done_1 = see_x_done_1 if !((init = 0 and act_step = true and counter = 3));
+    end Evolution
+end Agent
+
+Agent player_o
+    Lobsvars={init,counter,act_step, see_o_done_1_obs, goal_o_2_obs, goal_o_0_obs, goal_o_3_obs, goal_o_5_obs, goal_o_4_obs, legal_o_c_obs, legal_o_d_obs, legal_o_noop_obs, terminal_obs, done_o_c_1_obs, done_o_d_1_obs, done_o_noop_1_obs};
+    Vars:
+
+    end Vars
+    Actions = {c, d, noop, none};
+    Protocol:
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_o_c_obs = true): {c};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_o_d_obs = true): {d};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_o_noop_obs = true): {noop};
+        (Environment.counter > 0 or Environment.init > 0 or Environment.act_step = false or Environment.terminal_obs = true) : {none};
+    end Protocol
+    Evolution:
+
+    end Evolution
+end Agent
+
+
+Agent player_x
+    Lobsvars={init,counter,act_step, see_x_done_1_obs, goal_x_2_obs, goal_x_0_obs, goal_x_3_obs, goal_x_5_obs, goal_x_4_obs, legal_x_c_obs, legal_x_d_obs, legal_x_noop_obs, terminal_obs, done_x_c_1_obs, done_x_d_1_obs, done_x_noop_1_obs};
+    Vars:
+
+    end Vars
+    Actions = {c, d, noop, none};
+    Protocol:
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_x_c_obs = true): {c};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_x_d_obs = true): {d};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_x_noop_obs = true): {noop};
+        (Environment.counter > 0 or Environment.init > 0 or Environment.act_step = false or Environment.terminal_obs = true) : {none};
+    end Protocol
+    Evolution:
+
+    end Evolution
+end Agent
+
+Evaluation
+
+end Evaluation
+
+InitStates
+    Environment.counter = 0 and Environment.ok = true and Environment.init = 3 and Environment.act_step = false
+    and Environment.role_o = false
+    and Environment.role_x = false
+    and Environment.true_cd = false
+    and Environment.next_cd = false
+    and Environment.true_control_x = false
+    and Environment.next_control_x = false
+    and Environment.true_dd = false
+    and Environment.next_dd = false
+    and Environment.true_xd = false
+    and Environment.next_xd = false
+    and Environment.true_cc = false
+    and Environment.next_cc = false
+    and Environment.true_control_o = false
+    and Environment.next_control_o = false
+    and Environment.true_xc = false
+    and Environment.next_xc = false
+    and Environment.true_dc = false
+    and Environment.next_dc = false
+    and Environment.see_o_done_1 = false
+    and Environment.see_o_done_1_obs = false
+    and Environment.next_sees_o_done_1 = false
+    and Environment.see_x_done_1 = false
+    and Environment.see_x_done_1_obs = false
+    and Environment.next_sees_x_done_1 = false
+    and Environment.goal_x_2 = false
+    and Environment.goal_x_2_obs = false
+    and Environment.goal_x_0 = false
+    and Environment.goal_x_0_obs = false
+    and Environment.goal_x_3 = false
+    and Environment.goal_x_3_obs = false
+    and Environment.goal_x_5 = false
+    and Environment.goal_x_5_obs = false
+    and Environment.goal_x_4 = false
+    and Environment.goal_x_4_obs = false
+    and Environment.goal_o_2 = false
+    and Environment.goal_o_2_obs = false
+    and Environment.goal_o_0 = false
+    and Environment.goal_o_0_obs = false
+    and Environment.goal_o_3 = false
+    and Environment.goal_o_3_obs = false
+    and Environment.goal_o_5 = false
+    and Environment.goal_o_5_obs = false
+    and Environment.goal_o_4 = false
+    and Environment.goal_o_4_obs = false
+    and Environment.legal_x_c = false
+    and Environment.legal_x_c_obs = false
+    and Environment.legal_x_d = false
+    and Environment.legal_x_d_obs = false
+    and Environment.legal_x_noop = false
+    and Environment.legal_x_noop_obs = false
+    and Environment.legal_o_c = false
+    and Environment.legal_o_c_obs = false
+    and Environment.legal_o_d = false
+    and Environment.legal_o_d_obs = false
+    and Environment.legal_o_noop = false
+    and Environment.legal_o_noop_obs = false
+    and Environment.terminal = false
+    and Environment.terminal_obs = false
+    and Environment.does_x_c = false
+    and Environment.done_x_c_1 = false
+    and Environment.done_x_c_1_obs = false
+    and Environment.next_done_x_c_1 = false
+    and Environment.does_x_d = false
+    and Environment.done_x_d_1 = false
+    and Environment.done_x_d_1_obs = false
+    and Environment.next_done_x_d_1 = false
+    and Environment.does_x_noop = false
+    and Environment.done_x_noop_1 = false
+    and Environment.done_x_noop_1_obs = false
+    and Environment.next_done_x_noop_1 = false
+    and Environment.does_o_c = false
+    and Environment.done_o_c_1 = false
+    and Environment.done_o_c_1_obs = false
+    and Environment.next_done_o_c_1 = false
+    and Environment.does_o_d = false
+    and Environment.done_o_d_1 = false
+    and Environment.done_o_d_1_obs = false
+    and Environment.next_done_o_d_1 = false
+    and Environment.does_o_noop = false
+    and Environment.done_o_noop_1 = false
+    and Environment.done_o_noop_1_obs = false
+    and Environment.next_done_o_noop_1 = false
+;
+end InitStates
+
+Groups
+end Groups
+
+Fairness
+end Fairness
+
+Formulae
+
+end Formulae
