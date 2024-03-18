@@ -169,6 +169,7 @@ def parse_content(atom: str, num: int):
                 break
         return clean(atom[:pos-1]), clean(atom[pos:-1])
 
+    #print(atom, 'this case')
     return clean(atom)            
 
 '''
@@ -180,7 +181,6 @@ def parse_atom(atom: str):
     player = ''
     slk = ''
     positive = True
-
     if len(atom) > 4 and atom[:4] == 'not ':
         atom = atom[4:].strip()
         positive = False
@@ -190,6 +190,7 @@ def parse_atom(atom: str):
             atom_type = 'terminal'
             slk = 'terminal'
         else:
+            print('parse atom', atom)
             slk = parse_content(atom, 0)
     else:
         curr = ''
@@ -207,7 +208,7 @@ def parse_atom(atom: str):
             content = parse_content(atom, 1)
             slk = content
         else:
-            slk = parse_content(curr, 0)
+            slk = parse_content(atom, 0)
 
     return {'type': atom_type, 'player': player, 'slk': slk, 'positive': positive}
 
@@ -238,6 +239,7 @@ def parse_rule(rule: str):
             body.append(parse_atom(curr))
 
     else:
+        #print('parse rule', rule)
         head = parse_atom(rule)            
 
     return head, body
@@ -259,8 +261,8 @@ def print_environment_vars(maxd:int =3):
     # print the sees and observations
     for r in see.keys():
         for observations in see[r]:
-            print(f'        see_{r}_{observations}_1: boolean;')
-            print(f'        see_{r}_{observations}_1_obs: boolean;')
+            print(f'        sees_{r}_{observations}_1: boolean;')
+            print(f'        sees_{r}_{observations}_1_obs: boolean;')
             print(f'        next_sees_{r}_{observations}_1: boolean;')
     # print the goals
     for r in goal.keys():
@@ -333,8 +335,8 @@ def print_evolutions(maxd:int = 3):
     # print the sees and observations
     for r in see.keys():
         for observations in see[r]:
-            print(f'        see_{r}_{observations}_1_obs = see_{r}_{observations}_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
-            print(f'        see_{r}_{observations}_1_obs = see_{r}_{observations}_1 if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+            print(f'        sees_{r}_{observations}_1_obs = sees_{r}_{observations}_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+            print(f'        sees_{r}_{observations}_1_obs = sees_{r}_{observations}_1 if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
     
     # print the terminal observations
     print(f'        terminal_obs = terminal_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
@@ -368,14 +370,14 @@ def print_evolutions(maxd:int = 3):
     # print the evolutions for recall
     for r in legal.keys():
         for act in legal[r]:
-            print(f'        next_done_{r}_{act}_1 = next_done_{r}_{act}_1 if ((init = 0 and act_step = true and counter = {maxd}));')
+            print(f'        done_{r}_{act}_1 = next_done_{r}_{act}_1 if ((init = 0 and act_step = true and counter = {maxd}));')
             print(f'        done_{r}_{act}_1 = done_{r}_{act}_1 if !((init = 0 and act_step = true and counter = {maxd}));')
     
     
     for r in see.keys():
         for observations in see[r]:
-            print(f'        see_{r}_{observations}_1 = next_sees_{r}_{observations}_1 if ((init = 0 and act_step = true and counter = {maxd}));')
-            print(f'        see_{r}_{observations}_1 = see_{r}_{observations}_1 if !((init = 0 and act_step = true and counter = {maxd}));')
+            print(f'        sees_{r}_{observations}_1 = next_sees_{r}_{observations}_1 if ((init = 0 and act_step = true and counter = {maxd}));')
+            print(f'        sees_{r}_{observations}_1 = sees_{r}_{observations}_1 if !((init = 0 and act_step = true and counter = {maxd}));')
     
 
     print('    end Evolution')
@@ -393,8 +395,8 @@ def print_init(maxd:int = 3):
     # print the sees and observations
     for r in see.keys():
         for observations in see[r]:
-            print(f'    and Environment.see_{r}_{observations}_1 = false')
-            print(f'    and Environment.see_{r}_{observations}_1_obs = false')
+            print(f'    and Environment.sees_{r}_{observations}_1 = false')
+            print(f'    and Environment.sees_{r}_{observations}_1_obs = false')
             print(f'    and Environment.next_sees_{r}_{observations}_1 = false')
     # print the goals
     for r in goal.keys():
@@ -427,7 +429,7 @@ def print_agent(agent):
     print(f'Agent player_{agent}')
     print('    Lobsvars={init,counter,act_step', end='')
     for observations in see[agent]:
-        print(f', see_{agent}_{observations}_1_obs', end='')
+        print(f', sees_{agent}_{observations}_1_obs', end='')
     # print the goals
     for score in goal[agent]:
         print(f', goal_{agent}_{score}_obs', end='')
@@ -527,4 +529,4 @@ if __name__ == "__main__":
         sys.exit(1)
     
     gdl2slk(sys.argv[1])
-    # debug()
+    #debug()

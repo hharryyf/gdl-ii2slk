@@ -3,6 +3,8 @@
 role(x).
 role(o).
 
+succ(1,2).
+
 init(control(x)).
 
 legal(x, c) :- true(control(x)).
