@@ -474,23 +474,7 @@ def longest_chain():
     print('-- maximum chain length', ans)
     return ans + 1
 
-def gdl2slk(file):    
-    f = open(file=file, mode='r')
-    curr = ''
-    for line in f:
-        line = line.strip()
-        if len(line) == 0 or line[0] == '-' or line == None:
-            continue
-        curr += line
-        if curr[-1] == '.':
-            head, body = parse_rule(curr)
-            build(head, body)
-        curr = ''
-    f.close()
-    for b in base:
-        if b not in next:
-            dependency[f'next_{b}'] = []
-
+def writeslk():
     # write the SLK file
     # The Environment Agent
     print('Semantics=SingleAssignment;')
@@ -523,10 +507,31 @@ def gdl2slk(file):
     print()
     print('Formulae\n\nend Formulae')
 
+def construct_dependencies(file):    
+    f = open(file=file, mode='r')
+    curr = ''
+    for line in f:
+        line = line.strip()
+        if len(line) == 0 or line[0] == '-' or line == None:
+            continue
+        curr += line
+        if curr[-1] == '.':
+            head, body = parse_rule(curr)
+            build(head, body)
+        curr = ''
+    f.close()
+    for b in base:
+        if b not in next:
+            dependency[f'next_{b}'] = []
+
+def gdl2slk(file):
+    construct_dependencies(file)
+    writeslk()
+    
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print('Usage python translate.py [name of the GDL-II file]')
         sys.exit(1)
     
     gdl2slk(sys.argv[1])
-    #debug()
+    
