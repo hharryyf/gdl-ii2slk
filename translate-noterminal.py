@@ -276,7 +276,7 @@ def print_environment_vars(maxd:int =3):
             print(f'        legal_{r}_{atom}_obs: boolean;')
     # print the terminal
     print(f'        terminal: boolean;')
-    print(f'        terminal_obs: boolean;')
+    #print(f'        terminal_obs: boolean;')
     # print the does
     for r in legal.keys():
         for act in legal[r]:
@@ -339,8 +339,8 @@ def print_evolutions(maxd:int = 3):
             print(f'        sees_{r}_{observations}_1_obs = sees_{r}_{observations}_1 if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
     
     # print the terminal observations
-    print(f'        terminal_obs = terminal_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
-    print(f'        terminal_obs = terminal if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+    #print(f'        terminal_obs = terminal_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+    #print(f'        terminal_obs = terminal if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
     
     # print the does observations
     for r in legal.keys():
@@ -410,7 +410,7 @@ def print_init(maxd:int = 3):
             print(f'    and Environment.legal_{r}_{atom}_obs = false')
     # print the terminal
     print(f'    and Environment.terminal = false')
-    print(f'    and Environment.terminal_obs = false')
+    #print(f'    and Environment.terminal_obs = false')
     # print the does
     for r in legal.keys():
         for act in legal[r]:
@@ -437,7 +437,7 @@ def print_agent(agent):
     for atom in legal[agent]:
         print(f', legal_{agent}_{atom}_obs', end='')
     # print the terminal
-    print(f', terminal_obs', end='')
+    #print(f', terminal_obs', end='')
     # print the does
     for act in legal[agent]:
         print(f', done_{agent}_{act}_1_obs', end='')
@@ -451,8 +451,12 @@ def print_agent(agent):
     print('none};')
     print('    Protocol:')
     for act in legal[agent]:
-        print(f'        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_{agent}_{act}_obs = true): ' + '{' + f'{act}' + '};')
-    print('        (Environment.counter > 0 or Environment.init > 0 or Environment.act_step = false or Environment.terminal_obs = true) : {none};')
+        print(f'        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_{agent}_{act}_obs = true): ' + '{' + f'{act}' + '};')
+    print('        (Environment.counter > 0 or Environment.init > 0 or Environment.act_step = false) : {none};')
+    print('        (Environment.counter = 0 and Environment.act_step = true ', end='')
+    for act in legal[agent]:
+        print(f'and Environment.legal_{agent}_{act}_obs = false ', end='')
+    print(') : {none};')
     print('    end Protocol')
     print('    Evolution:\n\n    end Evolution')
     print('end Agent')
