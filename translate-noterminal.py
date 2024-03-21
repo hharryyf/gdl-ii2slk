@@ -190,7 +190,7 @@ def parse_atom(atom: str):
             atom_type = 'terminal'
             slk = 'terminal'
         else:
-            print('parse atom', atom)
+            # print('parse atom', atom)
             slk = parse_content(atom, 0)
     else:
         curr = ''
