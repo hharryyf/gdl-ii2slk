@@ -1,0 +1,62 @@
+role(x).
+role(o).
+
+init(round(0)).
+init(control(o)).
+legal(o, choose(1)):- true(control(o)).
+legal(o, choose(2)):- true(control(o)).
+legal(o, choose(3)):- true(control(o)).
+
+legal(x, guess(1)) :- true(control(x)), not true(tried(1)).
+legal(x, guess(2)) :- true(control(x)), not true(tried(2)).
+legal(x, guess(3)) :- true(control(x)), not true(tried(3)).
+
+next(tried(1)) :- does(x, guess(1)).
+next(tried(2)) :- does(x, guess(2)).
+next(tried(3)) :- does(x, guess(3)).
+next(tried(1)) :- true(tried(1)).
+next(tried(2)) :- true(tried(2)).
+next(tried(3)) :- true(tried(3)).
+
+legal(o, noop) :- true(control(x)).
+legal(x, noop) :- true(control(o)).
+
+next(choose(1)) :- does(o, choose(1)).
+next(choose(2)) :- does(o, choose(2)).
+next(choose(3)) :- does(o, choose(3)).
+
+next(choose(1)) :- true(choose(1)).
+next(choose(2)) :- true(choose(2)).
+next(choose(3)) :- true(choose(3)).
+
+next(control(x)) :- true(control(x)).
+next(control(x)) :- true(control(o)).
+next(round(1)) :- true(round(0)).
+next(round(2)) :- true(round(1)).
+next(round(3)) :- true(round(2)).
+next(round(4)) :- true(round(3)).
+terminal :- true(round(4)).
+
+next(correct) :- true(choose(1)), does(x, guess(1)).
+sees(x, ok) :- true(choose(1)), does(x, guess(1)).
+next(correct) :- true(choose(2)), does(x, guess(2)).
+sees(x, ok) :- true(choose(2)), does(x, guess(2)).
+next(correct) :- true(choose(3)), does(x, guess(3)).
+sees(x, ok) :- true(choose(3)), does(x, guess(3)).
+
+sees(x, less) :- true(choose(1)), does(x, guess(2)).
+sees(x, less) :- true(choose(1)), does(x, guess(3)).
+sees(x, less) :- true(choose(2)), does(x, guess(3)).
+sees(x, great) :- true(choose(2)), does(x, guess(1)).
+sees(x, great) :- true(choose(3)), does(x, guess(2)).
+sees(x, great) :- true(choose(3)), does(x, guess(1)).
+sees(o, nothing).
+
+terminal :- true(correct).
+goal(x, 100) :- true(correct), true(round(1)).
+goal(x, 60) :- true(correct), true(round(2)).
+goal(x, 30) :- true(correct), true(round(3)).
+goal(x, 0) :- true(correct), true(round(4)).
+goal(x, 0) :- true(round(4)).
+goal(x, 0) :- not true(correct);
+goal(o, 0).

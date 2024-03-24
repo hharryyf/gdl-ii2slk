@@ -446,9 +446,10 @@ def print_init(maxd:int = 3, recall:int = 1):
 def print_agent(agent, recall=1):
     print(f'Agent player_{agent}')
     print('    Lobsvars={init,counter,act_step', end='')
-    for observations in see[agent]:
-        for i in range(recall):
-            print(f', sees_{agent}_{observations}_{i+1}_obs', end='')
+    if agent in see:
+        for observations in see[agent]:
+            for i in range(recall):
+                print(f', sees_{agent}_{observations}_{i+1}_obs', end='')
     # print the goals
     #for score in goal[agent]:
     #    print(f', goal_{agent}_{score}_obs', end='')
