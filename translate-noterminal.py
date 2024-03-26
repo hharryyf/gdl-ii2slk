@@ -102,7 +102,7 @@ def build(head, body):
         graph[slk_var(head)].append(slk_var(bd))
 
     if len(body) == 0 and head['type'] != 'init':
-        dependency[slk_var(head)].append('(ok = true)')
+        dependency[slk_var(head)].append('(ok = 0)')
     elif len(body) != 0:
         conjunct = []
         for bd in body:
@@ -247,7 +247,7 @@ def print_environment_vars(maxd:int =3, recall:int = 1):
     print(f'        counter: 0 .. {maxd};')
     print(f'        init: 0 .. {maxd};')
     print(f'        act_step: boolean;')
-    print(f'        ok: boolean;')
+    print(f'        ok: 0.. 0;')
     # print the roles
     for r in role:
         print(f'        role_{r}: boolean;')
@@ -281,7 +281,7 @@ def print_environment_vars(maxd:int =3, recall:int = 1):
 def print_evolutions(maxd:int = 3, recall:int = 1):
     print('    Evolution:')
     print(f'        -- print the counters')
-    print('        ok = true if (ok = true);')
+    print('        ok = 0 if (ok = 0);')
     print('        (init = init - 1) if (init > 0);')
     print('        (init = 0) if (init = 0);')
     print(f'        (counter = counter + 1) if !(init <> 0 or (terminal = true and counter = 0) or counter = {maxd});')
@@ -293,7 +293,7 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
     for d in sorted(dependency.keys()):
         rule = dependency[d]
         if len(rule) == 0:
-            print(f'        {d}=false if (ok = true);')
+            print(f'        {d}=false if (ok = 0);')
         else:
             cond = '(' + rule[0]
             for i in range (1, len(rule)):
@@ -308,11 +308,12 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
         for act in sorted(legal[r]):
             for i in range(1, recall + 1, 1):
                 if i == 1:
-                    print(f'        next_done_{r}_{act}_{i} = true if (does_{r}_{act} = true);')
-                    print(f'        next_done_{r}_{act}_{i} = false if !(does_{r}_{act} = true);')
+                    print(f'        next_done_{r}_{act}_{i} = does_{r}_{act} if (ok = 0);')
+                    #print(f'        next_done_{r}_{act}_{i} = false if !(does_{r}_{act} = true);')
                 else:
-                    print(f'        next_done_{r}_{act}_{i} = true if (done_{r}_{act}_{i-1} = true);')
-                    print(f'        next_done_{r}_{act}_{i} = false if (done_{r}_{act}_{i-1} = false);')
+                    print(f'        next_done_{r}_{act}_{i} = done_{r}_{act}_{i-1} if (ok = 0);')
+                    # print(f'        next_done_{r}_{act}_{i} = true if (done_{r}_{act}_{i-1} = true);')
+                    #print(f'        next_done_{r}_{act}_{i} = false if (done_{r}_{act}_{i-1} = false);')
     
     print(f'        -- local observation evolution')
     for r in sorted(legal.keys()):
@@ -357,7 +358,7 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
 
 def print_init(maxd:int = 3, recall:int = 1):
     print('InitStates')
-    print(f'    Environment.counter = 0 and Environment.ok = true and Environment.init = {maxd} and Environment.act_step = false')
+    print(f'    Environment.counter = 0 and Environment.ok = 0 and Environment.init = {maxd} and Environment.act_step = false')
     for r in sorted(role):
         print(f'    and Environment.role_{r} = false')
     for atom in sorted(base):

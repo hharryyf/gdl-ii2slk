@@ -71,7 +71,6 @@ sees(x, great) :- true(choose(5)), does(x, guess(4)).
 sees(x, great) :- true(choose(5)), does(x, guess(3)).
 sees(x, great) :- true(choose(5)), does(x, guess(2)).
 sees(x, great) :- true(choose(5)), does(x, guess(1)).
-sees(o, nothing).
 
 terminal :- true(correct).
 goal(x, 100) :- true(correct), true(round(1)).
