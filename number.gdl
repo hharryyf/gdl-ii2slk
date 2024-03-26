@@ -9,22 +9,11 @@ legal(o, choose(3)):- true(control(o)).
 legal(o, choose(4)):- true(control(o)).
 legal(o, choose(5)):- true(control(o)).
 
-legal(x, guess(1)) :- true(control(x)), not true(tried(1)).
-legal(x, guess(2)) :- true(control(x)), not true(tried(2)).
-legal(x, guess(3)) :- true(control(x)), not true(tried(3)).
-legal(x, guess(4)) :- true(control(x)), not true(tried(4)).
-legal(x, guess(5)) :- true(control(x)), not true(tried(5)).
-
-next(tried(1)) :- does(x, guess(1)).
-next(tried(2)) :- does(x, guess(2)).
-next(tried(3)) :- does(x, guess(3)).
-next(tried(4)) :- does(x, guess(4)).
-next(tried(5)) :- does(x, guess(5)).
-next(tried(1)) :- true(tried(1)).
-next(tried(2)) :- true(tried(2)).
-next(tried(3)) :- true(tried(3)).
-next(tried(4)) :- true(tried(4)).
-next(tried(5)) :- true(tried(5)).
+legal(x, guess(1)) :- true(control(x)).
+legal(x, guess(2)) :- true(control(x)).
+legal(x, guess(3)) :- true(control(x)).
+legal(x, guess(4)) :- true(control(x)).
+legal(x, guess(5)) :- true(control(x)).
 
 legal(o, noop) :- true(control(x)).
 legal(x, noop) :- true(control(o)).
