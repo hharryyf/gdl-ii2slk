@@ -190,7 +190,7 @@ def parse_atom(atom: str):
             atom_type = 'terminal'
             slk = 'terminal'
         else:
-            print('parse atom', atom)
+            # print('parse atom', atom)
             slk = parse_content(atom, 0)
     else:
         curr = ''
@@ -245,7 +245,7 @@ def parse_rule(rule: str):
     return head, body
 
 # print all the variables for the environment
-def print_environment_vars(maxd:int =3):
+def print_environment_vars(maxd:int =3, recall:int = 1):
     print('    Vars:')
     print(f'        counter: 0 .. {maxd};')
     print(f'        init: 0 .. {maxd};')
@@ -261,9 +261,10 @@ def print_environment_vars(maxd:int =3):
     # print the sees and observations
     for r in see.keys():
         for observations in see[r]:
-            print(f'        sees_{r}_{observations}_1: boolean;')
-            print(f'        sees_{r}_{observations}_1_obs: boolean;')
-            print(f'        next_sees_{r}_{observations}_1: boolean;')
+            for i in range(recall):
+                print(f'        sees_{r}_{observations}_{i+1}: boolean;')
+                print(f'        sees_{r}_{observations}_{i+1}_obs: boolean;')
+                print(f'        next_sees_{r}_{observations}_{i+1}: boolean;')
     # print the goals
     #for r in goal.keys():
     #    for score in goal[r]:
@@ -276,21 +277,22 @@ def print_environment_vars(maxd:int =3):
             print(f'        legal_{r}_{atom}_obs: boolean;')
     # print the terminal
     print(f'        terminal: boolean;')
-    print(f'        terminal_obs: boolean;')
+    #print(f'        terminal_obs: boolean;')
     # print the does
     for r in legal.keys():
         for act in legal[r]:
             print(f'        does_{r}_{act}: boolean;')
-            print(f'        done_{r}_{act}_1: boolean;')
-            print(f'        done_{r}_{act}_1_obs: boolean;')
-            print(f'        next_done_{r}_{act}_1: boolean;')
+            for i in range(recall):
+                print(f'        done_{r}_{act}_{i+1}: boolean;')
+                print(f'        done_{r}_{act}_{i+1}_obs: boolean;')
+                print(f'        next_done_{r}_{act}_{i+1}: boolean;')
     
     # print other derived predicates
     for atom in other:
         print(f'        {atom}: boolean;')
     print('    end Vars')
 
-def print_evolutions(maxd:int = 3):
+def print_evolutions(maxd:int = 3, recall:int = 1):
     print('    Evolution:')
     print(f'        -- print the counters')
     print('        ok = true if (ok = true);')
@@ -318,8 +320,13 @@ def print_evolutions(maxd:int = 3):
     print(f'        -- print the next for actions')
     for r in legal.keys():
         for act in legal[r]:
-            print(f'        next_done_{r}_{act}_1 = true if (does_{r}_{act} = true);')
-            print(f'        next_done_{r}_{act}_1 = false if !(does_{r}_{act} = true);')
+            for i in range(1, recall + 1, 1):
+                if i == 1:
+                    print(f'        next_done_{r}_{act}_{i} = true if (does_{r}_{act} = true);')
+                    print(f'        next_done_{r}_{act}_{i} = false if !(does_{r}_{act} = true);')
+                else:
+                    print(f'        next_done_{r}_{act}_{i} = true if (done_{r}_{act}_{i-1} = true);')
+                    print(f'        next_done_{r}_{act}_{i} = false if (done_{r}_{act}_{i-1} = false);')
     
     print(f'        -- local observation evolution')
     # evolution of the observation of goals
@@ -335,18 +342,20 @@ def print_evolutions(maxd:int = 3):
     # print the sees and observations
     for r in see.keys():
         for observations in see[r]:
-            print(f'        sees_{r}_{observations}_1_obs = sees_{r}_{observations}_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
-            print(f'        sees_{r}_{observations}_1_obs = sees_{r}_{observations}_1 if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+            for i in range(recall):
+                print(f'        sees_{r}_{observations}_{i+1}_obs = sees_{r}_{observations}_{i+1}_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+                print(f'        sees_{r}_{observations}_{i+1}_obs = sees_{r}_{observations}_{i+1} if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
     
     # print the terminal observations
-    print(f'        terminal_obs = terminal_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
-    print(f'        terminal_obs = terminal if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+    #print(f'        terminal_obs = terminal_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+    #print(f'        terminal_obs = terminal if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
     
     # print the does observations
     for r in legal.keys():
         for act in legal[r]:
-            print(f'        done_{r}_{act}_1_obs = done_{r}_{act}_1_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
-            print(f'        done_{r}_{act}_1_obs = done_{r}_{act}_1 if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+            for i in range(recall):
+                print(f'        done_{r}_{act}_{i+1}_obs = done_{r}_{act}_{i+1}_obs if !(init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
+                print(f'        done_{r}_{act}_{i+1}_obs = done_{r}_{act}_{i+1} if (init = 1 or (init = 0 and act_step = false and counter = {maxd}));')
     
 
     # print the evolutions of actions
@@ -370,20 +379,27 @@ def print_evolutions(maxd:int = 3):
     # print the evolutions for recall
     for r in legal.keys():
         for act in legal[r]:
-            print(f'        done_{r}_{act}_1 = next_done_{r}_{act}_1 if ((init = 0 and act_step = true and counter = {maxd}));')
-            print(f'        done_{r}_{act}_1 = done_{r}_{act}_1 if !((init = 0 and act_step = true and counter = {maxd}));')
+            for i in range(recall):
+                print(f'        done_{r}_{act}_{i+1} = next_done_{r}_{act}_{i+1} if ((init = 0 and act_step = true and counter = {maxd}));')
+                print(f'        done_{r}_{act}_{i+1} = done_{r}_{act}_{i+1} if !((init = 0 and act_step = true and counter = {maxd}));')
     
     
     for r in see.keys():
         for observations in see[r]:
-            print(f'        sees_{r}_{observations}_1 = next_sees_{r}_{observations}_1 if ((init = 0 and act_step = true and counter = {maxd}));')
-            print(f'        sees_{r}_{observations}_1 = sees_{r}_{observations}_1 if !((init = 0 and act_step = true and counter = {maxd}));')
+            for i in range(recall):
+                print(f'        sees_{r}_{observations}_{i+1} = next_sees_{r}_{observations}_{i+1} if ((init = 0 and act_step = true and counter = {maxd}));')
+                print(f'        sees_{r}_{observations}_{i+1} = sees_{r}_{observations}_{i+1} if !((init = 0 and act_step = true and counter = {maxd}));')
+
+            for i in range(2, recall+1, 1):
+                print(f'        next_sees_{r}_{observations}_{i} = true if (sees_{r}_{observations}_{i-1} = true);')
+                print(f'        next_sees_{r}_{observations}_{i} = false if (sees_{r}_{observations}_{i-1} = false);')
+
     
 
     print('    end Evolution')
 
 
-def print_init(maxd:int = 3):
+def print_init(maxd:int = 3, recall:int = 1):
     print('InitStates')
     print(f'    Environment.counter = 0 and Environment.ok = true and Environment.init = {maxd} and Environment.act_step = false')
     for r in role:
@@ -395,9 +411,10 @@ def print_init(maxd:int = 3):
     # print the sees and observations
     for r in see.keys():
         for observations in see[r]:
-            print(f'    and Environment.sees_{r}_{observations}_1 = false')
-            print(f'    and Environment.sees_{r}_{observations}_1_obs = false')
-            print(f'    and Environment.next_sees_{r}_{observations}_1 = false')
+            for i in range(recall):
+                print(f'    and Environment.sees_{r}_{observations}_{i+1} = false')
+                print(f'    and Environment.sees_{r}_{observations}_{i+1}_obs = false')
+                print(f'    and Environment.next_sees_{r}_{observations}_{i+1} = false')
     # print the goals
     #for r in goal.keys():
     #    for score in goal[r]:
@@ -410,14 +427,15 @@ def print_init(maxd:int = 3):
             print(f'    and Environment.legal_{r}_{atom}_obs = false')
     # print the terminal
     print(f'    and Environment.terminal = false')
-    print(f'    and Environment.terminal_obs = false')
+    #print(f'    and Environment.terminal_obs = false')
     # print the does
     for r in legal.keys():
         for act in legal[r]:
             print(f'    and Environment.does_{r}_{act} = false')
-            print(f'    and Environment.done_{r}_{act}_1 = false')
-            print(f'    and Environment.done_{r}_{act}_1_obs = false')
-            print(f'    and Environment.next_done_{r}_{act}_1 = false')
+            for i in range(recall):
+                print(f'    and Environment.done_{r}_{act}_{i+1} = false')
+                print(f'    and Environment.done_{r}_{act}_{i+1}_obs = false')
+                print(f'    and Environment.next_done_{r}_{act}_{i+1} = false')
     
     # print other derived predicates
     for atom in other:
@@ -425,11 +443,13 @@ def print_init(maxd:int = 3):
     print(';')
     print('end InitStates')
     
-def print_agent(agent):
+def print_agent(agent, recall=1):
     print(f'Agent player_{agent}')
     print('    Lobsvars={init,counter,act_step', end='')
-    for observations in see[agent]:
-        print(f', sees_{agent}_{observations}_1_obs', end='')
+    if agent in see:
+        for observations in see[agent]:
+            for i in range(recall):
+                print(f', sees_{agent}_{observations}_{i+1}_obs', end='')
     # print the goals
     #for score in goal[agent]:
     #    print(f', goal_{agent}_{score}_obs', end='')
@@ -437,10 +457,11 @@ def print_agent(agent):
     for atom in legal[agent]:
         print(f', legal_{agent}_{atom}_obs', end='')
     # print the terminal
-    print(f', terminal_obs', end='')
+    #print(f', terminal_obs', end='')
     # print the does
     for act in legal[agent]:
-        print(f', done_{agent}_{act}_1_obs', end='')
+        for i in range(recall):
+            print(f', done_{agent}_{act}_{i+1}_obs', end='')
     print('};')
     print('    Vars:')
     print()
@@ -451,8 +472,12 @@ def print_agent(agent):
     print('none};')
     print('    Protocol:')
     for act in legal[agent]:
-        print(f'        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.terminal_obs = false and Environment.legal_{agent}_{act}_obs = true): ' + '{' + f'{act}' + '};')
-    print('        (Environment.counter > 0 or Environment.init > 0 or Environment.act_step = false or Environment.terminal_obs = true) : {none};')
+        print(f'        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_{agent}_{act}_obs = true): ' + '{' + f'{act}' + '};')
+    print('        (Environment.counter > 0 or Environment.init > 0 or Environment.act_step = false) : {none};')
+    print('        (Environment.counter = 0 and Environment.act_step = true ', end='')
+    for act in legal[agent]:
+        print(f'and Environment.legal_{agent}_{act}_obs = false ', end='')
+    print(') : {none};')
     print('    end Protocol')
     print('    Evolution:\n\n    end Evolution')
     print('end Agent')
@@ -474,31 +499,31 @@ def longest_chain():
     print('-- maximum chain length', ans)
     return ans + 1
 
-def writeslk():
+def writeslk(recall:int = 1):
     # write the SLK file
     # The Environment Agent
     print('Semantics=SingleAssignment;')
     print()
     print('Agent Environment')
     maxd = longest_chain()
-    print_environment_vars(maxd)
+    print_environment_vars(maxd, recall)
     print('    Actions = { none };')
     print('    Protocol:')
     print('        Other: {none};')
     print('    end Protocol')
-    print_evolutions(maxd)
+    print_evolutions(maxd, recall)
     print('end Agent')
 
     # Other Agents
     for r in role:
         print()
-        print_agent(r)
+        print_agent(r, recall)
         print()
     # Evaluation
     print('Evaluation\n\nend Evaluation')
     # initial states
     print()
-    print_init(maxd)
+    print_init(maxd, recall)
     print()
     # other information
     print('Groups\nend Groups')
@@ -524,14 +549,14 @@ def construct_dependencies(file):
         if b not in next:
             dependency[f'next_{b}'] = []
 
-def gdl2slk(file):
+def gdl2slk(file, recall:int = 1):
     construct_dependencies(file)
-    writeslk()
+    writeslk(recall)
     
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print('Usage python translate.py [name of the GDL-II file]')
+    if len(sys.argv) != 3:
+        print('Usage python translate.py [name of the GDL-II file] [recall depth]')
         sys.exit(1)
     
-    gdl2slk(sys.argv[1])
+    gdl2slk(sys.argv[1], int(sys.argv[2]))
     
