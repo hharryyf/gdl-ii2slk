@@ -1,0 +1,111 @@
+role(x).
+role(o).
+init(round(0)).
+init(control(o)).
+legal(o,choose(1)) :- true(control(o)).
+legal(o,choose(2)) :- true(control(o)).
+legal(o,choose(3)) :- true(control(o)).
+legal(o,choose(4)) :- true(control(o)).
+legal(o,choose(5)) :- true(control(o)).
+legal(o,choose(6)) :- true(control(o)).
+legal(o,choose(7)) :- true(control(o)).
+legal(x,guess(1)) :- true(control(x)).
+legal(x,guess(2)) :- true(control(x)).
+legal(x,guess(3)) :- true(control(x)).
+legal(x,guess(4)) :- true(control(x)).
+legal(x,guess(5)) :- true(control(x)).
+legal(x,guess(6)) :- true(control(x)).
+legal(x,guess(7)) :- true(control(x)).
+legal(o, noop) :- true(control(x)).
+legal(x, noop) :- true(control(o)).
+next(choose(1)) :- true(choose(1)).
+next(choose(2)) :- true(choose(2)).
+next(choose(3)) :- true(choose(3)).
+next(choose(4)) :- true(choose(4)).
+next(choose(5)) :- true(choose(5)).
+next(choose(6)) :- true(choose(6)).
+next(choose(7)) :- true(choose(7)).
+next(choose(1)) :- does(o,choose(1)).
+next(choose(2)) :- does(o,choose(2)).
+next(choose(3)) :- does(o,choose(3)).
+next(choose(4)) :- does(o,choose(4)).
+next(choose(5)) :- does(o,choose(5)).
+next(choose(6)) :- does(o,choose(6)).
+next(choose(7)) :- does(o,choose(7)).
+next(control(x)) :- true(control(o)).
+next(control(x)) :- true(control(x)).
+next(round(1)) :- true(round(0)).
+next(round(2)) :- true(round(1)).
+next(round(3)) :- true(round(2)).
+next(round(4)) :- true(round(3)).
+next(round(5)) :- true(round(4)).
+next(round(6)) :- true(round(5)).
+next(round(7)) :- true(round(6)).
+next(round(8)) :- true(round(7)).
+terminal :- true(round(8)).
+next(correct) :- true(choose(1)), does(x, guess(1)).
+sees(x, ok) :- true(choose(1)), does(x, guess(1)).
+next(correct) :- true(choose(2)), does(x, guess(2)).
+sees(x, ok) :- true(choose(2)), does(x, guess(2)).
+next(correct) :- true(choose(3)), does(x, guess(3)).
+sees(x, ok) :- true(choose(3)), does(x, guess(3)).
+next(correct) :- true(choose(4)), does(x, guess(4)).
+sees(x, ok) :- true(choose(4)), does(x, guess(4)).
+next(correct) :- true(choose(5)), does(x, guess(5)).
+sees(x, ok) :- true(choose(5)), does(x, guess(5)).
+next(correct) :- true(choose(6)), does(x, guess(6)).
+sees(x, ok) :- true(choose(6)), does(x, guess(6)).
+next(correct) :- true(choose(7)), does(x, guess(7)).
+sees(x, ok) :- true(choose(7)), does(x, guess(7)).
+sees(x, less) :- true(choose(1)), does(x, guess(2)).
+sees(x, less) :- true(choose(1)), does(x, guess(3)).
+sees(x, less) :- true(choose(1)), does(x, guess(4)).
+sees(x, less) :- true(choose(1)), does(x, guess(5)).
+sees(x, less) :- true(choose(1)), does(x, guess(6)).
+sees(x, less) :- true(choose(1)), does(x, guess(7)).
+sees(x, less) :- true(choose(2)), does(x, guess(3)).
+sees(x, less) :- true(choose(2)), does(x, guess(4)).
+sees(x, less) :- true(choose(2)), does(x, guess(5)).
+sees(x, less) :- true(choose(2)), does(x, guess(6)).
+sees(x, less) :- true(choose(2)), does(x, guess(7)).
+sees(x, great) :- true(choose(2)), does(x, guess(1)).
+sees(x, less) :- true(choose(3)), does(x, guess(4)).
+sees(x, less) :- true(choose(3)), does(x, guess(5)).
+sees(x, less) :- true(choose(3)), does(x, guess(6)).
+sees(x, less) :- true(choose(3)), does(x, guess(7)).
+sees(x, great) :- true(choose(3)), does(x, guess(2)).
+sees(x, great) :- true(choose(3)), does(x, guess(1)).
+sees(x, less) :- true(choose(4)), does(x, guess(5)).
+sees(x, less) :- true(choose(4)), does(x, guess(6)).
+sees(x, less) :- true(choose(4)), does(x, guess(7)).
+sees(x, great) :- true(choose(4)), does(x, guess(3)).
+sees(x, great) :- true(choose(4)), does(x, guess(2)).
+sees(x, great) :- true(choose(4)), does(x, guess(1)).
+sees(x, less) :- true(choose(5)), does(x, guess(6)).
+sees(x, less) :- true(choose(5)), does(x, guess(7)).
+sees(x, great) :- true(choose(5)), does(x, guess(4)).
+sees(x, great) :- true(choose(5)), does(x, guess(3)).
+sees(x, great) :- true(choose(5)), does(x, guess(2)).
+sees(x, great) :- true(choose(5)), does(x, guess(1)).
+sees(x, less) :- true(choose(6)), does(x, guess(7)).
+sees(x, great) :- true(choose(6)), does(x, guess(5)).
+sees(x, great) :- true(choose(6)), does(x, guess(4)).
+sees(x, great) :- true(choose(6)), does(x, guess(3)).
+sees(x, great) :- true(choose(6)), does(x, guess(2)).
+sees(x, great) :- true(choose(6)), does(x, guess(1)).
+sees(x, great) :- true(choose(7)), does(x, guess(6)).
+sees(x, great) :- true(choose(7)), does(x, guess(5)).
+sees(x, great) :- true(choose(7)), does(x, guess(4)).
+sees(x, great) :- true(choose(7)), does(x, guess(3)).
+sees(x, great) :- true(choose(7)), does(x, guess(2)).
+sees(x, great) :- true(choose(7)), does(x, guess(1)).
+terminal :- true(correct).
+goal(x,100) :- true(correct), true(round(2)).
+goal(x,83) :- true(correct), true(round(3)).
+goal(x,66) :- true(correct), true(round(4)).
+goal(x,50) :- true(correct), true(round(5)).
+goal(x,33) :- true(correct), true(round(6)).
+goal(x,16) :- true(correct), true(round(7)).
+goal(x, 0) :- true(round(8)).
+goal(x, 0) :- not true(correct).
+goal(o, 0).
