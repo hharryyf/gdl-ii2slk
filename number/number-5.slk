@@ -352,6 +352,8 @@ end Agent
 Evaluation
     t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
     win if ((Environment.goal_x_100 = true or Environment.goal_x_75 = true or Environment.goal_x_50 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+    reward if ((Environment.goal_x_100 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+    loss if ((Environment.goal_x_25 = true or Environment.goal_x_0 = true or Environment.goal_x_50 = true or Environment.goal_x_100 = true or Environment.goal_x_75 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
     select if ((Environment.true_round_0 = true or Environment.true_choose_1 = true or Environment.true_choose_2 = true or Environment.true_choose_3 = true or Environment.true_choose_4 = true or Environment.true_choose_5 = true));
     real if (Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
     token if (Environment.sees_x_great_1 = true and Environment.done_x_guess_1_1 = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
@@ -464,4 +466,5 @@ Formulae
     AG (token -> select_gt3);
     -- ((token and real) -> select_gt3);
     <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) F win;
+    <<e>> <<x>> <<y>> (Environment, e) (player_x, x) (player_o, y) (F reward and ([[xa]] (player_x, xa) F loss));
 end Formulae

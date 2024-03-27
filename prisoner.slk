@@ -280,8 +280,8 @@ end Agent
 
 Evaluation
     t if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true);
-    xwin if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true and (Environment.goal_x_4 = true or Environment.goal_x_5 = true));
-    owin if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true and (Environment.goal_o_4 = true or Environment.goal_o_5 = true));
+    xwin if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true and (Environment.goal_x_4 = true));
+    owin if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true and (Environment.goal_o_4 = true));
     xworse if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true and (Environment.goal_x_4 = true or Environment.goal_x_2 = true or Environment.goal_x_3 = true or Environment.goal_x_0 = true));
     oworse if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true and (Environment.goal_o_4 = true or Environment.goal_o_2 = true or Environment.goal_o_3 = true or Environment.goal_o_0 = true));
 end Evaluation

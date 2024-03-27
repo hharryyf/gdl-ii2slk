@@ -434,6 +434,8 @@ end Agent
 Evaluation
     t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
     win if ((Environment.goal_x_100 = true or Environment.goal_x_83 = true or Environment.goal_x_66 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+    reward if ((Environment.goal_x_100 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+    loss if ((Environment.goal_x_83 = true or Environment.goal_x_0 = true or Environment.goal_x_50 = true or Environment.goal_x_100 = true or Environment.goal_x_66 = true or Environment.goal_x_16 = true or Environment.goal_x_33 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
     select if ((Environment.true_round_0 = true or Environment.true_choose_1 = true or Environment.true_choose_6 = true or Environment.true_choose_7 = true or Environment.true_choose_2 = true or Environment.true_choose_3 = true or Environment.true_choose_4 = true or Environment.true_choose_5 = true));
     real if (Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
     hasgoal if ((Environment.goal_x_100 = true or Environment.goal_x_83 = true or Environment.goal_x_66 = true or Environment.goal_x_50 = true or Environment.goal_x_33 = true or Environment.goal_x_16 = true or Environment.goal_x_0 = true) and Environment.goal_o_0 = true);
@@ -568,4 +570,5 @@ Formulae
     AG (real -> hasgoal); -- has goal
     AG (token -> K(player_x, select_gt3)); -- knowledge
     <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) F win; -- strong winnability
+    <<e>> <<x>> <<y>> (Environment, e) (player_x, x) (player_o, y) (F reward and ([[xa]] (player_x, xa) F loss)); -- Nash
 end Formulae

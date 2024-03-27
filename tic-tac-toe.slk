@@ -7,8 +7,8 @@ Agent Environment
         init: 0 .. 4;
         act_step: boolean;
         ok: 0.. 0;
-        role_x: boolean;
         role_o: boolean;
+        role_x: boolean;
         true_cell_1_1_b: boolean;
         next_cell_1_1_b: boolean;
         true_cell_1_1_o: boolean;
@@ -27,12 +27,6 @@ Agent Environment
         next_cell_2_1_o: boolean;
         true_cell_2_1_x: boolean;
         next_cell_2_1_x: boolean;
-        true_cell_2_2_b: boolean;
-        next_cell_2_2_b: boolean;
-        true_cell_2_2_o: boolean;
-        next_cell_2_2_o: boolean;
-        true_cell_2_2_x: boolean;
-        next_cell_2_2_x: boolean;
         true_control_o: boolean;
         next_control_o: boolean;
         true_control_x: boolean;
@@ -43,16 +37,12 @@ Agent Environment
         next_tried_o_1_2: boolean;
         true_tried_o_2_1: boolean;
         next_tried_o_2_1: boolean;
-        true_tried_o_2_2: boolean;
-        next_tried_o_2_2: boolean;
         true_tried_x_1_1: boolean;
         next_tried_x_1_1: boolean;
         true_tried_x_1_2: boolean;
         next_tried_x_1_2: boolean;
         true_tried_x_2_1: boolean;
         next_tried_x_2_1: boolean;
-        true_tried_x_2_2: boolean;
-        next_tried_x_2_2: boolean;
         sees_o_fail_1: boolean;
         next_sees_o_fail_1: boolean;
         sees_o_success_1: boolean;
@@ -64,12 +54,10 @@ Agent Environment
         legal_o_mark_1_1: boolean;
         legal_o_mark_1_2: boolean;
         legal_o_mark_2_1: boolean;
-        legal_o_mark_2_2: boolean;
         legal_o_noop: boolean;
         legal_x_mark_1_1: boolean;
         legal_x_mark_1_2: boolean;
         legal_x_mark_2_1: boolean;
-        legal_x_mark_2_2: boolean;
         legal_x_noop: boolean;
         terminal: boolean;
         does_o_mark_1_1: boolean;
@@ -81,9 +69,6 @@ Agent Environment
         does_o_mark_2_1: boolean;
         done_o_mark_2_1_1: boolean;
         next_done_o_mark_2_1_1: boolean;
-        does_o_mark_2_2: boolean;
-        done_o_mark_2_2_1: boolean;
-        next_done_o_mark_2_2_1: boolean;
         does_o_noop: boolean;
         done_o_noop_1: boolean;
         next_done_o_noop_1: boolean;
@@ -96,16 +81,12 @@ Agent Environment
         does_x_mark_2_1: boolean;
         done_x_mark_2_1_1: boolean;
         next_done_x_mark_2_1_1: boolean;
-        does_x_mark_2_2: boolean;
-        done_x_mark_2_2_1: boolean;
-        next_done_x_mark_2_2_1: boolean;
         does_x_noop: boolean;
         done_x_noop_1: boolean;
         next_done_x_noop_1: boolean;
         affect_cell_1_1: boolean;
         affect_cell_1_2: boolean;
         affect_cell_2_1: boolean;
-        affect_cell_2_2: boolean;
         goal_o_0: boolean;
         goal_o_100: boolean;
         goal_o_50: boolean;
@@ -136,8 +117,6 @@ Agent Environment
         affect_cell_1_2=false if !(((does_x_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_b = true)));
         affect_cell_2_1=true if (((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)));
         affect_cell_2_1=false if !(((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)));
-        affect_cell_2_2=true if (((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)));
-        affect_cell_2_2=false if !(((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)));
         goal_o_0=true if (((line_x = true)));
         goal_o_0=false if !(((line_x = true)));
         goal_o_100=true if (((line_o = true)));
@@ -156,8 +135,6 @@ Agent Environment
         legal_o_mark_1_2=false if !(((true_tried_o_1_2 = false) and (true_control_o = true)));
         legal_o_mark_2_1=true if (((true_tried_o_2_1 = false) and (true_control_o = true)));
         legal_o_mark_2_1=false if !(((true_tried_o_2_1 = false) and (true_control_o = true)));
-        legal_o_mark_2_2=true if (((true_tried_o_2_2 = false) and (true_control_o = true)));
-        legal_o_mark_2_2=false if !(((true_tried_o_2_2 = false) and (true_control_o = true)));
         legal_o_noop=true if (((true_control_x = true)));
         legal_o_noop=false if !(((true_control_x = true)));
         legal_x_mark_1_1=true if (((true_tried_x_1_1 = false) and (true_control_x = true)));
@@ -166,14 +143,12 @@ Agent Environment
         legal_x_mark_1_2=false if !(((true_tried_x_1_2 = false) and (true_control_x = true)));
         legal_x_mark_2_1=true if (((true_tried_x_2_1 = false) and (true_control_x = true)));
         legal_x_mark_2_1=false if !(((true_tried_x_2_1 = false) and (true_control_x = true)));
-        legal_x_mark_2_2=true if (((true_tried_x_2_2 = false) and (true_control_x = true)));
-        legal_x_mark_2_2=false if !(((true_tried_x_2_2 = false) and (true_control_x = true)));
         legal_x_noop=true if (((true_control_o = true)));
         legal_x_noop=false if !(((true_control_o = true)));
-        line_o=true if (((true_cell_1_1_o = true) and (true_cell_1_2_o = true)) or ((true_cell_1_1_o = true) and (true_cell_2_1_o = true)) or ((true_cell_1_2_o = true) and (true_cell_2_2_o = true)) or ((true_cell_2_2_o = true) and (true_cell_2_1_o = true)));
-        line_o=false if !(((true_cell_1_1_o = true) and (true_cell_1_2_o = true)) or ((true_cell_1_1_o = true) and (true_cell_2_1_o = true)) or ((true_cell_1_2_o = true) and (true_cell_2_2_o = true)) or ((true_cell_2_2_o = true) and (true_cell_2_1_o = true)));
-        line_x=true if (((true_cell_1_1_x = true) and (true_cell_1_2_x = true)) or ((true_cell_1_1_x = true) and (true_cell_2_1_x = true)) or ((true_cell_2_1_x = true) and (true_cell_2_2_x = true)) or ((true_cell_1_2_x = true) and (true_cell_2_2_x = true)));
-        line_x=false if !(((true_cell_1_1_x = true) and (true_cell_1_2_x = true)) or ((true_cell_1_1_x = true) and (true_cell_2_1_x = true)) or ((true_cell_2_1_x = true) and (true_cell_2_2_x = true)) or ((true_cell_1_2_x = true) and (true_cell_2_2_x = true)));
+        line_o=true if (((true_cell_1_1_o = true)));
+        line_o=false if !(((true_cell_1_1_o = true)));
+        line_x=true if (((true_cell_1_1_x = true) and (true_cell_1_2_x = true)) or ((true_cell_1_1_x = true) and (true_cell_2_1_x = true)));
+        line_x=false if !(((true_cell_1_1_x = true) and (true_cell_1_2_x = true)) or ((true_cell_1_1_x = true) and (true_cell_2_1_x = true)));
         next_cell_1_1_b=true if (((affect_cell_1_1 = false) and (true_cell_1_1_b = true)));
         next_cell_1_1_b=false if !(((affect_cell_1_1 = false) and (true_cell_1_1_b = true)));
         next_cell_1_1_o=true if (((does_o_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((true_cell_1_1_o = true)));
@@ -192,57 +167,45 @@ Agent Environment
         next_cell_2_1_o=false if !(((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((true_cell_2_1_o = true)));
         next_cell_2_1_x=true if (((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((true_cell_2_1_x = true)));
         next_cell_2_1_x=false if !(((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((true_cell_2_1_x = true)));
-        next_cell_2_2_b=true if (((affect_cell_2_2 = false) and (true_cell_2_2_b = true)));
-        next_cell_2_2_b=false if !(((affect_cell_2_2 = false) and (true_cell_2_2_b = true)));
-        next_cell_2_2_o=true if (((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((true_cell_2_2_o = true)));
-        next_cell_2_2_o=false if !(((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((true_cell_2_2_o = true)));
-        next_cell_2_2_x=true if (((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((true_cell_2_2_x = true)));
-        next_cell_2_2_x=false if !(((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((true_cell_2_2_x = true)));
-        next_control_o=true if (((does_x_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((does_o_mark_1_1 = true) and (true_cell_1_1_x = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_x = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_x = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_x = true)));
-        next_control_o=false if !(((does_x_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((does_o_mark_1_1 = true) and (true_cell_1_1_x = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_x = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_x = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_x = true)));
-        next_control_x=true if (((does_x_mark_1_1 = true) and (true_cell_1_1_o = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_o = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_o = true)) or ((does_x_mark_2_2 = true) and (true_cell_2_2_o = true)) or ((does_o_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)));
-        next_control_x=false if !(((does_x_mark_1_1 = true) and (true_cell_1_1_o = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_o = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_o = true)) or ((does_x_mark_2_2 = true) and (true_cell_2_2_o = true)) or ((does_o_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)));
-        next_sees_o_fail_1=true if (((does_o_mark_1_1 = true) and (true_cell_1_1_x = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_x = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_x = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_x = true)));
-        next_sees_o_fail_1=false if !(((does_o_mark_1_1 = true) and (true_cell_1_1_x = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_x = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_x = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_x = true)));
-        next_sees_o_success_1=true if (((does_o_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)));
-        next_sees_o_success_1=false if !(((does_o_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)));
-        next_sees_x_fail_1=true if (((does_x_mark_1_1 = true) and (true_cell_1_1_o = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_o = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_o = true)) or ((does_x_mark_2_2 = true) and (true_cell_2_2_o = true)));
-        next_sees_x_fail_1=false if !(((does_x_mark_1_1 = true) and (true_cell_1_1_o = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_o = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_o = true)) or ((does_x_mark_2_2 = true) and (true_cell_2_2_o = true)));
-        next_sees_x_success_1=true if (((does_x_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)));
-        next_sees_x_success_1=false if !(((does_x_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)));
+        next_control_o=true if (((does_x_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_o_mark_1_1 = true) and (true_cell_1_1_x = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_x = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_x = true)));
+        next_control_o=false if !(((does_x_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_o_mark_1_1 = true) and (true_cell_1_1_x = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_x = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_x = true)));
+        next_control_x=true if (((does_x_mark_1_1 = true) and (true_cell_1_1_o = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_o = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_o = true)) or ((does_o_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)));
+        next_control_x=false if !(((does_x_mark_1_1 = true) and (true_cell_1_1_o = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_o = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_o = true)) or ((does_o_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)));
+        next_sees_o_fail_1=true if (((does_o_mark_1_1 = true) and (true_cell_1_1_x = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_x = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_x = true)));
+        next_sees_o_fail_1=false if !(((does_o_mark_1_1 = true) and (true_cell_1_1_x = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_x = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_x = true)));
+        next_sees_o_success_1=true if (((does_o_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)));
+        next_sees_o_success_1=false if !(((does_o_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_o_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)));
+        next_sees_x_fail_1=true if (((does_x_mark_1_1 = true) and (true_cell_1_1_o = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_o = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_o = true)));
+        next_sees_x_fail_1=false if !(((does_x_mark_1_1 = true) and (true_cell_1_1_o = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_o = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_o = true)));
+        next_sees_x_success_1=true if (((does_x_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)));
+        next_sees_x_success_1=false if !(((does_x_mark_1_1 = true) and (true_cell_1_1_b = true)) or ((does_x_mark_1_2 = true) and (true_cell_1_2_b = true)) or ((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)));
         next_tried_o_1_1=true if (((does_o_mark_1_1 = true)) or ((true_tried_o_1_1 = true)));
         next_tried_o_1_1=false if !(((does_o_mark_1_1 = true)) or ((true_tried_o_1_1 = true)));
         next_tried_o_1_2=true if (((does_o_mark_1_2 = true)) or ((true_tried_o_1_2 = true)));
         next_tried_o_1_2=false if !(((does_o_mark_1_2 = true)) or ((true_tried_o_1_2 = true)));
         next_tried_o_2_1=true if (((does_o_mark_2_1 = true)) or ((true_tried_o_2_1 = true)));
         next_tried_o_2_1=false if !(((does_o_mark_2_1 = true)) or ((true_tried_o_2_1 = true)));
-        next_tried_o_2_2=true if (((does_o_mark_2_2 = true)) or ((true_tried_o_2_2 = true)));
-        next_tried_o_2_2=false if !(((does_o_mark_2_2 = true)) or ((true_tried_o_2_2 = true)));
         next_tried_x_1_1=true if (((does_x_mark_1_1 = true)) or ((true_tried_x_1_1 = true)));
         next_tried_x_1_1=false if !(((does_x_mark_1_1 = true)) or ((true_tried_x_1_1 = true)));
         next_tried_x_1_2=true if (((does_x_mark_1_2 = true)) or ((true_tried_x_1_2 = true)));
         next_tried_x_1_2=false if !(((does_x_mark_1_2 = true)) or ((true_tried_x_1_2 = true)));
         next_tried_x_2_1=true if (((does_x_mark_2_1 = true)) or ((true_tried_x_2_1 = true)));
         next_tried_x_2_1=false if !(((does_x_mark_2_1 = true)) or ((true_tried_x_2_1 = true)));
-        next_tried_x_2_2=true if (((does_x_mark_2_2 = true)) or ((true_tried_x_2_2 = true)));
-        next_tried_x_2_2=false if !(((does_x_mark_2_2 = true)) or ((true_tried_x_2_2 = true)));
         role_o=true if ((ok = 0));
         role_o=false if !((ok = 0));
         role_x=true if ((ok = 0));
         role_x=false if !((ok = 0));
-        terminal=true if (((true_cell_1_1_b = false) and (true_cell_1_2_b = false) and (true_cell_2_1_b = false) and (true_cell_2_2_b = false)) or ((line_x = true)) or ((line_o = true)));
-        terminal=false if !(((true_cell_1_1_b = false) and (true_cell_1_2_b = false) and (true_cell_2_1_b = false) and (true_cell_2_2_b = false)) or ((line_x = true)) or ((line_o = true)));
+        terminal=true if (((true_cell_1_1_b = false) and (true_cell_1_2_b = false) and (true_cell_2_1_b = false)) or ((line_x = true)) or ((line_o = true)));
+        terminal=false if !(((true_cell_1_1_b = false) and (true_cell_1_2_b = false) and (true_cell_2_1_b = false)) or ((line_x = true)) or ((line_o = true)));
 
         -- print the next for actions
         next_done_o_mark_1_1_1 = does_o_mark_1_1 if (ok = 0);
         next_done_o_mark_1_2_1 = does_o_mark_1_2 if (ok = 0);
         next_done_o_mark_2_1_1 = does_o_mark_2_1 if (ok = 0);
-        next_done_o_mark_2_2_1 = does_o_mark_2_2 if (ok = 0);
         next_done_o_noop_1 = does_o_noop if (ok = 0);
         next_done_x_mark_1_1_1 = does_x_mark_1_1 if (ok = 0);
         next_done_x_mark_1_2_1 = does_x_mark_1_2 if (ok = 0);
         next_done_x_mark_2_1_1 = does_x_mark_2_1 if (ok = 0);
-        next_done_x_mark_2_2_1 = does_x_mark_2_2 if (ok = 0);
         next_done_x_noop_1 = does_x_noop if (ok = 0);
         -- local observation evolution
         does_o_mark_1_1 = true if (player_o.Action = mark_1_1 and init = 0 and counter = 0 and act_step = true and terminal = false);
@@ -254,9 +217,6 @@ Agent Environment
         does_o_mark_2_1 = true if (player_o.Action = mark_2_1 and init = 0 and counter = 0 and act_step = true and terminal = false);
         does_o_mark_2_1 = false if (counter = 4 and act_step = true);
         does_o_mark_2_1 = does_o_mark_2_1  if !((counter = 4 and act_step = true) or (player_o.Action = mark_2_1 and init = 0 and counter = 0 and act_step = true and terminal = false));
-        does_o_mark_2_2 = true if (player_o.Action = mark_2_2 and init = 0 and counter = 0 and act_step = true and terminal = false);
-        does_o_mark_2_2 = false if (counter = 4 and act_step = true);
-        does_o_mark_2_2 = does_o_mark_2_2  if !((counter = 4 and act_step = true) or (player_o.Action = mark_2_2 and init = 0 and counter = 0 and act_step = true and terminal = false));
         does_o_noop = true if (player_o.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false);
         does_o_noop = false if (counter = 4 and act_step = true);
         does_o_noop = does_o_noop  if !((counter = 4 and act_step = true) or (player_o.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false));
@@ -269,9 +229,6 @@ Agent Environment
         does_x_mark_2_1 = true if (player_x.Action = mark_2_1 and init = 0 and counter = 0 and act_step = true and terminal = false);
         does_x_mark_2_1 = false if (counter = 4 and act_step = true);
         does_x_mark_2_1 = does_x_mark_2_1  if !((counter = 4 and act_step = true) or (player_x.Action = mark_2_1 and init = 0 and counter = 0 and act_step = true and terminal = false));
-        does_x_mark_2_2 = true if (player_x.Action = mark_2_2 and init = 0 and counter = 0 and act_step = true and terminal = false);
-        does_x_mark_2_2 = false if (counter = 4 and act_step = true);
-        does_x_mark_2_2 = does_x_mark_2_2  if !((counter = 4 and act_step = true) or (player_x.Action = mark_2_2 and init = 0 and counter = 0 and act_step = true and terminal = false));
         does_x_noop = true if (player_x.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false);
         does_x_noop = false if (counter = 4 and act_step = true);
         does_x_noop = does_x_noop  if !((counter = 4 and act_step = true) or (player_x.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false));
@@ -296,13 +253,6 @@ Agent Environment
         true_cell_2_1_o = true_cell_2_1_o if !((init = 0 and act_step = true and counter = 4));
         true_cell_2_1_x = next_cell_2_1_x if ((init = 0 and act_step = true and counter = 4));
         true_cell_2_1_x = true_cell_2_1_x if !((init = 0 and act_step = true and counter = 4));
-        true_cell_2_2_b = next_cell_2_2_b if ((init = 0 and act_step = true and counter = 4));
-        true_cell_2_2_b = true if (init = 4);
-        true_cell_2_2_b = true_cell_2_2_b if !((init = 0 and act_step = true and counter = 4) or (init = 4));
-        true_cell_2_2_o = next_cell_2_2_o if ((init = 0 and act_step = true and counter = 4));
-        true_cell_2_2_o = true_cell_2_2_o if !((init = 0 and act_step = true and counter = 4));
-        true_cell_2_2_x = next_cell_2_2_x if ((init = 0 and act_step = true and counter = 4));
-        true_cell_2_2_x = true_cell_2_2_x if !((init = 0 and act_step = true and counter = 4));
         true_control_o = next_control_o if ((init = 0 and act_step = true and counter = 4));
         true_control_o = true_control_o if !((init = 0 and act_step = true and counter = 4));
         true_control_x = next_control_x if ((init = 0 and act_step = true and counter = 4));
@@ -314,24 +264,18 @@ Agent Environment
         true_tried_o_1_2 = true_tried_o_1_2 if !((init = 0 and act_step = true and counter = 4));
         true_tried_o_2_1 = next_tried_o_2_1 if ((init = 0 and act_step = true and counter = 4));
         true_tried_o_2_1 = true_tried_o_2_1 if !((init = 0 and act_step = true and counter = 4));
-        true_tried_o_2_2 = next_tried_o_2_2 if ((init = 0 and act_step = true and counter = 4));
-        true_tried_o_2_2 = true_tried_o_2_2 if !((init = 0 and act_step = true and counter = 4));
         true_tried_x_1_1 = next_tried_x_1_1 if ((init = 0 and act_step = true and counter = 4));
         true_tried_x_1_1 = true_tried_x_1_1 if !((init = 0 and act_step = true and counter = 4));
         true_tried_x_1_2 = next_tried_x_1_2 if ((init = 0 and act_step = true and counter = 4));
         true_tried_x_1_2 = true_tried_x_1_2 if !((init = 0 and act_step = true and counter = 4));
         true_tried_x_2_1 = next_tried_x_2_1 if ((init = 0 and act_step = true and counter = 4));
         true_tried_x_2_1 = true_tried_x_2_1 if !((init = 0 and act_step = true and counter = 4));
-        true_tried_x_2_2 = next_tried_x_2_2 if ((init = 0 and act_step = true and counter = 4));
-        true_tried_x_2_2 = true_tried_x_2_2 if !((init = 0 and act_step = true and counter = 4));
         done_o_mark_1_1_1 = next_done_o_mark_1_1_1 if ((init = 0 and act_step = true and counter = 4));
         done_o_mark_1_1_1 = done_o_mark_1_1_1 if !((init = 0 and act_step = true and counter = 4));
         done_o_mark_1_2_1 = next_done_o_mark_1_2_1 if ((init = 0 and act_step = true and counter = 4));
         done_o_mark_1_2_1 = done_o_mark_1_2_1 if !((init = 0 and act_step = true and counter = 4));
         done_o_mark_2_1_1 = next_done_o_mark_2_1_1 if ((init = 0 and act_step = true and counter = 4));
         done_o_mark_2_1_1 = done_o_mark_2_1_1 if !((init = 0 and act_step = true and counter = 4));
-        done_o_mark_2_2_1 = next_done_o_mark_2_2_1 if ((init = 0 and act_step = true and counter = 4));
-        done_o_mark_2_2_1 = done_o_mark_2_2_1 if !((init = 0 and act_step = true and counter = 4));
         done_o_noop_1 = next_done_o_noop_1 if ((init = 0 and act_step = true and counter = 4));
         done_o_noop_1 = done_o_noop_1 if !((init = 0 and act_step = true and counter = 4));
         done_x_mark_1_1_1 = next_done_x_mark_1_1_1 if ((init = 0 and act_step = true and counter = 4));
@@ -340,8 +284,6 @@ Agent Environment
         done_x_mark_1_2_1 = done_x_mark_1_2_1 if !((init = 0 and act_step = true and counter = 4));
         done_x_mark_2_1_1 = next_done_x_mark_2_1_1 if ((init = 0 and act_step = true and counter = 4));
         done_x_mark_2_1_1 = done_x_mark_2_1_1 if !((init = 0 and act_step = true and counter = 4));
-        done_x_mark_2_2_1 = next_done_x_mark_2_2_1 if ((init = 0 and act_step = true and counter = 4));
-        done_x_mark_2_2_1 = done_x_mark_2_2_1 if !((init = 0 and act_step = true and counter = 4));
         done_x_noop_1 = next_done_x_noop_1 if ((init = 0 and act_step = true and counter = 4));
         done_x_noop_1 = done_x_noop_1 if !((init = 0 and act_step = true and counter = 4));
         sees_o_fail_1 = next_sees_o_fail_1 if ((init = 0 and act_step = true and counter = 4));
@@ -356,16 +298,15 @@ Agent Environment
 end Agent
 
 Agent player_o
-    Lobsvars={init,counter,act_step, sees_o_fail_1, sees_o_success_1, legal_o_mark_1_1, legal_o_mark_1_2, legal_o_mark_2_1, legal_o_mark_2_2, legal_o_noop, done_o_mark_1_1_1, done_o_mark_1_2_1, done_o_mark_2_1_1, done_o_mark_2_2_1, done_o_noop_1};
+    Lobsvars={init,counter,act_step, sees_o_fail_1, sees_o_success_1, legal_o_mark_1_1, legal_o_mark_1_2, legal_o_mark_2_1, legal_o_noop, done_o_mark_1_1_1, done_o_mark_1_2_1, done_o_mark_2_1_1, done_o_noop_1};
     Vars:
 
     end Vars
-    Actions = {mark_1_1, mark_1_2, mark_2_1, mark_2_2, noop, none};
+    Actions = {mark_1_1, mark_1_2, mark_2_1, noop, none};
     Protocol:
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_mark_1_1 = true): {mark_1_1};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_mark_1_2 = true): {mark_1_2};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_mark_2_1 = true): {mark_2_1};
-        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_mark_2_2 = true): {mark_2_2};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_noop = true): {noop};
         Other : {none};
     end Protocol
@@ -376,16 +317,15 @@ end Agent
 
 
 Agent player_x
-    Lobsvars={init,counter,act_step, sees_x_fail_1, sees_x_success_1, legal_x_mark_1_1, legal_x_mark_1_2, legal_x_mark_2_1, legal_x_mark_2_2, legal_x_noop, done_x_mark_1_1_1, done_x_mark_1_2_1, done_x_mark_2_1_1, done_x_mark_2_2_1, done_x_noop_1};
+    Lobsvars={init,counter,act_step, sees_x_fail_1, sees_x_success_1, legal_x_mark_1_1, legal_x_mark_1_2, legal_x_mark_2_1, legal_x_noop, done_x_mark_1_1_1, done_x_mark_1_2_1, done_x_mark_2_1_1, done_x_noop_1};
     Vars:
 
     end Vars
-    Actions = {mark_1_1, mark_1_2, mark_2_1, mark_2_2, noop, none};
+    Actions = {mark_1_1, mark_1_2, mark_2_1, noop, none};
     Protocol:
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_mark_1_1 = true): {mark_1_1};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_mark_1_2 = true): {mark_1_2};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_mark_2_1 = true): {mark_2_1};
-        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_mark_2_2 = true): {mark_2_2};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_noop = true): {noop};
         Other : {none};
     end Protocol
@@ -395,7 +335,7 @@ Agent player_x
 end Agent
 
 Evaluation
-    t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+    t if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true);
 end Evaluation
 
 InitStates
@@ -420,12 +360,6 @@ InitStates
     and Environment.next_cell_2_1_o = false
     and Environment.true_cell_2_1_x = false
     and Environment.next_cell_2_1_x = false
-    and Environment.true_cell_2_2_b = false
-    and Environment.next_cell_2_2_b = false
-    and Environment.true_cell_2_2_o = false
-    and Environment.next_cell_2_2_o = false
-    and Environment.true_cell_2_2_x = false
-    and Environment.next_cell_2_2_x = false
     and Environment.true_control_o = false
     and Environment.next_control_o = false
     and Environment.true_control_x = false
@@ -436,16 +370,12 @@ InitStates
     and Environment.next_tried_o_1_2 = false
     and Environment.true_tried_o_2_1 = false
     and Environment.next_tried_o_2_1 = false
-    and Environment.true_tried_o_2_2 = false
-    and Environment.next_tried_o_2_2 = false
     and Environment.true_tried_x_1_1 = false
     and Environment.next_tried_x_1_1 = false
     and Environment.true_tried_x_1_2 = false
     and Environment.next_tried_x_1_2 = false
     and Environment.true_tried_x_2_1 = false
     and Environment.next_tried_x_2_1 = false
-    and Environment.true_tried_x_2_2 = false
-    and Environment.next_tried_x_2_2 = false
     and Environment.sees_o_fail_1 = false
     and Environment.next_sees_o_fail_1 = false
     and Environment.sees_o_success_1 = false
@@ -457,12 +387,10 @@ InitStates
     and Environment.legal_o_mark_1_1 = false
     and Environment.legal_o_mark_1_2 = false
     and Environment.legal_o_mark_2_1 = false
-    and Environment.legal_o_mark_2_2 = false
     and Environment.legal_o_noop = false
     and Environment.legal_x_mark_1_1 = false
     and Environment.legal_x_mark_1_2 = false
     and Environment.legal_x_mark_2_1 = false
-    and Environment.legal_x_mark_2_2 = false
     and Environment.legal_x_noop = false
     and Environment.terminal = false
     and Environment.does_o_mark_1_1 = false
@@ -474,9 +402,6 @@ InitStates
     and Environment.does_o_mark_2_1 = false
     and Environment.done_o_mark_2_1_1 = false
     and Environment.next_done_o_mark_2_1_1 = false
-    and Environment.does_o_mark_2_2 = false
-    and Environment.done_o_mark_2_2_1 = false
-    and Environment.next_done_o_mark_2_2_1 = false
     and Environment.does_o_noop = false
     and Environment.done_o_noop_1 = false
     and Environment.next_done_o_noop_1 = false
@@ -489,13 +414,10 @@ InitStates
     and Environment.does_x_mark_2_1 = false
     and Environment.done_x_mark_2_1_1 = false
     and Environment.next_done_x_mark_2_1_1 = false
-    and Environment.does_x_mark_2_2 = false
-    and Environment.done_x_mark_2_2_1 = false
-    and Environment.next_done_x_mark_2_2_1 = false
     and Environment.does_x_noop = false
     and Environment.done_x_noop_1 = false
     and Environment.next_done_x_noop_1 = false
-    and Environment.affect_cell_1_1 = false    and Environment.affect_cell_1_2 = false    and Environment.affect_cell_2_1 = false    and Environment.affect_cell_2_2 = false    and Environment.goal_o_0 = false    and Environment.goal_o_100 = false    and Environment.goal_o_50 = false    and Environment.goal_x_0 = false    and Environment.goal_x_100 = false    and Environment.goal_x_50 = false    and Environment.line_o = false    and Environment.line_x = false;
+    and Environment.affect_cell_1_1 = false    and Environment.affect_cell_1_2 = false    and Environment.affect_cell_2_1 = false    and Environment.goal_o_0 = false    and Environment.goal_o_100 = false    and Environment.goal_o_50 = false    and Environment.goal_x_0 = false    and Environment.goal_x_100 = false    and Environment.goal_x_50 = false    and Environment.line_o = false    and Environment.line_x = false;
 end InitStates
 
 Groups
@@ -505,5 +427,5 @@ Fairness
 end Fairness
 
 Formulae
-    EF t;
+    AF t;
 end Formulae

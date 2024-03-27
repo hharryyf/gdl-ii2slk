@@ -557,6 +557,8 @@ end Agent
 Evaluation
     t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
     -- win if ((Environment.goal_x_100 = true or Environment.goal_x_83 = true or Environment.goal_x_66 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+    reward if ((Environment.goal_x_100 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+    loss if ((Environment.goal_x_100 = true or Environment.goal_x_88 = true or Environment.goal_x_0 = true or Environment.goal_x_77 = true or Environment.goal_x_66 = true or Environment.goal_x_55 = true or Environment.goal_x_44 = true or Environment.goal_x_33 = true or Environment.goal_x_22 = true or Environment.goal_x_11 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
     real if (Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
     hasgoal if ((Environment.goal_x_100 = true or Environment.goal_x_88 = true or Environment.goal_x_77 = true or Environment.goal_x_66 = true or Environment.goal_x_55 = true or Environment.goal_x_44 = true or Environment.goal_x_33 = true or Environment.goal_x_22 = true or Environment.goal_x_11 = true or Environment.goal_x_0 = true) and Environment.goal_o_0 = true);
     token if (Environment.sees_x_great_1 = true and Environment.done_x_guess_1_1 = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
@@ -725,4 +727,5 @@ Formulae
     AF t; -- terminal
     AG (real -> hasgoal); -- has goal
     AG (token -> K(player_x, select_gt3)); -- knowledge
+    -- <<e>> <<x>> <<y>> (Environment, e) (player_x, x) (player_o, y) (F reward and ([[xa]] (player_x, xa) F loss)); -- Nash
 end Formulae
