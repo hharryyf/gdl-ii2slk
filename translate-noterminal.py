@@ -244,32 +244,46 @@ def parse_rule(rule: str):
 # all the variables for the environment
 def print_environment_vars(maxd:int =3, recall:int = 1):
     print('    Vars:')
-    print(f'        counter: 0 .. {maxd};')
-    print(f'        init: 0 .. {maxd};')
-    print(f'        act_step: boolean;')
     print(f'        ok: 0.. 0;')
     # print the roles
     for r in role:
         print(f'        role_{r}: boolean;')
-    # print the base propositions
+    print(f'        counter: 0 .. {maxd};')
+    print(f'        init: 0 .. {maxd};')
+    print(f'        act_step: boolean;')
+    
+    for r in sorted(legal.keys()):
+        for act in sorted(legal[r]):
+            print(f'        does_{r}_{act}: boolean;')
+
     for atom in sorted(base):
         print(f'        true_{atom}: boolean;')
-        print(f'        next_{atom}: boolean;')
+
     # print the sees and observations
     for r in sorted(see.keys()):
         for observations in sorted(see[r]):
             for i in range(recall):
                 print(f'        sees_{r}_{observations}_{i+1}: boolean;')
-                # print(f'        sees_{r}_{observations}_{i+1}_obs: boolean;')
-                print(f'        next_sees_{r}_{observations}_{i+1}: boolean;')
+
     for r in sorted(legal.keys()):
         for atom in sorted(legal[r]):
             print(f'        legal_{r}_{atom}: boolean;')
     
+    # print the base propositions
+    for atom in sorted(base):
+        print(f'        next_{atom}: boolean;')
+    
+
+    # print the sees and observations
+    for r in sorted(see.keys()):
+        for observations in sorted(see[r]):
+            for i in range(recall):
+                # print(f'        sees_{r}_{observations}_{i+1}_obs: boolean;')
+                print(f'        next_sees_{r}_{observations}_{i+1}: boolean;')
+    
     print(f'        terminal: boolean;')
     for r in sorted(legal.keys()):
         for act in sorted(legal[r]):
-            print(f'        does_{r}_{act}: boolean;')
             for i in range(recall):
                 print(f'        done_{r}_{act}_{i+1}: boolean;')
                 print(f'        next_done_{r}_{act}_{i+1}: boolean;')
