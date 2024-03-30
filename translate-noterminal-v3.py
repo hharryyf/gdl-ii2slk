@@ -292,7 +292,7 @@ def print_environment_vars(maxd:int =3, recall:int = 1):
         for act in sorted(legal[r]):
             for i in range(recall):
                 print(f'        done_{r}_{act}_{i+1}: boolean;')
-                print(f'        next_done_{r}_{act}_{i+1}: boolean;')
+                # print(f'        next_done_{r}_{act}_{i+1}: boolean;')
     
     for atom in sorted(other):
         if atom[:5] != 'goal_':
@@ -327,13 +327,13 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
     print()
 
     print(f'        -- print the next for actions')
-    for r in sorted(legal.keys()):
-        for act in sorted(legal[r]):
-            for i in range(1, recall + 1, 1):
-                if i == 1:
-                    print(f'        next_done_{r}_{act}_{i} = does_{r}_{act} if (ok = 0);')
-                else:
-                    print(f'        next_done_{r}_{act}_{i} = done_{r}_{act}_{i-1} if (ok = 0);')
+    #for r in sorted(legal.keys()):
+    #    for act in sorted(legal[r]):
+    #        for i in range(1, recall + 1, 1):
+    #            if i == 1:
+    #                print(f'        next_done_{r}_{act}_{i} = does_{r}_{act} if (ok = 0);')
+    #            else:
+    #                print(f'        next_done_{r}_{act}_{i} = done_{r}_{act}_{i-1} if (ok = 0);')
     
     print(f'        -- local observation evolution')
     for r in sorted(legal.keys()):
@@ -357,8 +357,8 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
     for r in sorted(legal.keys()):
         for act in sorted(legal[r]):
             for i in range(recall):
-                print(f'        done_{r}_{act}_{i+1} = next_done_{r}_{act}_{i+1} if ((init = 0 and act_step = true and counter = {maxd}));')
-                print(f'        done_{r}_{act}_{i+1} = done_{r}_{act}_{i+1} if !((init = 0 and act_step = true and counter = {maxd}));')
+                print(f'        done_{r}_{act}_{i+1} = does_{r}_{act} if ((init = 0 and act_step = true and counter = 1));')
+                print(f'        done_{r}_{act}_{i+1} = done_{r}_{act}_{i+1} if !((init = 0 and act_step = true and counter = 1));')
     
     
     for r in sorted(see.keys()):
@@ -404,7 +404,7 @@ def print_init(maxd:int = 3, recall:int = 1):
             print(f'    and Environment.does_{r}_{act} = false')
             for i in range(recall):
                 print(f'    and Environment.done_{r}_{act}_{i+1} = false')
-                print(f'    and Environment.next_done_{r}_{act}_{i+1} = false')
+                # print(f'    and Environment.next_done_{r}_{act}_{i+1} = false')
                 
     # print other derived predicates
     for atom in sorted(other):
@@ -497,8 +497,8 @@ def writeslk(recall:int = 1):
         for i in range (1, len(rule)):
             cond = cond + ' or ' + rule[i]
         cond = cond + ')'
-        print(f'        {d} if {cond};')
-        
+        print(f'    {d} if {cond};')
+    print('t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);')
     print('end Evaluation')
     # initial states
     print()
@@ -509,7 +509,9 @@ def writeslk(recall:int = 1):
     print()
     print('Fairness\nend Fairness')
     print()
-    print('Formulae\n\nend Formulae')
+    print('Formulae')
+    print('    AF t;')
+    print('end Formulae')
 
 def construct_dependencies(file):    
     f = open(file=file, mode='r')
