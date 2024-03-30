@@ -3,56 +3,48 @@ Semantics=SingleAssignment;
 Agent Environment
 -- maximum chain length 2
     Vars:
+        ok: 0.. 0;
         counter: 0 .. 3;
         init: 0 .. 3;
         act_step: boolean;
-        ok: 0.. 0;
-        role_x: boolean;
-        role_o: boolean;
+        does_o_choose_1: boolean;
+        does_o_choose_2: boolean;
+        does_o_choose_3: boolean;
+        does_o_choose_4: boolean;
+        does_o_choose_5: boolean;
+        does_o_choose_6: boolean;
+        does_o_choose_7: boolean;
+        does_o_noop: boolean;
+        does_x_guess_1: boolean;
+        does_x_guess_2: boolean;
+        does_x_guess_3: boolean;
+        does_x_guess_4: boolean;
+        does_x_guess_5: boolean;
+        does_x_guess_6: boolean;
+        does_x_guess_7: boolean;
+        does_x_noop: boolean;
         true_choose_1: boolean;
-        next_choose_1: boolean;
         true_choose_2: boolean;
-        next_choose_2: boolean;
         true_choose_3: boolean;
-        next_choose_3: boolean;
         true_choose_4: boolean;
-        next_choose_4: boolean;
         true_choose_5: boolean;
-        next_choose_5: boolean;
         true_choose_6: boolean;
-        next_choose_6: boolean;
         true_choose_7: boolean;
-        next_choose_7: boolean;
         true_control_o: boolean;
-        next_control_o: boolean;
         true_control_x: boolean;
-        next_control_x: boolean;
         true_correct: boolean;
-        next_correct: boolean;
         true_round_0: boolean;
-        next_round_0: boolean;
         true_round_1: boolean;
-        next_round_1: boolean;
         true_round_2: boolean;
-        next_round_2: boolean;
         true_round_3: boolean;
-        next_round_3: boolean;
         true_round_4: boolean;
-        next_round_4: boolean;
         true_round_5: boolean;
-        next_round_5: boolean;
         true_round_6: boolean;
-        next_round_6: boolean;
         true_round_7: boolean;
-        next_round_7: boolean;
         true_round_8: boolean;
-        next_round_8: boolean;
         sees_x_great_1: boolean;
-        next_sees_x_great_1: boolean;
         sees_x_less_1: boolean;
-        next_sees_x_less_1: boolean;
         sees_x_ok_1: boolean;
-        next_sees_x_ok_1: boolean;
         legal_o_choose_1: boolean;
         legal_o_choose_2: boolean;
         legal_o_choose_3: boolean;
@@ -69,63 +61,61 @@ Agent Environment
         legal_x_guess_6: boolean;
         legal_x_guess_7: boolean;
         legal_x_noop: boolean;
+        next_choose_1: boolean;
+        next_choose_2: boolean;
+        next_choose_3: boolean;
+        next_choose_4: boolean;
+        next_choose_5: boolean;
+        next_choose_6: boolean;
+        next_choose_7: boolean;
+        next_control_o: boolean;
+        next_control_x: boolean;
+        next_correct: boolean;
+        next_round_0: boolean;
+        next_round_1: boolean;
+        next_round_2: boolean;
+        next_round_3: boolean;
+        next_round_4: boolean;
+        next_round_5: boolean;
+        next_round_6: boolean;
+        next_round_7: boolean;
+        next_round_8: boolean;
+        next_sees_x_great_1: boolean;
+        next_sees_x_less_1: boolean;
+        next_sees_x_ok_1: boolean;
         terminal: boolean;
-        does_o_choose_1: boolean;
         done_o_choose_1_1: boolean;
         next_done_o_choose_1_1: boolean;
-        does_o_choose_2: boolean;
         done_o_choose_2_1: boolean;
         next_done_o_choose_2_1: boolean;
-        does_o_choose_3: boolean;
         done_o_choose_3_1: boolean;
         next_done_o_choose_3_1: boolean;
-        does_o_choose_4: boolean;
         done_o_choose_4_1: boolean;
         next_done_o_choose_4_1: boolean;
-        does_o_choose_5: boolean;
         done_o_choose_5_1: boolean;
         next_done_o_choose_5_1: boolean;
-        does_o_choose_6: boolean;
         done_o_choose_6_1: boolean;
         next_done_o_choose_6_1: boolean;
-        does_o_choose_7: boolean;
         done_o_choose_7_1: boolean;
         next_done_o_choose_7_1: boolean;
-        does_o_noop: boolean;
         done_o_noop_1: boolean;
         next_done_o_noop_1: boolean;
-        does_x_guess_1: boolean;
         done_x_guess_1_1: boolean;
         next_done_x_guess_1_1: boolean;
-        does_x_guess_2: boolean;
         done_x_guess_2_1: boolean;
         next_done_x_guess_2_1: boolean;
-        does_x_guess_3: boolean;
         done_x_guess_3_1: boolean;
         next_done_x_guess_3_1: boolean;
-        does_x_guess_4: boolean;
         done_x_guess_4_1: boolean;
         next_done_x_guess_4_1: boolean;
-        does_x_guess_5: boolean;
         done_x_guess_5_1: boolean;
         next_done_x_guess_5_1: boolean;
-        does_x_guess_6: boolean;
         done_x_guess_6_1: boolean;
         next_done_x_guess_6_1: boolean;
-        does_x_guess_7: boolean;
         done_x_guess_7_1: boolean;
         next_done_x_guess_7_1: boolean;
-        does_x_noop: boolean;
         done_x_noop_1: boolean;
         next_done_x_noop_1: boolean;
-        goal_o_0: boolean;
-        goal_x_0: boolean;
-        goal_x_100: boolean;
-        goal_x_16: boolean;
-        goal_x_33: boolean;
-        goal_x_50: boolean;
-        goal_x_66: boolean;
-        goal_x_83: boolean;
     end Vars
     Actions = { none };
     Protocol:
@@ -142,22 +132,6 @@ Agent Environment
         act_step = true if !((init > 1) or (counter < 3 and init = 0 and act_step = false) or (counter = 3 and init = 0 and act_step = true));
 
         -- print the dependencies
-        goal_o_0=true if ((ok = 0));
-        goal_o_0=false if !((ok = 0));
-        goal_x_0=true if (((true_round_8 = true)) or ((true_correct = false)));
-        goal_x_0=false if !(((true_round_8 = true)) or ((true_correct = false)));
-        goal_x_100=true if (((true_correct = true) and (true_round_2 = true)));
-        goal_x_100=false if !(((true_correct = true) and (true_round_2 = true)));
-        goal_x_16=true if (((true_correct = true) and (true_round_7 = true)));
-        goal_x_16=false if !(((true_correct = true) and (true_round_7 = true)));
-        goal_x_33=true if (((true_correct = true) and (true_round_6 = true)));
-        goal_x_33=false if !(((true_correct = true) and (true_round_6 = true)));
-        goal_x_50=true if (((true_correct = true) and (true_round_5 = true)));
-        goal_x_50=false if !(((true_correct = true) and (true_round_5 = true)));
-        goal_x_66=true if (((true_correct = true) and (true_round_4 = true)));
-        goal_x_66=false if !(((true_correct = true) and (true_round_4 = true)));
-        goal_x_83=true if (((true_correct = true) and (true_round_3 = true)));
-        goal_x_83=false if !(((true_correct = true) and (true_round_3 = true)));
         legal_o_choose_1=true if (((true_control_o = true)));
         legal_o_choose_1=false if !(((true_control_o = true)));
         legal_o_choose_2=true if (((true_control_o = true)));
@@ -232,10 +206,6 @@ Agent Environment
         next_sees_x_less_1=false if !(((true_choose_1 = true) and (does_x_guess_2 = true)) or ((true_choose_1 = true) and (does_x_guess_3 = true)) or ((true_choose_1 = true) and (does_x_guess_4 = true)) or ((true_choose_1 = true) and (does_x_guess_5 = true)) or ((true_choose_1 = true) and (does_x_guess_6 = true)) or ((true_choose_1 = true) and (does_x_guess_7 = true)) or ((true_choose_2 = true) and (does_x_guess_3 = true)) or ((true_choose_2 = true) and (does_x_guess_4 = true)) or ((true_choose_2 = true) and (does_x_guess_5 = true)) or ((true_choose_2 = true) and (does_x_guess_6 = true)) or ((true_choose_2 = true) and (does_x_guess_7 = true)) or ((true_choose_3 = true) and (does_x_guess_4 = true)) or ((true_choose_3 = true) and (does_x_guess_5 = true)) or ((true_choose_3 = true) and (does_x_guess_6 = true)) or ((true_choose_3 = true) and (does_x_guess_7 = true)) or ((true_choose_4 = true) and (does_x_guess_5 = true)) or ((true_choose_4 = true) and (does_x_guess_6 = true)) or ((true_choose_4 = true) and (does_x_guess_7 = true)) or ((true_choose_5 = true) and (does_x_guess_6 = true)) or ((true_choose_5 = true) and (does_x_guess_7 = true)) or ((true_choose_6 = true) and (does_x_guess_7 = true)));
         next_sees_x_ok_1=true if (((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)) or ((true_choose_6 = true) and (does_x_guess_6 = true)) or ((true_choose_7 = true) and (does_x_guess_7 = true)));
         next_sees_x_ok_1=false if !(((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)) or ((true_choose_6 = true) and (does_x_guess_6 = true)) or ((true_choose_7 = true) and (does_x_guess_7 = true)));
-        role_o=true if ((ok = 0));
-        role_o=false if !((ok = 0));
-        role_x=true if ((ok = 0));
-        role_x=false if !((ok = 0));
         terminal=true if (((true_round_8 = true)) or ((true_correct = true)));
         terminal=false if !(((true_round_8 = true)) or ((true_correct = true)));
 
@@ -432,21 +402,19 @@ Agent player_x
 end Agent
 
 Evaluation
-    t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    win if ((Environment.goal_x_100 = true or Environment.goal_x_83 = true or Environment.goal_x_66 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    reward if ((Environment.goal_x_100 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    loss if ((Environment.goal_x_83 = true or Environment.goal_x_0 = true or Environment.goal_x_50 = true or Environment.goal_x_100 = true or Environment.goal_x_66 = true or Environment.goal_x_16 = true or Environment.goal_x_33 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    select if ((Environment.true_round_0 = true or Environment.true_choose_1 = true or Environment.true_choose_6 = true or Environment.true_choose_7 = true or Environment.true_choose_2 = true or Environment.true_choose_3 = true or Environment.true_choose_4 = true or Environment.true_choose_5 = true));
-    real if (Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    hasgoal if ((Environment.goal_x_100 = true or Environment.goal_x_83 = true or Environment.goal_x_66 = true or Environment.goal_x_50 = true or Environment.goal_x_33 = true or Environment.goal_x_16 = true or Environment.goal_x_0 = true) and Environment.goal_o_0 = true);
-    token if (Environment.sees_x_great_1 = true and Environment.done_x_guess_1_1 = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    select_gt3 if ((Environment.true_choose_2 = true or Environment.true_choose_3 = true or  Environment.true_choose_4 = true or Environment.true_choose_5 = true or Environment.true_choose_6 = true or Environment.true_choose_7 = true));
+        t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+        goal_o_0 if ((Environment.ok = 0));
+        goal_x_0 if (((Environment.true_round_8 = true)) or ((Environment.true_correct = false)));
+        goal_x_100 if (((Environment.true_correct = true) and (Environment.true_round_2 = true)));
+        goal_x_16 if (((Environment.true_correct = true) and (Environment.true_round_7 = true)));
+        goal_x_33 if (((Environment.true_correct = true) and (Environment.true_round_6 = true)));
+        goal_x_50 if (((Environment.true_correct = true) and (Environment.true_round_5 = true)));
+        goal_x_66 if (((Environment.true_correct = true) and (Environment.true_round_4 = true)));
+        goal_x_83 if (((Environment.true_correct = true) and (Environment.true_round_3 = true)));
 end Evaluation
 
 InitStates
     Environment.counter = 0 and Environment.ok = 0 and Environment.init = 3 and Environment.act_step = false
-    and Environment.role_o = false
-    and Environment.role_x = false
     and Environment.true_choose_1 = false
     and Environment.next_choose_1 = false
     and Environment.true_choose_2 = false
@@ -556,7 +524,7 @@ InitStates
     and Environment.does_x_noop = false
     and Environment.done_x_noop_1 = false
     and Environment.next_done_x_noop_1 = false
-    and Environment.goal_o_0 = false    and Environment.goal_x_0 = false    and Environment.goal_x_100 = false    and Environment.goal_x_16 = false    and Environment.goal_x_33 = false    and Environment.goal_x_50 = false    and Environment.goal_x_66 = false    and Environment.goal_x_83 = false;
+;
 end InitStates
 
 Groups
@@ -566,9 +534,6 @@ Fairness
 end Fairness
 
 Formulae
-    AF t; -- terminal
-    AG (real -> hasgoal); -- has goal
-    AG (token -> K(player_x, select_gt3)); -- knowledge
-    <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) F win; -- strong winnability
-    <<e>> <<x>> <<y>> (Environment, e) (player_x, x) (player_o, y) (F reward and ([[xa]] (player_x, xa) F loss)); -- Nash
+    AF t;
+    <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) F (t and (goal_x_100 or goal_x_83 or goal_x_66));
 end Formulae

@@ -1,0 +1,291 @@
+role(x).
+role(o).
+
+
+init(cell(1,1,b)).
+init(cell(1,2,b)).
+init(cell(2,3,b)).
+init(cell(2,1,b)).
+init(cell(2,2,b)).
+init(cell(2,3,b)).
+init(cell(3,1,b)).
+init(cell(3,2,b)).
+init(cell(3,3,b)).
+init(control(x)).
+
+legal(o, noop) :- true(control(x)).
+legal(x, noop) :- true(control(o)).
+
+legal(x, mark(1, 1)) :- not true(tried(x, 1, 1)), true(control(x)).
+legal(x, mark(1, 2)) :- not true(tried(x, 1, 2)), true(control(x)).
+legal(x, mark(1, 3)) :- not true(tried(x, 1, 3)), true(control(x)).
+legal(x, mark(2, 1)) :- not true(tried(x, 2, 1)), true(control(x)).
+legal(x, mark(2, 2)) :- not true(tried(x, 2, 2)), true(control(x)).
+legal(x, mark(2, 3)) :- not true(tried(x, 2, 3)), true(control(x)).
+legal(x, mark(3, 1)) :- not true(tried(x, 3, 1)), true(control(x)).
+legal(x, mark(3, 2)) :- not true(tried(x, 3, 2)), true(control(x)).
+legal(x, mark(3, 3)) :- not true(tried(x, 3, 3)), true(control(x)).
+
+legal(o, mark(1, 1)) :- not true(tried(o, 1, 1)), true(control(o)).
+legal(o, mark(1, 2)) :- not true(tried(o, 1, 2)), true(control(o)).
+legal(o, mark(1, 3)) :- not true(tried(o, 1, 3)), true(control(o)).
+legal(o, mark(2, 1)) :- not true(tried(o, 2, 1)), true(control(o)).
+legal(o, mark(2, 2)) :- not true(tried(o, 2, 2)), true(control(o)).
+legal(o, mark(2, 3)) :- not true(tried(o, 2, 3)), true(control(o)).
+legal(o, mark(3, 1)) :- not true(tried(o, 3, 1)), true(control(o)).
+legal(o, mark(3, 2)) :- not true(tried(o, 3, 2)), true(control(o)).
+legal(o, mark(3, 3)) :- not true(tried(o, 3, 3)), true(control(o)).
+
+
+next(tried(x, 1, 1)) :- does(x, mark(1, 1)).
+next(tried(x, 1, 2)) :- does(x, mark(1, 2)).
+next(tried(x, 1, 3)) :- does(x, mark(1, 3)).
+next(tried(x, 2, 1)) :- does(x, mark(2, 1)).
+next(tried(x, 2, 2)) :- does(x, mark(2, 2)).
+next(tried(x, 2, 3)) :- does(x, mark(2, 3)).
+next(tried(x, 3, 1)) :- does(x, mark(3, 1)).
+next(tried(x, 3, 2)) :- does(x, mark(3, 2)).
+next(tried(x, 3, 3)) :- does(x, mark(3, 3)).
+
+next(tried(o, 1, 1)) :- does(o, mark(1, 1)).
+next(tried(o, 1, 2)) :- does(o, mark(1, 2)).
+next(tried(o, 1, 3)) :- does(o, mark(1, 3)).
+next(tried(o, 2, 1)) :- does(o, mark(2, 1)).
+next(tried(o, 2, 2)) :- does(o, mark(2, 2)).
+next(tried(o, 2, 3)) :- does(o, mark(2, 3)).
+next(tried(o, 3, 1)) :- does(o, mark(3, 1)).
+next(tried(o, 3, 2)) :- does(o, mark(3, 2)).
+next(tried(o, 3, 3)) :- does(o, mark(3, 3)).
+
+next(tried(x, 1, 1)) :- true(tried(x, 1, 1)).
+next(tried(x, 1, 2)) :- true(tried(x, 1, 2)).
+next(tried(x, 1, 3)) :- true(tried(x, 1, 3)).
+next(tried(x, 2, 1)) :- true(tried(x, 2, 1)).
+next(tried(x, 2, 2)) :- true(tried(x, 2, 2)).
+next(tried(x, 2, 3)) :- true(tried(x, 2, 3)).
+next(tried(x, 3, 1)) :- true(tried(x, 3, 1)).
+next(tried(x, 3, 2)) :- true(tried(x, 3, 2)).
+next(tried(x, 3, 3)) :- true(tried(x, 3, 3)).
+
+next(tried(o, 1, 1)) :- true(tried(o, 1, 1)).
+next(tried(o, 1, 2)) :- true(tried(o, 1, 2)).
+next(tried(o, 1, 3)) :- true(tried(o, 1, 3)).
+next(tried(o, 2, 1)) :- true(tried(o, 2, 1)).
+next(tried(o, 2, 2)) :- true(tried(o, 2, 2)).
+next(tried(o, 2, 3)) :- true(tried(o, 2, 3)).
+next(tried(o, 3, 1)) :- true(tried(o, 3, 1)).
+next(tried(o, 3, 2)) :- true(tried(o, 3, 2)).
+next(tried(o, 3, 3)) :- true(tried(o, 3, 3)).
+
+sees(x,success) :- does(x, mark(1,1)), true(cell(1, 1, b)).
+next(cell(1,1,x)) :- does(x, mark(1,1)), true(cell(1, 1, b)).
+next(control(o)) :- does(x, mark(1,1)), true(cell(1, 1, b)).
+sees(x,fail) :- does(x, mark(1,1)), true(cell(1, 1, o)).
+next(control(x)) :- does(x, mark(1,1)), true(cell(1, 1, o)).
+
+sees(x,success) :- does(x, mark(1,2)), true(cell(1, 2, b)).
+next(cell(1,2,x)) :- does(x, mark(1,2)), true(cell(1, 2, b)).
+next(control(o)) :- does(x, mark(1,2)), true(cell(1, 2, b)).
+sees(x,fail) :- does(x, mark(1,2)), true(cell(1, 2, o)).
+next(control(x)) :- does(x, mark(1,2)), true(cell(1, 2, o)).
+
+sees(x,success) :- does(x, mark(1,3)), true(cell(1, 3, b)).
+next(cell(1,3,x)) :- does(x, mark(1,3)), true(cell(1, 3, b)).
+next(control(o)) :- does(x, mark(1,3)), true(cell(1, 3, b)).
+sees(x,fail) :- does(x, mark(1,3)), true(cell(1, 3, o)).
+next(control(x)) :- does(x, mark(1,3)), true(cell(1, 3, o)).
+
+
+sees(x,success) :- does(x, mark(2,1)), true(cell(2, 1, b)).
+next(cell(2,1,x)) :- does(x, mark(2,1)), true(cell(2, 1, b)).
+next(control(o)) :- does(x, mark(2,1)), true(cell(2, 1, b)).
+sees(x,fail) :- does(x, mark(2,1)), true(cell(2, 1, o)).
+next(control(x)) :- does(x, mark(2,1)), true(cell(2, 1, o)).
+
+
+sees(x,success) :- does(x, mark(2,2)), true(cell(2, 2, b)).
+next(cell(2,2,x)) :- does(x, mark(2,2)), true(cell(2, 2, b)).
+next(control(o)) :- does(x, mark(2,2)), true(cell(2, 2, b)).
+sees(x,fail) :- does(x, mark(2,2)), true(cell(2, 2, o)).
+next(control(x)) :- does(x, mark(2,2)), true(cell(2, 2, o)).
+
+sees(x,success) :- does(x, mark(2,3)), true(cell(2, 3, b)).
+next(cell(2,3,x)) :- does(x, mark(2,3)), true(cell(2, 3, b)).
+next(control(o)) :- does(x, mark(2,3)), true(cell(2, 3, b)).
+sees(x,fail) :- does(x, mark(2,3)), true(cell(2, 3, o)).
+next(control(x)) :- does(x, mark(2,3)), true(cell(2, 3, o)).
+
+sees(x,success) :- does(x, mark(3,1)), true(cell(3, 1, b)).
+next(cell(3,1,x)) :- does(x, mark(3,1)), true(cell(3, 1, b)).
+next(control(o)) :- does(x, mark(3,1)), true(cell(3, 1, b)).
+sees(x,fail) :- does(x, mark(3,1)), true(cell(3, 1, o)).
+next(control(x)) :- does(x, mark(3,1)), true(cell(3, 1, o)).
+
+
+sees(x,success) :- does(x, mark(3,2)), true(cell(3, 2, b)).
+next(cell(3,2,x)) :- does(x, mark(3,2)), true(cell(3, 2, b)).
+next(control(o)) :- does(x, mark(3,2)), true(cell(3, 2, b)).
+sees(x,fail) :- does(x, mark(3,2)), true(cell(3, 2, o)).
+next(control(x)) :- does(x, mark(3,2)), true(cell(3, 2, o)).
+
+sees(x,success) :- does(x, mark(3,3)), true(cell(3, 3, b)).
+next(cell(3,3,x)) :- does(x, mark(3,3)), true(cell(3, 3, b)).
+next(control(o)) :- does(x, mark(3,3)), true(cell(3, 3, b)).
+sees(x,fail) :- does(x, mark(3,3)), true(cell(3, 3, o)).
+next(control(x)) :- does(x, mark(3,3)), true(cell(3, 3, o)).
+
+
+
+sees(o,success) :- does(o, mark(1,1)), true(cell(1, 1, b)).
+next(cell(1,1,o)) :- does(o, mark(1,1)), true(cell(1, 1, b)).
+next(control(x)) :- does(o, mark(1,1)), true(cell(1, 1, b)).
+sees(o,fail) :- does(o, mark(1,1)), true(cell(1, 1, x)).
+next(control(o)) :- does(o, mark(1,1)), true(cell(1, 1, x)).
+
+sees(o,success) :- does(o, mark(1,2)), true(cell(1, 2, b)).
+next(cell(1,2,o)) :- does(o, mark(1,2)), true(cell(1, 2, b)).
+next(control(x)) :- does(o, mark(1,2)), true(cell(1, 2, b)).
+sees(o,fail) :- does(o, mark(1,2)), true(cell(1, 2, x)).
+next(control(o)) :- does(o, mark(1,2)), true(cell(1, 2, x)).
+
+sees(o,success) :- does(o, mark(1,3)), true(cell(1, 3, b)).
+next(cell(1,3,o)) :- does(o, mark(1,3)), true(cell(1, 3, b)).
+next(control(x)) :- does(o, mark(1,3)), true(cell(1, 3, b)).
+sees(o,fail) :- does(o, mark(1,3)), true(cell(1, 3, x)).
+next(control(o)) :- does(o, mark(1,3)), true(cell(1, 3, x)).
+
+sees(o,success) :- does(o, mark(2,1)), true(cell(2, 1, b)).
+next(cell(2,1,o)) :- does(o, mark(2,1)), true(cell(2, 1, b)).
+next(control(x)) :- does(o, mark(2,1)), true(cell(2, 1, b)).
+sees(o,fail) :- does(o, mark(2,1)), true(cell(2, 1, x)).
+next(control(o)) :- does(o, mark(2,1)), true(cell(2, 1, x)).
+
+
+sees(o,success) :- does(o, mark(2,2)), true(cell(2, 2, b)).
+next(cell(2,2,o)) :- does(o, mark(2,2)), true(cell(2, 2, b)).
+next(control(x)) :- does(o, mark(2,2)), true(cell(2, 2, b)).
+sees(o,fail) :- does(o, mark(2,2)), true(cell(2, 2, x)).
+next(control(o)) :- does(o, mark(2,2)), true(cell(2, 2, x)).
+
+
+sees(o,success) :- does(o, mark(2,3)), true(cell(2, 3, b)).
+next(cell(2,3,o)) :- does(o, mark(2,3)), true(cell(2, 3, b)).
+next(control(x)) :- does(o, mark(2,3)), true(cell(2, 3, b)).
+sees(o,fail) :- does(o, mark(2,3)), true(cell(2, 3, x)).
+next(control(o)) :- does(o, mark(2,3)), true(cell(2, 3, x)).
+
+
+sees(o,success) :- does(o, mark(3,1)), true(cell(3, 1, b)).
+next(cell(3,1,o)) :- does(o, mark(3,1)), true(cell(3, 1, b)).
+next(control(x)) :- does(o, mark(2,1)), true(cell(3, 1, b)).
+sees(o,fail) :- does(o, mark(3,1)), true(cell(3, 1, x)).
+next(control(o)) :- does(o, mark(3,1)), true(cell(3, 1, x)).
+
+
+sees(o,success) :- does(o, mark(3,2)), true(cell(3, 2, b)).
+next(cell(3,2,o)) :- does(o, mark(3,2)), true(cell(3, 2, b)).
+next(control(x)) :- does(o, mark(3,2)), true(cell(3, 2, b)).
+sees(o,fail) :- does(o, mark(3,2)), true(cell(3, 2, x)).
+next(control(o)) :- does(o, mark(3,2)), true(cell(3, 2, x)).
+
+
+sees(o,success) :- does(o, mark(3,3)), true(cell(3, 3, b)).
+next(cell(3,3,o)) :- does(o, mark(3,3)), true(cell(3, 3, b)).
+next(control(x)) :- does(o, mark(3,3)), true(cell(3, 3, b)).
+sees(o,fail) :- does(o, mark(3,3)), true(cell(3, 3, x)).
+next(control(o)) :- does(o, mark(3,3)), true(cell(3, 3, x)).
+
+
+next(cell(1, 1, x)):- true(cell(1, 1, x)).
+next(cell(1, 1, o)):- true(cell(1, 1, o)).
+next(cell(1, 2, x)):- true(cell(1, 2, x)).
+next(cell(1, 2, o)):- true(cell(1, 2, o)).
+next(cell(1, 3, x)):- true(cell(1, 3, x)).
+next(cell(1, 3, o)):- true(cell(1, 3, o)).
+next(cell(2, 1, x)):- true(cell(2, 1, x)).
+next(cell(2, 1, o)):- true(cell(2, 1, o)).
+next(cell(2, 2, x)):- true(cell(2, 2, x)).
+next(cell(2, 2, o)):- true(cell(2, 2, o)).
+next(cell(2, 3, x)):- true(cell(2, 3, x)).
+next(cell(2, 3, o)):- true(cell(2, 3, o)).
+next(cell(3, 1, x)):- true(cell(3, 1, x)).
+next(cell(3, 1, o)):- true(cell(3, 1, o)).
+next(cell(3, 2, x)):- true(cell(3, 2, x)).
+next(cell(3, 2, o)):- true(cell(3, 2, o)).
+next(cell(3, 3, x)):- true(cell(3, 3, x)).
+next(cell(3, 3, o)):- true(cell(3, 3, o)).
+
+next(cell(1, 1, b)):- not affect(cell(1, 1)), true(cell(1, 1, b)).
+next(cell(1, 2, b)):- not affect(cell(1, 2)), true(cell(1, 2, b)).
+next(cell(1, 3, b)):- not affect(cell(1, 3)), true(cell(1, 3, b)).
+next(cell(2, 1, b)):- not affect(cell(2, 1)), true(cell(2, 1, b)).
+next(cell(2, 2, b)):- not affect(cell(2, 2)), true(cell(2, 2, b)).
+next(cell(2, 3, b)):- not affect(cell(2, 3)), true(cell(2, 3, b)).
+next(cell(3, 1, b)):- not affect(cell(3, 1)), true(cell(3, 1, b)).
+next(cell(3, 2, b)):- not affect(cell(3, 2)), true(cell(3, 2, b)).
+next(cell(3, 3, b)):- not affect(cell(3, 3)), true(cell(3, 3, b)).
+affect(cell(1, 1)) :- does(x, mark(1,1)), true(cell(1, 1, b)).
+affect(cell(1, 2)) :- does(x, mark(1,2)), true(cell(1, 2, b)).
+affect(cell(1, 3)) :- does(x, mark(1,3)), true(cell(1, 3, b)).
+affect(cell(2, 1)) :- does(x, mark(2,1)), true(cell(2, 1, b)).
+affect(cell(2, 2)) :- does(x, mark(2,2)), true(cell(2, 2, b)).
+affect(cell(2, 3)) :- does(x, mark(2,3)), true(cell(2, 3, b)).
+affect(cell(3, 1)) :- does(x, mark(3,1)), true(cell(3, 1, b)).
+affect(cell(3, 2)) :- does(x, mark(3,2)), true(cell(3, 2, b)).
+affect(cell(3, 3)) :- does(x, mark(3,3)), true(cell(3, 3, b)).
+
+
+affect(cell(1, 1)) :- does(o, mark(1,1)), true(cell(1, 1, b)).
+affect(cell(1, 2)) :- does(o, mark(1,2)), true(cell(1, 2, b)).
+affect(cell(1, 3)) :- does(o, mark(1,3)), true(cell(1, 3, b)).
+affect(cell(2, 1)) :- does(o, mark(2,1)), true(cell(2, 1, b)).
+affect(cell(2, 2)) :- does(o, mark(2,2)), true(cell(2, 2, b)).
+affect(cell(2, 3)) :- does(o, mark(2,3)), true(cell(2, 3, b)).
+affect(cell(3, 1)) :- does(o, mark(3,1)), true(cell(3, 1, b)).
+affect(cell(3, 2)) :- does(o, mark(3,2)), true(cell(3, 2, b)).
+affect(cell(3, 3)) :- does(o, mark(3,3)), true(cell(3, 3, b)).
+
+
+line(x) :- true(cell(1, 1, x)), true(cell(1, 2, x)), true(cell(1, 3, x)).
+
+line(x) :- true(cell(2, 1, x)), true(cell(2, 2, x)), true(cell(2, 3, x)).
+
+line(x) :- true(cell(3, 1, x)), true(cell(3, 2, x)), true(cell(3, 3, x)).
+
+line(x) :- true(cell(1, 1, x)), true(cell(2, 1, x)), true(cell(3, 1, x)).
+
+line(x) :- true(cell(1, 2, x)), true(cell(2, 2, x)), true(cell(3, 2, x)).
+
+line(x) :- true(cell(1, 3, x)), true(cell(2, 3, x)), true(cell(3, 3, x)).
+
+line(x) :- true(cell(1, 1, x)), true(cell(2, 2, x)), true(cell(3, 3, x)).
+
+line(x) :- true(cell(1, 3, x)), true(cell(2, 2, x)), true(cell(3, 1, x)).
+
+line(o) :- true(cell(1, 1, o)), true(cell(1, 2, o)), true(cell(1, 3, o)).
+
+line(o) :- true(cell(2, 1, o)), true(cell(2, 2, o)), true(cell(2, 3, o)).
+
+line(o) :- true(cell(3, 1, o)), true(cell(3, 2, o)), true(cell(3, 3, o)).
+
+line(o) :- true(cell(1, 1, o)), true(cell(2, 1, o)), true(cell(3, 1, o)).
+
+line(o) :- true(cell(1, 2, o)), true(cell(2, 2, o)), true(cell(3, 2, o)).
+
+line(o) :- true(cell(1, 3, o)), true(cell(2, 3, o)), true(cell(3, 3, o)).
+
+line(o) :- true(cell(1, 1, o)), true(cell(2, 2, o)), true(cell(3, 3, o)).
+
+line(o) :- true(cell(1, 3, o)), true(cell(2, 2, o)), true(cell(3, 1, o)).
+
+
+
+terminal :- not true(cell(1,1,b)), not true(cell(1,2,b)), not true(cell(1,3,b)), not true(cell(2,1,b)), not true(cell(2,2,b)), not true(cell(2,3,b)), not true(cell(3,1,b)), not true(cell(3,2,b)), not true(cell(3,3,b)).
+terminal :- line(x).
+terminal :- line(o).
+goal(x, 50) :- not line(x), not line(o).
+goal(o, 50) :- not line(x), not line(o).
+goal(x, 100) :- line(x).
+goal(o, 0) :- line(x).
+goal(o, 100) :- line(o).
+goal(x, 0) :- line(o).

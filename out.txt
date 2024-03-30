@@ -1,0 +1,518 @@
+Semantics = SingleAssignment;
+
+Agent Environment
+  Obsvars:
+    bulb : { on, off };
+  end Obsvars
+
+  Vars:
+    interrogate0 : boolean;
+    interrogate1 : boolean;
+    interrogate2 : boolean;
+    interrogate3 : boolean;
+    interrogate4 : boolean;
+    interrogate5 : boolean;
+    interrogate6 : boolean;
+    interrogate7 : boolean;
+    interrogate8 : boolean;
+    interrogate9 : boolean;
+    interrogate10 : boolean;
+    interrogate11 : boolean;
+    interrogate12 : boolean;
+    interrogate13 : boolean;
+    interrogate14 : boolean;
+    interrogate15 : boolean;
+    interrogate16 : boolean;
+    interrogate17 : boolean;
+    interrogate18 : boolean;
+    interrogate19 : boolean;
+  end Vars
+
+  Actions = { null };
+  Protocol:
+    Other : {null};
+  end Protocol
+
+  Evolution:
+    bulb = on if Prisoner1.Action=switch_on or Prisoner2.Action=switch_on or Prisoner3.Action=switch_on or Prisoner4.Action=switch_on or Prisoner5.Action=switch_on or Prisoner6.Action=switch_on or Prisoner7.Action=switch_on or Prisoner8.Action=switch_on or Prisoner9.Action=switch_on or Prisoner10.Action=switch_on or Prisoner11.Action=switch_on or Prisoner12.Action=switch_on or Prisoner13.Action=switch_on or Prisoner14.Action=switch_on or Prisoner15.Action=switch_on or Prisoner16.Action=switch_on or Prisoner17.Action=switch_on or Prisoner18.Action=switch_on or Prisoner19.Action=switch_on;
+    bulb = off if Counter.Action=switch_off;
+    interrogate0 = false if interrogate0 = true;
+    interrogate1 = false if interrogate1 = true;
+    interrogate2 = false if interrogate2 = true;
+    interrogate3 = false if interrogate3 = true;
+    interrogate4 = false if interrogate4 = true;
+    interrogate5 = false if interrogate5 = true;
+    interrogate6 = false if interrogate6 = true;
+    interrogate7 = false if interrogate7 = true;
+    interrogate8 = false if interrogate8 = true;
+    interrogate9 = false if interrogate9 = true;
+    interrogate10 = false if interrogate10 = true;
+    interrogate11 = false if interrogate11 = true;
+    interrogate12 = false if interrogate12 = true;
+    interrogate13 = false if interrogate13 = true;
+    interrogate14 = false if interrogate14 = true;
+    interrogate15 = false if interrogate15 = true;
+    interrogate16 = false if interrogate16 = true;
+    interrogate17 = false if interrogate17 = true;
+    interrogate18 = false if interrogate18 = true;
+    interrogate19 = false if interrogate19 = true;
+    interrogate0 = true if interrogate0 = false and Prison.Action=choose0;
+    interrogate1 = true if interrogate1 = false and Prison.Action=choose1;
+    interrogate2 = true if interrogate2 = false and Prison.Action=choose2;
+    interrogate3 = true if interrogate3 = false and Prison.Action=choose3;
+    interrogate4 = true if interrogate4 = false and Prison.Action=choose4;
+    interrogate5 = true if interrogate5 = false and Prison.Action=choose5;
+    interrogate6 = true if interrogate6 = false and Prison.Action=choose6;
+    interrogate7 = true if interrogate7 = false and Prison.Action=choose7;
+    interrogate8 = true if interrogate8 = false and Prison.Action=choose8;
+    interrogate9 = true if interrogate9 = false and Prison.Action=choose9;
+    interrogate10 = true if interrogate10 = false and Prison.Action=choose10;
+    interrogate11 = true if interrogate11 = false and Prison.Action=choose11;
+    interrogate12 = true if interrogate12 = false and Prison.Action=choose12;
+    interrogate13 = true if interrogate13 = false and Prison.Action=choose13;
+    interrogate14 = true if interrogate14 = false and Prison.Action=choose14;
+    interrogate15 = true if interrogate15 = false and Prison.Action=choose15;
+    interrogate16 = true if interrogate16 = false and Prison.Action=choose16;
+    interrogate17 = true if interrogate17 = false and Prison.Action=choose17;
+    interrogate18 = true if interrogate18 = false and Prison.Action=choose18;
+    interrogate19 = true if interrogate19 = false and Prison.Action=choose19;
+  end Evolution
+end Agent
+
+Agent Prison
+  Lobsvars = {interrogate0, interrogate1, interrogate2, interrogate3, interrogate4, interrogate5, interrogate6, interrogate7, interrogate8, interrogate9, interrogate10, interrogate11, interrogate12, interrogate13, interrogate14, interrogate15, interrogate16, interrogate17, interrogate18, interrogate19};
+  Vars:
+    interrogated0 : boolean;
+    interrogated1 : boolean;
+    interrogated2 : boolean;
+    interrogated3 : boolean;
+    interrogated4 : boolean;
+    interrogated5 : boolean;
+    interrogated6 : boolean;
+    interrogated7 : boolean;
+    interrogated8 : boolean;
+    interrogated9 : boolean;
+    interrogated10 : boolean;
+    interrogated11 : boolean;
+    interrogated12 : boolean;
+    interrogated13 : boolean;
+    interrogated14 : boolean;
+    interrogated15 : boolean;
+    interrogated16 : boolean;
+    interrogated17 : boolean;
+    interrogated18 : boolean;
+    interrogated19 : boolean;
+    release : boolean;
+    execute : boolean;
+  end Vars
+  Actions = {null, choose0, choose1, choose2, choose3, choose4, choose5, choose6, choose7, choose8, choose9, choose10, choose11, choose12, choose13, choose14, choose15, choose16, choose17, choose18, choose19};
+  Protocol:
+    release = false and execute = false and Environment.interrogate0=false and Environment.interrogate1=false and Environment.interrogate2=false and Environment.interrogate3=false and Environment.interrogate4=false and Environment.interrogate5=false and Environment.interrogate6=false and Environment.interrogate7=false and Environment.interrogate8=false and Environment.interrogate9=false and Environment.interrogate10=false and Environment.interrogate11=false and Environment.interrogate12=false and Environment.interrogate13=false and Environment.interrogate14=false and Environment.interrogate15=false and Environment.interrogate16=false and Environment.interrogate17=false and Environment.interrogate18=false and Environment.interrogate19=false: {choose0, choose1, choose2, choose3, choose4, choose5, choose6, choose7, choose8, choose9, choose10, choose11, choose12, choose13, choose14, choose15, choose16, choose17, choose18, choose19};
+    Other: {null};
+  end Protocol
+  Evolution:
+    release = true if Counter.Action=announce and interrogated1=true and interrogated2=true and interrogated3=true and interrogated4=true and interrogated5=true and interrogated6=true and interrogated7=true and interrogated8=true and interrogated9=true and interrogated10=true and interrogated11=true and interrogated12=true and interrogated13=true and interrogated14=true and interrogated15=true and interrogated16=true and interrogated17=true and interrogated18=true and interrogated19=true;
+    execute = true if Counter.Action=announce and (interrogated1 = false or interrogated2=false or interrogated3=false or interrogated4=false or interrogated5=false or interrogated6=false or interrogated7=false or interrogated8=false or interrogated9=false or interrogated10=false or interrogated11=false or interrogated12=false or interrogated13=false or interrogated14=false or interrogated15=false or interrogated16=false or interrogated17=false or interrogated18=false or interrogated19=false);
+    interrogated0=true if interrogated0=false and Action = choose0;
+    interrogated1=true if interrogated1=false and Action = choose1;
+    interrogated2=true if interrogated2=false and Action = choose2;
+    interrogated3=true if interrogated3=false and Action = choose3;
+    interrogated4=true if interrogated4=false and Action = choose4;
+    interrogated5=true if interrogated5=false and Action = choose5;
+    interrogated6=true if interrogated6=false and Action = choose6;
+    interrogated7=true if interrogated7=false and Action = choose7;
+    interrogated8=true if interrogated8=false and Action = choose8;
+    interrogated9=true if interrogated9=false and Action = choose9;
+    interrogated10=true if interrogated10=false and Action = choose10;
+    interrogated11=true if interrogated11=false and Action = choose11;
+    interrogated12=true if interrogated12=false and Action = choose12;
+    interrogated13=true if interrogated13=false and Action = choose13;
+    interrogated14=true if interrogated14=false and Action = choose14;
+    interrogated15=true if interrogated15=false and Action = choose15;
+    interrogated16=true if interrogated16=false and Action = choose16;
+    interrogated17=true if interrogated17=false and Action = choose17;
+    interrogated18=true if interrogated18=false and Action = choose18;
+    interrogated19=true if interrogated19=false and Action = choose19;
+  end Evolution
+end Agent
+
+Agent Counter
+  Lobsvars = {interrogate0};
+  Vars:
+    count : 0..19;
+  end Vars
+  Actions = {switch_off, announce, do_nothing};
+  Protocol:
+    	count < 18 and Environment.bulb = on and Environment.interrogate0=true: {switch_off};
+    	count = 18 and Environment.bulb = on and Environment.interrogate0=true: {announce};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    count = count + 1 if count <= 18 and  Environment.bulb = on and Environment.interrogate0=true;
+  end Evolution
+end Agent
+
+Agent Prisoner1
+  Lobsvars = {interrogate1};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate1=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate1=true;
+  end Evolution
+end Agent
+
+Agent Prisoner2
+  Lobsvars = {interrogate2};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate2=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate2=true;
+  end Evolution
+end Agent
+
+Agent Prisoner3
+  Lobsvars = {interrogate3};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate3=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate3=true;
+  end Evolution
+end Agent
+
+Agent Prisoner4
+  Lobsvars = {interrogate4};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate4=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate4=true;
+  end Evolution
+end Agent
+
+Agent Prisoner5
+  Lobsvars = {interrogate5};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate5=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate5=true;
+  end Evolution
+end Agent
+
+Agent Prisoner6
+  Lobsvars = {interrogate6};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate6=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate6=true;
+  end Evolution
+end Agent
+
+Agent Prisoner7
+  Lobsvars = {interrogate7};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate7=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate7=true;
+  end Evolution
+end Agent
+
+Agent Prisoner8
+  Lobsvars = {interrogate8};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate8=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate8=true;
+  end Evolution
+end Agent
+
+Agent Prisoner9
+  Lobsvars = {interrogate9};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate9=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate9=true;
+  end Evolution
+end Agent
+
+Agent Prisoner10
+  Lobsvars = {interrogate10};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate10=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate10=true;
+  end Evolution
+end Agent
+
+Agent Prisoner11
+  Lobsvars = {interrogate11};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate11=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate11=true;
+  end Evolution
+end Agent
+
+Agent Prisoner12
+  Lobsvars = {interrogate12};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate12=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate12=true;
+  end Evolution
+end Agent
+
+Agent Prisoner13
+  Lobsvars = {interrogate13};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate13=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate13=true;
+  end Evolution
+end Agent
+
+Agent Prisoner14
+  Lobsvars = {interrogate14};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate14=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate14=true;
+  end Evolution
+end Agent
+
+Agent Prisoner15
+  Lobsvars = {interrogate15};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate15=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate15=true;
+  end Evolution
+end Agent
+
+Agent Prisoner16
+  Lobsvars = {interrogate16};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate16=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate16=true;
+  end Evolution
+end Agent
+
+Agent Prisoner17
+  Lobsvars = {interrogate17};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate17=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate17=true;
+  end Evolution
+end Agent
+
+Agent Prisoner18
+  Lobsvars = {interrogate18};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate18=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate18=true;
+  end Evolution
+end Agent
+
+Agent Prisoner19
+  Lobsvars = {interrogate19};
+  Vars:
+    first_interrogation : boolean;
+  end Vars
+  Actions = { switch_on, do_nothing };
+  Protocol:
+    first_interrogation = true and Environment.bulb = off and Environment.interrogate19=true: {switch_on};
+    Other: {do_nothing};
+  end Protocol
+  Evolution:
+    first_interrogation = false if first_interrogation = true and Environment.bulb = off and Environment.interrogate19=true;
+  end Evolution
+end Agent
+
+Evaluation
+  Announce if Counter.count = 19;
+  Release if Prison.release = true;
+  Execute if Prison.execute = true;
+  Interrogated0 if Prison.interrogated0 = true;
+  Interrogate0 if Environment.interrogate0 = true;
+  Interrogated1 if Prison.interrogated1 = true;
+  Interrogate1 if Environment.interrogate1 = true;
+  Interrogated2 if Prison.interrogated2 = true;
+  Interrogate2 if Environment.interrogate2 = true;
+  Interrogated3 if Prison.interrogated3 = true;
+  Interrogate3 if Environment.interrogate3 = true;
+  Interrogated4 if Prison.interrogated4 = true;
+  Interrogate4 if Environment.interrogate4 = true;
+  Interrogated5 if Prison.interrogated5 = true;
+  Interrogate5 if Environment.interrogate5 = true;
+  Interrogated6 if Prison.interrogated6 = true;
+  Interrogate6 if Environment.interrogate6 = true;
+  Interrogated7 if Prison.interrogated7 = true;
+  Interrogate7 if Environment.interrogate7 = true;
+  Interrogated8 if Prison.interrogated8 = true;
+  Interrogate8 if Environment.interrogate8 = true;
+  Interrogated9 if Prison.interrogated9 = true;
+  Interrogate9 if Environment.interrogate9 = true;
+  Interrogated10 if Prison.interrogated10 = true;
+  Interrogate10 if Environment.interrogate10 = true;
+  Interrogated11 if Prison.interrogated11 = true;
+  Interrogate11 if Environment.interrogate11 = true;
+  Interrogated12 if Prison.interrogated12 = true;
+  Interrogate12 if Environment.interrogate12 = true;
+  Interrogated13 if Prison.interrogated13 = true;
+  Interrogate13 if Environment.interrogate13 = true;
+  Interrogated14 if Prison.interrogated14 = true;
+  Interrogate14 if Environment.interrogate14 = true;
+  Interrogated15 if Prison.interrogated15 = true;
+  Interrogate15 if Environment.interrogate15 = true;
+  Interrogated16 if Prison.interrogated16 = true;
+  Interrogate16 if Environment.interrogate16 = true;
+  Interrogated17 if Prison.interrogated17 = true;
+  Interrogate17 if Environment.interrogate17 = true;
+  Interrogated18 if Prison.interrogated18 = true;
+  Interrogate18 if Environment.interrogate18 = true;
+  Interrogated19 if Prison.interrogated19 = true;
+  Interrogate19 if Environment.interrogate19 = true;
+  On if Environment.bulb=on;
+  tt if Prison.release = true or Prison.release = false;
+end Evaluation
+
+InitStates
+  Environment.bulb = off and Environment.interrogate0=false and Environment.interrogate1=false and Environment.interrogate2=false and Environment.interrogate3=false and Environment.interrogate4=false and Environment.interrogate5=false and Environment.interrogate6=false and Environment.interrogate7=false and Environment.interrogate8=false and Environment.interrogate9=false and Environment.interrogate10=false and Environment.interrogate11=false and Environment.interrogate12=false and Environment.interrogate13=false and Environment.interrogate14=false and Environment.interrogate15=false and Environment.interrogate16=false and Environment.interrogate17=false and Environment.interrogate18=false and Environment.interrogate19=false and
+  Counter.count = 0 and Prisoner1.first_interrogation = true and Prisoner2.first_interrogation = true and Prisoner3.first_interrogation = true and Prisoner4.first_interrogation = true and Prisoner5.first_interrogation = true and Prisoner6.first_interrogation = true and Prisoner7.first_interrogation = true and Prisoner8.first_interrogation = true and Prisoner9.first_interrogation = true and Prisoner10.first_interrogation = true and Prisoner11.first_interrogation = true and Prisoner12.first_interrogation = true and Prisoner13.first_interrogation = true and Prisoner14.first_interrogation = true and Prisoner15.first_interrogation = true and Prisoner16.first_interrogation = true and Prisoner17.first_interrogation = true and Prisoner18.first_interrogation = true and Prisoner19.first_interrogation = true and
+  Prison.release = false and Prison.execute=false and Prison.interrogated0=false and Prison.interrogated1=false and Prison.interrogated2=false and Prison.interrogated3=false and Prison.interrogated4=false and Prison.interrogated5=false and Prison.interrogated6=false and Prison.interrogated7=false and Prison.interrogated8=false and Prison.interrogated9=false and Prison.interrogated10=false and Prison.interrogated11=false and Prison.interrogated12=false and Prison.interrogated13=false and Prison.interrogated14=false and Prison.interrogated15=false and Prison.interrogated16=false and Prison.interrogated17=false and Prison.interrogated18=false and Prison.interrogated19=false;
+end InitStates
+
+Fairness
+  (Execute or Release or Interrogate0);
+  (Execute or Release or Interrogate1);
+  (Execute or Release or Interrogate2);
+  (Execute or Release or Interrogate3);
+  (Execute or Release or Interrogate4);
+  (Execute or Release or Interrogate5);
+  (Execute or Release or Interrogate6);
+  (Execute or Release or Interrogate7);
+  (Execute or Release or Interrogate8);
+  (Execute or Release or Interrogate9);
+  (Execute or Release or Interrogate10);
+  (Execute or Release or Interrogate11);
+  (Execute or Release or Interrogate12);
+  (Execute or Release or Interrogate13);
+  (Execute or Release or Interrogate14);
+  (Execute or Release or Interrogate15);
+  (Execute or Release or Interrogate16);
+  (Execute or Release or Interrogate17);
+  (Execute or Release or Interrogate18);
+  (Execute or Release or Interrogate19);
+end Fairness
+Formulae
+  AG Announce -> K(Counter, Interrogated0 and Interrogated1 and Interrogated2 and Interrogated3 and Interrogated4 and Interrogated5 and Interrogated6 and Interrogated7 and Interrogated8 and Interrogated9 and Interrogated10 and Interrogated11 and Interrogated12 and Interrogated13 and Interrogated14 and Interrogated15 and Interrogated16 and Interrogated17 and Interrogated18 and Interrogated19);
+end Formulae

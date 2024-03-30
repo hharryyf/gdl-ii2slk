@@ -4,8 +4,6 @@ Agent Environment
 -- maximum chain length 3
     Vars:
         ok: 0.. 0;
-        role_o: boolean;
-        role_x: boolean;
         counter: 0 .. 4;
         init: 0 .. 4;
         act_step: boolean;
@@ -108,12 +106,6 @@ Agent Environment
         affect_cell_2_2: boolean;
         line_o: boolean;
         line_x: boolean;
-        goal_o_0: boolean;
-        goal_o_100: boolean;
-        goal_o_50: boolean;
-        goal_x_0: boolean;
-        goal_x_100: boolean;
-        goal_x_50: boolean;
     end Vars
     Actions = { none };
     Protocol:
@@ -138,18 +130,6 @@ Agent Environment
         affect_cell_2_1=false if !(((does_x_mark_2_1 = true) and (true_cell_2_1_b = true)) or ((does_o_mark_2_1 = true) and (true_cell_2_1_b = true)));
         affect_cell_2_2=true if (((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)));
         affect_cell_2_2=false if !(((does_x_mark_2_2 = true) and (true_cell_2_2_b = true)) or ((does_o_mark_2_2 = true) and (true_cell_2_2_b = true)));
-        goal_o_0=true if (((line_x = true)));
-        goal_o_0=false if !(((line_x = true)));
-        goal_o_100=true if (((line_o = true)));
-        goal_o_100=false if !(((line_o = true)));
-        goal_o_50=true if (((line_x = false) and (line_o = false)));
-        goal_o_50=false if !(((line_x = false) and (line_o = false)));
-        goal_x_0=true if (((line_o = true)));
-        goal_x_0=false if !(((line_o = true)));
-        goal_x_100=true if (((line_x = true)));
-        goal_x_100=false if !(((line_x = true)));
-        goal_x_50=true if (((line_x = false) and (line_o = false)));
-        goal_x_50=false if !(((line_x = false) and (line_o = false)));
         legal_o_mark_1_1=true if (((true_tried_o_1_1 = false) and (true_control_o = true)));
         legal_o_mark_1_1=false if !(((true_tried_o_1_1 = false) and (true_control_o = true)));
         legal_o_mark_1_2=true if (((true_tried_o_1_2 = false) and (true_control_o = true)));
@@ -226,10 +206,6 @@ Agent Environment
         next_tried_x_2_1=false if !(((does_x_mark_2_1 = true)) or ((true_tried_x_2_1 = true)));
         next_tried_x_2_2=true if (((does_x_mark_2_2 = true)) or ((true_tried_x_2_2 = true)));
         next_tried_x_2_2=false if !(((does_x_mark_2_2 = true)) or ((true_tried_x_2_2 = true)));
-        role_o=true if ((ok = 0));
-        role_o=false if !((ok = 0));
-        role_x=true if ((ok = 0));
-        role_x=false if !((ok = 0));
         terminal=true if (((true_cell_1_1_b = false) and (true_cell_1_2_b = false) and (true_cell_2_1_b = false) and (true_cell_2_2_b = false)) or ((line_x = true)) or ((line_o = true)));
         terminal=false if !(((true_cell_1_1_b = false) and (true_cell_1_2_b = false) and (true_cell_2_1_b = false) and (true_cell_2_2_b = false)) or ((line_x = true)) or ((line_o = true)));
 
@@ -395,13 +371,17 @@ Agent player_x
 end Agent
 
 Evaluation
-    t if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true);
+        goal_o_0 if (((Environment.line_x = true)));
+        goal_o_100 if (((Environment.line_o = true)));
+        goal_o_50 if (((Environment.line_x = false) and (Environment.line_o = false)));
+        goal_x_0 if (((Environment.line_o = true)));
+        goal_x_100 if (((Environment.line_x = true)));
+        goal_x_50 if (((Environment.line_x = false) and (Environment.line_o = false)));
+        t if (Environment.terminal = true and Environment.counter = 0 and Environment.init = 0 and Environment.act_step = true);
 end Evaluation
 
 InitStates
     Environment.counter = 0 and Environment.ok = 0 and Environment.init = 4 and Environment.act_step = false
-    and Environment.role_o = false
-    and Environment.role_x = false
     and Environment.true_cell_1_1_b = false
     and Environment.next_cell_1_1_b = false
     and Environment.true_cell_1_1_o = false
@@ -495,7 +475,7 @@ InitStates
     and Environment.does_x_noop = false
     and Environment.done_x_noop_1 = false
     and Environment.next_done_x_noop_1 = false
-    and Environment.affect_cell_1_1 = false    and Environment.affect_cell_1_2 = false    and Environment.affect_cell_2_1 = false    and Environment.affect_cell_2_2 = false    and Environment.goal_o_0 = false    and Environment.goal_o_100 = false    and Environment.goal_o_50 = false    and Environment.goal_x_0 = false    and Environment.goal_x_100 = false    and Environment.goal_x_50 = false    and Environment.line_o = false    and Environment.line_x = false;
+    and Environment.affect_cell_1_1 = false    and Environment.affect_cell_1_2 = false    and Environment.affect_cell_2_1 = false    and Environment.affect_cell_2_2 = false    and Environment.line_o = false    and Environment.line_x = false;
 end InitStates
 
 Groups
@@ -506,4 +486,5 @@ end Fairness
 
 Formulae
     EF t;
+    <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) F (t and goal_x_100); -- strong winnability
 end Formulae

@@ -3,103 +3,133 @@ Semantics=SingleAssignment;
 Agent Environment
 -- maximum chain length 2
     Vars:
+        ok: 0.. 0;
+        role_o: boolean;
+        role_x: boolean;
         counter: 0 .. 3;
         init: 0 .. 3;
         act_step: boolean;
-        ok: 0.. 0;
-        role_x: boolean;
-        role_o: boolean;
+        does_o_choose_1: boolean;
+        does_o_choose_2: boolean;
+        does_o_choose_3: boolean;
+        does_o_choose_4: boolean;
+        does_o_choose_5: boolean;
+        does_o_choose_6: boolean;
+        does_o_choose_7: boolean;
+        does_o_choose_8: boolean;
+        does_o_noop: boolean;
+        does_x_guess_1: boolean;
+        does_x_guess_2: boolean;
+        does_x_guess_3: boolean;
+        does_x_guess_4: boolean;
+        does_x_guess_5: boolean;
+        does_x_guess_6: boolean;
+        does_x_guess_7: boolean;
+        does_x_guess_8: boolean;
+        does_x_noop: boolean;
         true_choose_1: boolean;
-        next_choose_1: boolean;
         true_choose_2: boolean;
-        next_choose_2: boolean;
         true_choose_3: boolean;
-        next_choose_3: boolean;
         true_choose_4: boolean;
-        next_choose_4: boolean;
         true_choose_5: boolean;
-        next_choose_5: boolean;
+        true_choose_6: boolean;
+        true_choose_7: boolean;
+        true_choose_8: boolean;
         true_control_o: boolean;
-        next_control_o: boolean;
         true_control_x: boolean;
-        next_control_x: boolean;
         true_correct: boolean;
-        next_correct: boolean;
         true_round_0: boolean;
-        next_round_0: boolean;
         true_round_1: boolean;
-        next_round_1: boolean;
         true_round_2: boolean;
-        next_round_2: boolean;
         true_round_3: boolean;
-        next_round_3: boolean;
         true_round_4: boolean;
-        next_round_4: boolean;
         true_round_5: boolean;
-        next_round_5: boolean;
         true_round_6: boolean;
-        next_round_6: boolean;
+        true_round_7: boolean;
+        true_round_8: boolean;
+        true_round_9: boolean;
         sees_x_great_1: boolean;
-        next_sees_x_great_1: boolean;
         sees_x_less_1: boolean;
-        next_sees_x_less_1: boolean;
         sees_x_ok_1: boolean;
-        next_sees_x_ok_1: boolean;
         legal_o_choose_1: boolean;
         legal_o_choose_2: boolean;
         legal_o_choose_3: boolean;
         legal_o_choose_4: boolean;
         legal_o_choose_5: boolean;
+        legal_o_choose_6: boolean;
+        legal_o_choose_7: boolean;
+        legal_o_choose_8: boolean;
         legal_o_noop: boolean;
         legal_x_guess_1: boolean;
         legal_x_guess_2: boolean;
         legal_x_guess_3: boolean;
         legal_x_guess_4: boolean;
         legal_x_guess_5: boolean;
+        legal_x_guess_6: boolean;
+        legal_x_guess_7: boolean;
+        legal_x_guess_8: boolean;
         legal_x_noop: boolean;
+        next_choose_1: boolean;
+        next_choose_2: boolean;
+        next_choose_3: boolean;
+        next_choose_4: boolean;
+        next_choose_5: boolean;
+        next_choose_6: boolean;
+        next_choose_7: boolean;
+        next_choose_8: boolean;
+        next_control_o: boolean;
+        next_control_x: boolean;
+        next_correct: boolean;
+        next_round_0: boolean;
+        next_round_1: boolean;
+        next_round_2: boolean;
+        next_round_3: boolean;
+        next_round_4: boolean;
+        next_round_5: boolean;
+        next_round_6: boolean;
+        next_round_7: boolean;
+        next_round_8: boolean;
+        next_round_9: boolean;
+        next_sees_x_great_1: boolean;
+        next_sees_x_less_1: boolean;
+        next_sees_x_ok_1: boolean;
         terminal: boolean;
-        does_o_choose_1: boolean;
         done_o_choose_1_1: boolean;
         next_done_o_choose_1_1: boolean;
-        does_o_choose_2: boolean;
         done_o_choose_2_1: boolean;
         next_done_o_choose_2_1: boolean;
-        does_o_choose_3: boolean;
         done_o_choose_3_1: boolean;
         next_done_o_choose_3_1: boolean;
-        does_o_choose_4: boolean;
         done_o_choose_4_1: boolean;
         next_done_o_choose_4_1: boolean;
-        does_o_choose_5: boolean;
         done_o_choose_5_1: boolean;
         next_done_o_choose_5_1: boolean;
-        does_o_noop: boolean;
+        done_o_choose_6_1: boolean;
+        next_done_o_choose_6_1: boolean;
+        done_o_choose_7_1: boolean;
+        next_done_o_choose_7_1: boolean;
+        done_o_choose_8_1: boolean;
+        next_done_o_choose_8_1: boolean;
         done_o_noop_1: boolean;
         next_done_o_noop_1: boolean;
-        does_x_guess_1: boolean;
         done_x_guess_1_1: boolean;
         next_done_x_guess_1_1: boolean;
-        does_x_guess_2: boolean;
         done_x_guess_2_1: boolean;
         next_done_x_guess_2_1: boolean;
-        does_x_guess_3: boolean;
         done_x_guess_3_1: boolean;
         next_done_x_guess_3_1: boolean;
-        does_x_guess_4: boolean;
         done_x_guess_4_1: boolean;
         next_done_x_guess_4_1: boolean;
-        does_x_guess_5: boolean;
         done_x_guess_5_1: boolean;
         next_done_x_guess_5_1: boolean;
-        does_x_noop: boolean;
+        done_x_guess_6_1: boolean;
+        next_done_x_guess_6_1: boolean;
+        done_x_guess_7_1: boolean;
+        next_done_x_guess_7_1: boolean;
+        done_x_guess_8_1: boolean;
+        next_done_x_guess_8_1: boolean;
         done_x_noop_1: boolean;
         next_done_x_noop_1: boolean;
-        goal_o_0: boolean;
-        goal_x_0: boolean;
-        goal_x_100: boolean;
-        goal_x_25: boolean;
-        goal_x_50: boolean;
-        goal_x_75: boolean;
     end Vars
     Actions = { none };
     Protocol:
@@ -116,18 +146,6 @@ Agent Environment
         act_step = true if !((init > 1) or (counter < 3 and init = 0 and act_step = false) or (counter = 3 and init = 0 and act_step = true));
 
         -- print the dependencies
-        goal_o_0=true if ((ok = 0));
-        goal_o_0=false if !((ok = 0));
-        goal_x_0=true if (((true_round_6 = true)) or ((true_correct = false)));
-        goal_x_0=false if !(((true_round_6 = true)) or ((true_correct = false)));
-        goal_x_100=true if (((true_correct = true) and (true_round_2 = true)));
-        goal_x_100=false if !(((true_correct = true) and (true_round_2 = true)));
-        goal_x_25=true if (((true_correct = true) and (true_round_5 = true)));
-        goal_x_25=false if !(((true_correct = true) and (true_round_5 = true)));
-        goal_x_50=true if (((true_correct = true) and (true_round_4 = true)));
-        goal_x_50=false if !(((true_correct = true) and (true_round_4 = true)));
-        goal_x_75=true if (((true_correct = true) and (true_round_3 = true)));
-        goal_x_75=false if !(((true_correct = true) and (true_round_3 = true)));
         legal_o_choose_1=true if (((true_control_o = true)));
         legal_o_choose_1=false if !(((true_control_o = true)));
         legal_o_choose_2=true if (((true_control_o = true)));
@@ -138,6 +156,12 @@ Agent Environment
         legal_o_choose_4=false if !(((true_control_o = true)));
         legal_o_choose_5=true if (((true_control_o = true)));
         legal_o_choose_5=false if !(((true_control_o = true)));
+        legal_o_choose_6=true if (((true_control_o = true)));
+        legal_o_choose_6=false if !(((true_control_o = true)));
+        legal_o_choose_7=true if (((true_control_o = true)));
+        legal_o_choose_7=false if !(((true_control_o = true)));
+        legal_o_choose_8=true if (((true_control_o = true)));
+        legal_o_choose_8=false if !(((true_control_o = true)));
         legal_o_noop=true if (((true_control_x = true)));
         legal_o_noop=false if !(((true_control_x = true)));
         legal_x_guess_1=true if (((true_control_x = true)));
@@ -150,6 +174,12 @@ Agent Environment
         legal_x_guess_4=false if !(((true_control_x = true)));
         legal_x_guess_5=true if (((true_control_x = true)));
         legal_x_guess_5=false if !(((true_control_x = true)));
+        legal_x_guess_6=true if (((true_control_x = true)));
+        legal_x_guess_6=false if !(((true_control_x = true)));
+        legal_x_guess_7=true if (((true_control_x = true)));
+        legal_x_guess_7=false if !(((true_control_x = true)));
+        legal_x_guess_8=true if (((true_control_x = true)));
+        legal_x_guess_8=false if !(((true_control_x = true)));
         legal_x_noop=true if (((true_control_o = true)));
         legal_x_noop=false if !(((true_control_o = true)));
         next_choose_1=true if (((true_choose_1 = true)) or ((does_o_choose_1 = true)));
@@ -162,11 +192,17 @@ Agent Environment
         next_choose_4=false if !(((true_choose_4 = true)) or ((does_o_choose_4 = true)));
         next_choose_5=true if (((true_choose_5 = true)) or ((does_o_choose_5 = true)));
         next_choose_5=false if !(((true_choose_5 = true)) or ((does_o_choose_5 = true)));
+        next_choose_6=true if (((true_choose_6 = true)) or ((does_o_choose_6 = true)));
+        next_choose_6=false if !(((true_choose_6 = true)) or ((does_o_choose_6 = true)));
+        next_choose_7=true if (((true_choose_7 = true)) or ((does_o_choose_7 = true)));
+        next_choose_7=false if !(((true_choose_7 = true)) or ((does_o_choose_7 = true)));
+        next_choose_8=true if (((true_choose_8 = true)) or ((does_o_choose_8 = true)));
+        next_choose_8=false if !(((true_choose_8 = true)) or ((does_o_choose_8 = true)));
         next_control_o=false if (ok = 0);
         next_control_x=true if (((true_control_o = true)) or ((true_control_x = true)));
         next_control_x=false if !(((true_control_o = true)) or ((true_control_x = true)));
-        next_correct=true if (((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)));
-        next_correct=false if !(((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)));
+        next_correct=true if (((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)) or ((true_choose_6 = true) and (does_x_guess_6 = true)) or ((true_choose_7 = true) and (does_x_guess_7 = true)) or ((true_choose_8 = true) and (does_x_guess_8 = true)));
+        next_correct=false if !(((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)) or ((true_choose_6 = true) and (does_x_guess_6 = true)) or ((true_choose_7 = true) and (does_x_guess_7 = true)) or ((true_choose_8 = true) and (does_x_guess_8 = true)));
         next_round_0=false if (ok = 0);
         next_round_1=true if (((true_round_0 = true)));
         next_round_1=false if !(((true_round_0 = true)));
@@ -180,18 +216,24 @@ Agent Environment
         next_round_5=false if !(((true_round_4 = true)));
         next_round_6=true if (((true_round_5 = true)));
         next_round_6=false if !(((true_round_5 = true)));
-        next_sees_x_great_1=true if (((true_choose_2 = true) and (does_x_guess_1 = true)) or ((true_choose_3 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_1 = true)) or ((true_choose_4 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_2 = true)) or ((true_choose_4 = true) and (does_x_guess_1 = true)) or ((true_choose_5 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_3 = true)) or ((true_choose_5 = true) and (does_x_guess_2 = true)) or ((true_choose_5 = true) and (does_x_guess_1 = true)));
-        next_sees_x_great_1=false if !(((true_choose_2 = true) and (does_x_guess_1 = true)) or ((true_choose_3 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_1 = true)) or ((true_choose_4 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_2 = true)) or ((true_choose_4 = true) and (does_x_guess_1 = true)) or ((true_choose_5 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_3 = true)) or ((true_choose_5 = true) and (does_x_guess_2 = true)) or ((true_choose_5 = true) and (does_x_guess_1 = true)));
-        next_sees_x_less_1=true if (((true_choose_1 = true) and (does_x_guess_2 = true)) or ((true_choose_1 = true) and (does_x_guess_3 = true)) or ((true_choose_1 = true) and (does_x_guess_4 = true)) or ((true_choose_1 = true) and (does_x_guess_5 = true)) or ((true_choose_2 = true) and (does_x_guess_3 = true)) or ((true_choose_2 = true) and (does_x_guess_4 = true)) or ((true_choose_2 = true) and (does_x_guess_5 = true)) or ((true_choose_3 = true) and (does_x_guess_4 = true)) or ((true_choose_3 = true) and (does_x_guess_5 = true)) or ((true_choose_4 = true) and (does_x_guess_5 = true)));
-        next_sees_x_less_1=false if !(((true_choose_1 = true) and (does_x_guess_2 = true)) or ((true_choose_1 = true) and (does_x_guess_3 = true)) or ((true_choose_1 = true) and (does_x_guess_4 = true)) or ((true_choose_1 = true) and (does_x_guess_5 = true)) or ((true_choose_2 = true) and (does_x_guess_3 = true)) or ((true_choose_2 = true) and (does_x_guess_4 = true)) or ((true_choose_2 = true) and (does_x_guess_5 = true)) or ((true_choose_3 = true) and (does_x_guess_4 = true)) or ((true_choose_3 = true) and (does_x_guess_5 = true)) or ((true_choose_4 = true) and (does_x_guess_5 = true)));
-        next_sees_x_ok_1=true if (((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)));
-        next_sees_x_ok_1=false if !(((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)));
+        next_round_7=true if (((true_round_6 = true)));
+        next_round_7=false if !(((true_round_6 = true)));
+        next_round_8=true if (((true_round_7 = true)));
+        next_round_8=false if !(((true_round_7 = true)));
+        next_round_9=true if (((true_round_8 = true)));
+        next_round_9=false if !(((true_round_8 = true)));
+        next_sees_x_great_1=true if (((true_choose_2 = true) and (does_x_guess_1 = true)) or ((true_choose_3 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_1 = true)) or ((true_choose_4 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_2 = true)) or ((true_choose_4 = true) and (does_x_guess_1 = true)) or ((true_choose_5 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_3 = true)) or ((true_choose_5 = true) and (does_x_guess_2 = true)) or ((true_choose_5 = true) and (does_x_guess_1 = true)) or ((true_choose_6 = true) and (does_x_guess_5 = true)) or ((true_choose_6 = true) and (does_x_guess_4 = true)) or ((true_choose_6 = true) and (does_x_guess_3 = true)) or ((true_choose_6 = true) and (does_x_guess_2 = true)) or ((true_choose_6 = true) and (does_x_guess_1 = true)) or ((true_choose_7 = true) and (does_x_guess_6 = true)) or ((true_choose_7 = true) and (does_x_guess_5 = true)) or ((true_choose_7 = true) and (does_x_guess_4 = true)) or ((true_choose_7 = true) and (does_x_guess_3 = true)) or ((true_choose_7 = true) and (does_x_guess_2 = true)) or ((true_choose_7 = true) and (does_x_guess_1 = true)) or ((true_choose_8 = true) and (does_x_guess_7 = true)) or ((true_choose_8 = true) and (does_x_guess_6 = true)) or ((true_choose_8 = true) and (does_x_guess_5 = true)) or ((true_choose_8 = true) and (does_x_guess_4 = true)) or ((true_choose_8 = true) and (does_x_guess_3 = true)) or ((true_choose_8 = true) and (does_x_guess_2 = true)) or ((true_choose_8 = true) and (does_x_guess_1 = true)));
+        next_sees_x_great_1=false if !(((true_choose_2 = true) and (does_x_guess_1 = true)) or ((true_choose_3 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_1 = true)) or ((true_choose_4 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_2 = true)) or ((true_choose_4 = true) and (does_x_guess_1 = true)) or ((true_choose_5 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_3 = true)) or ((true_choose_5 = true) and (does_x_guess_2 = true)) or ((true_choose_5 = true) and (does_x_guess_1 = true)) or ((true_choose_6 = true) and (does_x_guess_5 = true)) or ((true_choose_6 = true) and (does_x_guess_4 = true)) or ((true_choose_6 = true) and (does_x_guess_3 = true)) or ((true_choose_6 = true) and (does_x_guess_2 = true)) or ((true_choose_6 = true) and (does_x_guess_1 = true)) or ((true_choose_7 = true) and (does_x_guess_6 = true)) or ((true_choose_7 = true) and (does_x_guess_5 = true)) or ((true_choose_7 = true) and (does_x_guess_4 = true)) or ((true_choose_7 = true) and (does_x_guess_3 = true)) or ((true_choose_7 = true) and (does_x_guess_2 = true)) or ((true_choose_7 = true) and (does_x_guess_1 = true)) or ((true_choose_8 = true) and (does_x_guess_7 = true)) or ((true_choose_8 = true) and (does_x_guess_6 = true)) or ((true_choose_8 = true) and (does_x_guess_5 = true)) or ((true_choose_8 = true) and (does_x_guess_4 = true)) or ((true_choose_8 = true) and (does_x_guess_3 = true)) or ((true_choose_8 = true) and (does_x_guess_2 = true)) or ((true_choose_8 = true) and (does_x_guess_1 = true)));
+        next_sees_x_less_1=true if (((true_choose_1 = true) and (does_x_guess_2 = true)) or ((true_choose_1 = true) and (does_x_guess_3 = true)) or ((true_choose_1 = true) and (does_x_guess_4 = true)) or ((true_choose_1 = true) and (does_x_guess_5 = true)) or ((true_choose_1 = true) and (does_x_guess_6 = true)) or ((true_choose_1 = true) and (does_x_guess_7 = true)) or ((true_choose_1 = true) and (does_x_guess_8 = true)) or ((true_choose_2 = true) and (does_x_guess_3 = true)) or ((true_choose_2 = true) and (does_x_guess_4 = true)) or ((true_choose_2 = true) and (does_x_guess_5 = true)) or ((true_choose_2 = true) and (does_x_guess_6 = true)) or ((true_choose_2 = true) and (does_x_guess_7 = true)) or ((true_choose_2 = true) and (does_x_guess_8 = true)) or ((true_choose_3 = true) and (does_x_guess_4 = true)) or ((true_choose_3 = true) and (does_x_guess_5 = true)) or ((true_choose_3 = true) and (does_x_guess_6 = true)) or ((true_choose_3 = true) and (does_x_guess_7 = true)) or ((true_choose_3 = true) and (does_x_guess_8 = true)) or ((true_choose_4 = true) and (does_x_guess_5 = true)) or ((true_choose_4 = true) and (does_x_guess_6 = true)) or ((true_choose_4 = true) and (does_x_guess_7 = true)) or ((true_choose_4 = true) and (does_x_guess_8 = true)) or ((true_choose_5 = true) and (does_x_guess_6 = true)) or ((true_choose_5 = true) and (does_x_guess_7 = true)) or ((true_choose_5 = true) and (does_x_guess_8 = true)) or ((true_choose_6 = true) and (does_x_guess_7 = true)) or ((true_choose_6 = true) and (does_x_guess_8 = true)) or ((true_choose_7 = true) and (does_x_guess_8 = true)));
+        next_sees_x_less_1=false if !(((true_choose_1 = true) and (does_x_guess_2 = true)) or ((true_choose_1 = true) and (does_x_guess_3 = true)) or ((true_choose_1 = true) and (does_x_guess_4 = true)) or ((true_choose_1 = true) and (does_x_guess_5 = true)) or ((true_choose_1 = true) and (does_x_guess_6 = true)) or ((true_choose_1 = true) and (does_x_guess_7 = true)) or ((true_choose_1 = true) and (does_x_guess_8 = true)) or ((true_choose_2 = true) and (does_x_guess_3 = true)) or ((true_choose_2 = true) and (does_x_guess_4 = true)) or ((true_choose_2 = true) and (does_x_guess_5 = true)) or ((true_choose_2 = true) and (does_x_guess_6 = true)) or ((true_choose_2 = true) and (does_x_guess_7 = true)) or ((true_choose_2 = true) and (does_x_guess_8 = true)) or ((true_choose_3 = true) and (does_x_guess_4 = true)) or ((true_choose_3 = true) and (does_x_guess_5 = true)) or ((true_choose_3 = true) and (does_x_guess_6 = true)) or ((true_choose_3 = true) and (does_x_guess_7 = true)) or ((true_choose_3 = true) and (does_x_guess_8 = true)) or ((true_choose_4 = true) and (does_x_guess_5 = true)) or ((true_choose_4 = true) and (does_x_guess_6 = true)) or ((true_choose_4 = true) and (does_x_guess_7 = true)) or ((true_choose_4 = true) and (does_x_guess_8 = true)) or ((true_choose_5 = true) and (does_x_guess_6 = true)) or ((true_choose_5 = true) and (does_x_guess_7 = true)) or ((true_choose_5 = true) and (does_x_guess_8 = true)) or ((true_choose_6 = true) and (does_x_guess_7 = true)) or ((true_choose_6 = true) and (does_x_guess_8 = true)) or ((true_choose_7 = true) and (does_x_guess_8 = true)));
+        next_sees_x_ok_1=true if (((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)) or ((true_choose_6 = true) and (does_x_guess_6 = true)) or ((true_choose_7 = true) and (does_x_guess_7 = true)) or ((true_choose_8 = true) and (does_x_guess_8 = true)));
+        next_sees_x_ok_1=false if !(((true_choose_1 = true) and (does_x_guess_1 = true)) or ((true_choose_2 = true) and (does_x_guess_2 = true)) or ((true_choose_3 = true) and (does_x_guess_3 = true)) or ((true_choose_4 = true) and (does_x_guess_4 = true)) or ((true_choose_5 = true) and (does_x_guess_5 = true)) or ((true_choose_6 = true) and (does_x_guess_6 = true)) or ((true_choose_7 = true) and (does_x_guess_7 = true)) or ((true_choose_8 = true) and (does_x_guess_8 = true)));
         role_o=true if ((ok = 0));
         role_o=false if !((ok = 0));
         role_x=true if ((ok = 0));
         role_x=false if !((ok = 0));
-        terminal=true if (((true_round_6 = true)) or ((true_correct = true)));
-        terminal=false if !(((true_round_6 = true)) or ((true_correct = true)));
+        terminal=true if (((true_round_9 = true)) or ((true_correct = true)));
+        terminal=false if !(((true_round_9 = true)) or ((true_correct = true)));
 
         -- print the next for actions
         next_done_o_choose_1_1 = does_o_choose_1 if (ok = 0);
@@ -199,12 +241,18 @@ Agent Environment
         next_done_o_choose_3_1 = does_o_choose_3 if (ok = 0);
         next_done_o_choose_4_1 = does_o_choose_4 if (ok = 0);
         next_done_o_choose_5_1 = does_o_choose_5 if (ok = 0);
+        next_done_o_choose_6_1 = does_o_choose_6 if (ok = 0);
+        next_done_o_choose_7_1 = does_o_choose_7 if (ok = 0);
+        next_done_o_choose_8_1 = does_o_choose_8 if (ok = 0);
         next_done_o_noop_1 = does_o_noop if (ok = 0);
         next_done_x_guess_1_1 = does_x_guess_1 if (ok = 0);
         next_done_x_guess_2_1 = does_x_guess_2 if (ok = 0);
         next_done_x_guess_3_1 = does_x_guess_3 if (ok = 0);
         next_done_x_guess_4_1 = does_x_guess_4 if (ok = 0);
         next_done_x_guess_5_1 = does_x_guess_5 if (ok = 0);
+        next_done_x_guess_6_1 = does_x_guess_6 if (ok = 0);
+        next_done_x_guess_7_1 = does_x_guess_7 if (ok = 0);
+        next_done_x_guess_8_1 = does_x_guess_8 if (ok = 0);
         next_done_x_noop_1 = does_x_noop if (ok = 0);
         -- local observation evolution
         does_o_choose_1 = true if (player_o.Action = choose_1 and init = 0 and counter = 0 and act_step = true and terminal = false);
@@ -222,6 +270,15 @@ Agent Environment
         does_o_choose_5 = true if (player_o.Action = choose_5 and init = 0 and counter = 0 and act_step = true and terminal = false);
         does_o_choose_5 = false if (counter = 3 and act_step = true);
         does_o_choose_5 = does_o_choose_5  if !((counter = 3 and act_step = true) or (player_o.Action = choose_5 and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_o_choose_6 = true if (player_o.Action = choose_6 and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_o_choose_6 = false if (counter = 3 and act_step = true);
+        does_o_choose_6 = does_o_choose_6  if !((counter = 3 and act_step = true) or (player_o.Action = choose_6 and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_o_choose_7 = true if (player_o.Action = choose_7 and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_o_choose_7 = false if (counter = 3 and act_step = true);
+        does_o_choose_7 = does_o_choose_7  if !((counter = 3 and act_step = true) or (player_o.Action = choose_7 and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_o_choose_8 = true if (player_o.Action = choose_8 and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_o_choose_8 = false if (counter = 3 and act_step = true);
+        does_o_choose_8 = does_o_choose_8  if !((counter = 3 and act_step = true) or (player_o.Action = choose_8 and init = 0 and counter = 0 and act_step = true and terminal = false));
         does_o_noop = true if (player_o.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false);
         does_o_noop = false if (counter = 3 and act_step = true);
         does_o_noop = does_o_noop  if !((counter = 3 and act_step = true) or (player_o.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false));
@@ -240,6 +297,15 @@ Agent Environment
         does_x_guess_5 = true if (player_x.Action = guess_5 and init = 0 and counter = 0 and act_step = true and terminal = false);
         does_x_guess_5 = false if (counter = 3 and act_step = true);
         does_x_guess_5 = does_x_guess_5  if !((counter = 3 and act_step = true) or (player_x.Action = guess_5 and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_x_guess_6 = true if (player_x.Action = guess_6 and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_x_guess_6 = false if (counter = 3 and act_step = true);
+        does_x_guess_6 = does_x_guess_6  if !((counter = 3 and act_step = true) or (player_x.Action = guess_6 and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_x_guess_7 = true if (player_x.Action = guess_7 and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_x_guess_7 = false if (counter = 3 and act_step = true);
+        does_x_guess_7 = does_x_guess_7  if !((counter = 3 and act_step = true) or (player_x.Action = guess_7 and init = 0 and counter = 0 and act_step = true and terminal = false));
+        does_x_guess_8 = true if (player_x.Action = guess_8 and init = 0 and counter = 0 and act_step = true and terminal = false);
+        does_x_guess_8 = false if (counter = 3 and act_step = true);
+        does_x_guess_8 = does_x_guess_8  if !((counter = 3 and act_step = true) or (player_x.Action = guess_8 and init = 0 and counter = 0 and act_step = true and terminal = false));
         does_x_noop = true if (player_x.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false);
         does_x_noop = false if (counter = 3 and act_step = true);
         does_x_noop = does_x_noop  if !((counter = 3 and act_step = true) or (player_x.Action = noop and init = 0 and counter = 0 and act_step = true and terminal = false));
@@ -253,6 +319,12 @@ Agent Environment
         true_choose_4 = true_choose_4 if !((init = 0 and act_step = true and counter = 3));
         true_choose_5 = next_choose_5 if ((init = 0 and act_step = true and counter = 3));
         true_choose_5 = true_choose_5 if !((init = 0 and act_step = true and counter = 3));
+        true_choose_6 = next_choose_6 if ((init = 0 and act_step = true and counter = 3));
+        true_choose_6 = true_choose_6 if !((init = 0 and act_step = true and counter = 3));
+        true_choose_7 = next_choose_7 if ((init = 0 and act_step = true and counter = 3));
+        true_choose_7 = true_choose_7 if !((init = 0 and act_step = true and counter = 3));
+        true_choose_8 = next_choose_8 if ((init = 0 and act_step = true and counter = 3));
+        true_choose_8 = true_choose_8 if !((init = 0 and act_step = true and counter = 3));
         true_control_o = next_control_o if ((init = 0 and act_step = true and counter = 3));
         true_control_o = true if (init = 3);
         true_control_o = true_control_o if !((init = 0 and act_step = true and counter = 3) or (init = 3));
@@ -275,6 +347,12 @@ Agent Environment
         true_round_5 = true_round_5 if !((init = 0 and act_step = true and counter = 3));
         true_round_6 = next_round_6 if ((init = 0 and act_step = true and counter = 3));
         true_round_6 = true_round_6 if !((init = 0 and act_step = true and counter = 3));
+        true_round_7 = next_round_7 if ((init = 0 and act_step = true and counter = 3));
+        true_round_7 = true_round_7 if !((init = 0 and act_step = true and counter = 3));
+        true_round_8 = next_round_8 if ((init = 0 and act_step = true and counter = 3));
+        true_round_8 = true_round_8 if !((init = 0 and act_step = true and counter = 3));
+        true_round_9 = next_round_9 if ((init = 0 and act_step = true and counter = 3));
+        true_round_9 = true_round_9 if !((init = 0 and act_step = true and counter = 3));
         done_o_choose_1_1 = next_done_o_choose_1_1 if ((init = 0 and act_step = true and counter = 3));
         done_o_choose_1_1 = done_o_choose_1_1 if !((init = 0 and act_step = true and counter = 3));
         done_o_choose_2_1 = next_done_o_choose_2_1 if ((init = 0 and act_step = true and counter = 3));
@@ -285,6 +363,12 @@ Agent Environment
         done_o_choose_4_1 = done_o_choose_4_1 if !((init = 0 and act_step = true and counter = 3));
         done_o_choose_5_1 = next_done_o_choose_5_1 if ((init = 0 and act_step = true and counter = 3));
         done_o_choose_5_1 = done_o_choose_5_1 if !((init = 0 and act_step = true and counter = 3));
+        done_o_choose_6_1 = next_done_o_choose_6_1 if ((init = 0 and act_step = true and counter = 3));
+        done_o_choose_6_1 = done_o_choose_6_1 if !((init = 0 and act_step = true and counter = 3));
+        done_o_choose_7_1 = next_done_o_choose_7_1 if ((init = 0 and act_step = true and counter = 3));
+        done_o_choose_7_1 = done_o_choose_7_1 if !((init = 0 and act_step = true and counter = 3));
+        done_o_choose_8_1 = next_done_o_choose_8_1 if ((init = 0 and act_step = true and counter = 3));
+        done_o_choose_8_1 = done_o_choose_8_1 if !((init = 0 and act_step = true and counter = 3));
         done_o_noop_1 = next_done_o_noop_1 if ((init = 0 and act_step = true and counter = 3));
         done_o_noop_1 = done_o_noop_1 if !((init = 0 and act_step = true and counter = 3));
         done_x_guess_1_1 = next_done_x_guess_1_1 if ((init = 0 and act_step = true and counter = 3));
@@ -297,6 +381,12 @@ Agent Environment
         done_x_guess_4_1 = done_x_guess_4_1 if !((init = 0 and act_step = true and counter = 3));
         done_x_guess_5_1 = next_done_x_guess_5_1 if ((init = 0 and act_step = true and counter = 3));
         done_x_guess_5_1 = done_x_guess_5_1 if !((init = 0 and act_step = true and counter = 3));
+        done_x_guess_6_1 = next_done_x_guess_6_1 if ((init = 0 and act_step = true and counter = 3));
+        done_x_guess_6_1 = done_x_guess_6_1 if !((init = 0 and act_step = true and counter = 3));
+        done_x_guess_7_1 = next_done_x_guess_7_1 if ((init = 0 and act_step = true and counter = 3));
+        done_x_guess_7_1 = done_x_guess_7_1 if !((init = 0 and act_step = true and counter = 3));
+        done_x_guess_8_1 = next_done_x_guess_8_1 if ((init = 0 and act_step = true and counter = 3));
+        done_x_guess_8_1 = done_x_guess_8_1 if !((init = 0 and act_step = true and counter = 3));
         done_x_noop_1 = next_done_x_noop_1 if ((init = 0 and act_step = true and counter = 3));
         done_x_noop_1 = done_x_noop_1 if !((init = 0 and act_step = true and counter = 3));
         sees_x_great_1 = next_sees_x_great_1 if ((init = 0 and act_step = true and counter = 3));
@@ -309,17 +399,20 @@ Agent Environment
 end Agent
 
 Agent player_o
-    Lobsvars={init,counter,act_step, legal_o_choose_1, legal_o_choose_2, legal_o_choose_3, legal_o_choose_4, legal_o_choose_5, legal_o_noop, done_o_choose_1_1, done_o_choose_2_1, done_o_choose_3_1, done_o_choose_4_1, done_o_choose_5_1, done_o_noop_1};
+    Lobsvars={init,counter,act_step, legal_o_choose_1, legal_o_choose_2, legal_o_choose_3, legal_o_choose_4, legal_o_choose_5, legal_o_choose_6, legal_o_choose_7, legal_o_choose_8, legal_o_noop, done_o_choose_1_1, done_o_choose_2_1, done_o_choose_3_1, done_o_choose_4_1, done_o_choose_5_1, done_o_choose_6_1, done_o_choose_7_1, done_o_choose_8_1, done_o_noop_1};
     Vars:
 
     end Vars
-    Actions = {choose_1, choose_2, choose_3, choose_4, choose_5, noop, none};
+    Actions = {choose_1, choose_2, choose_3, choose_4, choose_5, choose_6, choose_7, choose_8, noop, none};
     Protocol:
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_choose_1 = true): {choose_1};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_choose_2 = true): {choose_2};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_choose_3 = true): {choose_3};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_choose_4 = true): {choose_4};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_choose_5 = true): {choose_5};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_choose_6 = true): {choose_6};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_choose_7 = true): {choose_7};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_choose_8 = true): {choose_8};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_o_noop = true): {noop};
         Other : {none};
     end Protocol
@@ -330,17 +423,20 @@ end Agent
 
 
 Agent player_x
-    Lobsvars={init,counter,act_step, sees_x_great_1, sees_x_less_1, sees_x_ok_1, legal_x_guess_1, legal_x_guess_2, legal_x_guess_3, legal_x_guess_4, legal_x_guess_5, legal_x_noop, done_x_guess_1_1, done_x_guess_2_1, done_x_guess_3_1, done_x_guess_4_1, done_x_guess_5_1, done_x_noop_1};
+    Lobsvars={init,counter,act_step, sees_x_great_1, sees_x_less_1, sees_x_ok_1, legal_x_guess_1, legal_x_guess_2, legal_x_guess_3, legal_x_guess_4, legal_x_guess_5, legal_x_guess_6, legal_x_guess_7, legal_x_guess_8, legal_x_noop, done_x_guess_1_1, done_x_guess_2_1, done_x_guess_3_1, done_x_guess_4_1, done_x_guess_5_1, done_x_guess_6_1, done_x_guess_7_1, done_x_guess_8_1, done_x_noop_1};
     Vars:
 
     end Vars
-    Actions = {guess_1, guess_2, guess_3, guess_4, guess_5, noop, none};
+    Actions = {guess_1, guess_2, guess_3, guess_4, guess_5, guess_6, guess_7, guess_8, noop, none};
     Protocol:
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_guess_1 = true): {guess_1};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_guess_2 = true): {guess_2};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_guess_3 = true): {guess_3};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_guess_4 = true): {guess_4};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_guess_5 = true): {guess_5};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_guess_6 = true): {guess_6};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_guess_7 = true): {guess_7};
+        (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_guess_8 = true): {guess_8};
         (Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true and Environment.legal_x_noop = true): {noop};
         Other : {none};
     end Protocol
@@ -350,14 +446,15 @@ Agent player_x
 end Agent
 
 Evaluation
-    t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    win if ((Environment.goal_x_100 = true or Environment.goal_x_75 = true or Environment.goal_x_50 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    reward if ((Environment.goal_x_100 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    loss if ((Environment.goal_x_25 = true or Environment.goal_x_0 = true or Environment.goal_x_50 = true or Environment.goal_x_100 = true or Environment.goal_x_75 = true) and Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    select if ((Environment.true_round_0 = true or Environment.true_choose_1 = true or Environment.true_choose_2 = true or Environment.true_choose_3 = true or Environment.true_choose_4 = true or Environment.true_choose_5 = true));
-    real if (Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    token if (Environment.sees_x_great_1 = true and Environment.done_x_guess_1_1 = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    select_gt3 if ((Environment.true_choose_2 = true or Environment.true_choose_3 = true or  Environment.true_choose_4 = true or Environment.true_choose_5 = true));
+        goal_o_0 if ((Environment.ok = 0));
+        goal_x_0 if (((Environment.true_round_9 = true)) or ((Environment.true_correct = false)));
+        goal_x_100 if (((Environment.true_correct = true) and (Environment.true_round_2 = true)));
+        goal_x_14 if (((Environment.true_correct = true) and (Environment.true_round_8 = true)));
+        goal_x_28 if (((Environment.true_correct = true) and (Environment.true_round_7 = true)));
+        goal_x_42 if (((Environment.true_correct = true) and (Environment.true_round_6 = true)));
+        goal_x_57 if (((Environment.true_correct = true) and (Environment.true_round_5 = true)));
+        goal_x_71 if (((Environment.true_correct = true) and (Environment.true_round_4 = true)));
+        goal_x_85 if (((Environment.true_correct = true) and (Environment.true_round_3 = true)));
 end Evaluation
 
 InitStates
@@ -374,6 +471,12 @@ InitStates
     and Environment.next_choose_4 = false
     and Environment.true_choose_5 = false
     and Environment.next_choose_5 = false
+    and Environment.true_choose_6 = false
+    and Environment.next_choose_6 = false
+    and Environment.true_choose_7 = false
+    and Environment.next_choose_7 = false
+    and Environment.true_choose_8 = false
+    and Environment.next_choose_8 = false
     and Environment.true_control_o = false
     and Environment.next_control_o = false
     and Environment.true_control_x = false
@@ -394,6 +497,12 @@ InitStates
     and Environment.next_round_5 = false
     and Environment.true_round_6 = false
     and Environment.next_round_6 = false
+    and Environment.true_round_7 = false
+    and Environment.next_round_7 = false
+    and Environment.true_round_8 = false
+    and Environment.next_round_8 = false
+    and Environment.true_round_9 = false
+    and Environment.next_round_9 = false
     and Environment.sees_x_great_1 = false
     and Environment.next_sees_x_great_1 = false
     and Environment.sees_x_less_1 = false
@@ -405,12 +514,18 @@ InitStates
     and Environment.legal_o_choose_3 = false
     and Environment.legal_o_choose_4 = false
     and Environment.legal_o_choose_5 = false
+    and Environment.legal_o_choose_6 = false
+    and Environment.legal_o_choose_7 = false
+    and Environment.legal_o_choose_8 = false
     and Environment.legal_o_noop = false
     and Environment.legal_x_guess_1 = false
     and Environment.legal_x_guess_2 = false
     and Environment.legal_x_guess_3 = false
     and Environment.legal_x_guess_4 = false
     and Environment.legal_x_guess_5 = false
+    and Environment.legal_x_guess_6 = false
+    and Environment.legal_x_guess_7 = false
+    and Environment.legal_x_guess_8 = false
     and Environment.legal_x_noop = false
     and Environment.terminal = false
     and Environment.does_o_choose_1 = false
@@ -428,6 +543,15 @@ InitStates
     and Environment.does_o_choose_5 = false
     and Environment.done_o_choose_5_1 = false
     and Environment.next_done_o_choose_5_1 = false
+    and Environment.does_o_choose_6 = false
+    and Environment.done_o_choose_6_1 = false
+    and Environment.next_done_o_choose_6_1 = false
+    and Environment.does_o_choose_7 = false
+    and Environment.done_o_choose_7_1 = false
+    and Environment.next_done_o_choose_7_1 = false
+    and Environment.does_o_choose_8 = false
+    and Environment.done_o_choose_8_1 = false
+    and Environment.next_done_o_choose_8_1 = false
     and Environment.does_o_noop = false
     and Environment.done_o_noop_1 = false
     and Environment.next_done_o_noop_1 = false
@@ -446,10 +570,19 @@ InitStates
     and Environment.does_x_guess_5 = false
     and Environment.done_x_guess_5_1 = false
     and Environment.next_done_x_guess_5_1 = false
+    and Environment.does_x_guess_6 = false
+    and Environment.done_x_guess_6_1 = false
+    and Environment.next_done_x_guess_6_1 = false
+    and Environment.does_x_guess_7 = false
+    and Environment.done_x_guess_7_1 = false
+    and Environment.next_done_x_guess_7_1 = false
+    and Environment.does_x_guess_8 = false
+    and Environment.done_x_guess_8_1 = false
+    and Environment.next_done_x_guess_8_1 = false
     and Environment.does_x_noop = false
     and Environment.done_x_noop_1 = false
     and Environment.next_done_x_noop_1 = false
-    and Environment.goal_o_0 = false    and Environment.goal_x_0 = false    and Environment.goal_x_100 = false    and Environment.goal_x_25 = false    and Environment.goal_x_50 = false    and Environment.goal_x_75 = false;
+;
 end InitStates
 
 Groups
@@ -459,12 +592,5 @@ Fairness
 end Fairness
 
 Formulae
-    EF t;
-    AF t;
-    -- AG K(player_x, real -> select);
-    -- (token and real);
-    AG (token -> select_gt3);
-    -- ((token and real) -> select_gt3);
-    <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) F win;
-    <<e>> <<x>> <<y>> (Environment, e) (player_x, x) (player_o, y) (F reward and ([[xa]] (player_x, xa) F loss));
+
 end Formulae

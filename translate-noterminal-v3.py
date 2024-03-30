@@ -51,12 +51,6 @@ def build(head, body):
             if atominfo['player'] not in legal:
                 legal[atominfo['player']] = set()
             legal[atominfo['player']].add(atominfo['slk'])
-        #elif atominfo['type'] == 'goal':
-        #    if slk_var(atominfo) not in dependency:
-        #        dependency[slk_var(atominfo)] = []
-        #    if atominfo['player'] not in goal:
-        #        goal[atominfo['player']] = set()
-        #    goal[atominfo['player']].add(atominfo['slk'])
         elif atominfo['type'] == 'init':
             base.add(atominfo['slk'])
             init.add(atominfo['slk'])
@@ -102,14 +96,26 @@ def build(head, body):
         graph[slk_var(head)].append(slk_var(bd))
 
     if len(body) == 0 and head['type'] != 'init':
-        dependency[slk_var(head)].append('(ok = 0)')
+        if slk_var(head)[:5] == 'goal_':
+            dependency[slk_var(head)].append('(Environment.ok = 0)')
+        else:
+            dependency[slk_var(head)].append('(ok = 0)')
     elif len(body) != 0:
         conjunct = []
         for bd in body:
+            if slk_var(bd)[:5] == 'goal':
+                print('goal cannot appear in the body!')
+                exit(1)
             if bd['positive'] == True:
-                conjunct.append(f'({slk_var(bd)} = true)')
+                if slk_var(head)[:5] == 'goal_':
+                    conjunct.append(f'(Environment.{slk_var(bd)} = true)')
+                else:
+                    conjunct.append(f'({slk_var(bd)} = true)')
             else:
-                conjunct.append(f'({slk_var(bd)} = false)')
+                if slk_var(head)[:5] == 'goal_':
+                    conjunct.append(f'(Environment.{slk_var(bd)} = false)')
+                else:
+                    conjunct.append(f'({slk_var(bd)} = false)')
         conj = conjunct[0]
         for i in range(1, len(conjunct)):
             conj = conj + ' and ' + conjunct[i]
@@ -246,8 +252,8 @@ def print_environment_vars(maxd:int =3, recall:int = 1):
     print('    Vars:')
     print(f'        ok: 0.. 0;')
     # print the roles
-    for r in role:
-        print(f'        role_{r}: boolean;')
+    #for r in role:
+    #    print(f'        role_{r}: boolean;')
     print(f'        counter: 0 .. {maxd};')
     print(f'        init: 0 .. {maxd};')
     print(f'        act_step: boolean;')
@@ -289,7 +295,8 @@ def print_environment_vars(maxd:int =3, recall:int = 1):
                 print(f'        next_done_{r}_{act}_{i+1}: boolean;')
     
     for atom in sorted(other):
-        print(f'        {atom}: boolean;')
+        if atom[:5] != 'goal_':
+            print(f'        {atom}: boolean;')
     print('    end Vars')
 
 def print_evolutions(maxd:int = 3, recall:int = 1):
@@ -305,6 +312,8 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
     print()
     print(f'        -- print the dependencies')
     for d in sorted(dependency.keys()):
+        if d[:5] == 'goal_' or d[:5] == 'role_':
+            continue
         rule = dependency[d]
         if len(rule) == 0:
             print(f'        {d}=false if (ok = 0);')
@@ -325,7 +334,7 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
                     print(f'        next_done_{r}_{act}_{i} = does_{r}_{act} if (ok = 0);')
                 else:
                     print(f'        next_done_{r}_{act}_{i} = done_{r}_{act}_{i-1} if (ok = 0);')
-                
+    
     print(f'        -- local observation evolution')
     for r in sorted(legal.keys()):
         for act in sorted(legal[r]):
@@ -370,8 +379,8 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
 def print_init(maxd:int = 3, recall:int = 1):
     print('InitStates')
     print(f'    Environment.counter = 0 and Environment.ok = 0 and Environment.init = {maxd} and Environment.act_step = false')
-    for r in sorted(role):
-        print(f'    and Environment.role_{r} = false')
+    #for r in sorted(role):
+    #    print(f'    and Environment.role_{r} = false')
     for atom in sorted(base):
         print(f'    and Environment.true_{atom} = false')
         print(f'    and Environment.next_{atom} = false')
@@ -395,12 +404,12 @@ def print_init(maxd:int = 3, recall:int = 1):
             print(f'    and Environment.does_{r}_{act} = false')
             for i in range(recall):
                 print(f'    and Environment.done_{r}_{act}_{i+1} = false')
-                # print(f'    and Environment.done_{r}_{act}_{i+1}_obs = false')
                 print(f'    and Environment.next_done_{r}_{act}_{i+1} = false')
-    
+                
     # print other derived predicates
     for atom in sorted(other):
-        print(f'    and Environment.{atom} = false', end = '')
+        if atom[:5] != 'goal_':
+            print(f'    and Environment.{atom} = false', end = '')
     print(';')
     print('end InitStates')
     
@@ -478,7 +487,19 @@ def writeslk(recall:int = 1):
         print_agent(r, recall)
         print()
     # Evaluation
-    print('Evaluation\n\nend Evaluation')
+    
+    print('Evaluation')
+    for d in sorted(dependency.keys()):
+        if d[:5] != 'goal_':
+            continue
+        rule = dependency[d]
+        cond = '(' + rule[0]
+        for i in range (1, len(rule)):
+            cond = cond + ' or ' + rule[i]
+        cond = cond + ')'
+        print(f'        {d} if {cond};')
+        
+    print('end Evaluation')
     # initial states
     print()
     print_init(maxd, recall)
