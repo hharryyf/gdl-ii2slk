@@ -4,8 +4,6 @@ Agent Environment
 -- maximum chain length 2
     Vars:
         ok: 0.. 0;
-        role_o: boolean;
-        role_x: boolean;
         counter: 0 .. 3;
         init: 0 .. 3;
         act_step: boolean;
@@ -24,7 +22,9 @@ Agent Environment
         true_xc: boolean;
         true_xd: boolean;
         sees_o_done_1: boolean;
+        sees_o_done_2: boolean;
         sees_x_done_1: boolean;
+        sees_x_done_2: boolean;
         legal_o_c: boolean;
         legal_o_d: boolean;
         legal_o_noop: boolean;
@@ -40,14 +40,22 @@ Agent Environment
         next_xc: boolean;
         next_xd: boolean;
         next_sees_o_done_1: boolean;
+        next_sees_o_done_2: boolean;
         next_sees_x_done_1: boolean;
+        next_sees_x_done_2: boolean;
         terminal: boolean;
         done_o_c_1: boolean;
+        done_o_c_2: boolean;
         done_o_d_1: boolean;
+        done_o_d_2: boolean;
         done_o_noop_1: boolean;
+        done_o_noop_2: boolean;
         done_x_c_1: boolean;
+        done_x_c_2: boolean;
         done_x_d_1: boolean;
+        done_x_d_2: boolean;
         done_x_noop_1: boolean;
+        done_x_noop_2: boolean;
     end Vars
     Actions = { none };
     Protocol:
@@ -96,10 +104,6 @@ Agent Environment
         next_xc=false if !(((does_x_c = true)));
         next_xd=true if (((does_x_d = true)));
         next_xd=false if !(((does_x_d = true)));
-        role_o=true if ((ok = 0));
-        role_o=false if !((ok = 0));
-        role_x=true if ((ok = 0));
-        role_x=false if !((ok = 0));
         terminal=true if (((true_cc = true)) or ((true_cd = true)) or ((true_dc = true)) or ((true_dd = true)));
         terminal=false if !(((true_cc = true)) or ((true_cd = true)) or ((true_dc = true)) or ((true_dd = true)));
 
@@ -140,27 +144,47 @@ Agent Environment
         true_xc = true_xc if !((init = 0 and act_step = true and counter = 3));
         true_xd = next_xd if ((init = 0 and act_step = true and counter = 3));
         true_xd = true_xd if !((init = 0 and act_step = true and counter = 3));
-        done_o_c_1 = does_o_c if ((init = 0 and act_step = true and counter > 0));
-        done_o_c_1 = done_o_c_1 if !((init = 0 and act_step = true and counter > 0));
-        done_o_d_1 = does_o_d if ((init = 0 and act_step = true and counter > 0));
-        done_o_d_1 = done_o_d_1 if !((init = 0 and act_step = true and counter > 0));
-        done_o_noop_1 = does_o_noop if ((init = 0 and act_step = true and counter > 0));
-        done_o_noop_1 = done_o_noop_1 if !((init = 0 and act_step = true and counter > 0));
-        done_x_c_1 = does_x_c if ((init = 0 and act_step = true and counter > 0));
-        done_x_c_1 = done_x_c_1 if !((init = 0 and act_step = true and counter > 0));
-        done_x_d_1 = does_x_d if ((init = 0 and act_step = true and counter > 0));
-        done_x_d_1 = done_x_d_1 if !((init = 0 and act_step = true and counter > 0));
-        done_x_noop_1 = does_x_noop if ((init = 0 and act_step = true and counter > 0));
-        done_x_noop_1 = done_x_noop_1 if !((init = 0 and act_step = true and counter > 0));
+        done_o_c_1 = does_o_c if ((init = 0 and act_step = true and counter = 1));
+        done_o_c_1 = done_o_c_1 if !((init = 0 and act_step = true and counter = 1));
+        done_o_c_2 = done_o_c_1 if ((init = 0 and act_step = true and counter = 1));
+        done_o_c_2 = done_o_c_2 if !((init = 0 and act_step = true and counter = 1));
+        done_o_d_1 = does_o_d if ((init = 0 and act_step = true and counter = 1));
+        done_o_d_1 = done_o_d_1 if !((init = 0 and act_step = true and counter = 1));
+        done_o_d_2 = done_o_d_1 if ((init = 0 and act_step = true and counter = 1));
+        done_o_d_2 = done_o_d_2 if !((init = 0 and act_step = true and counter = 1));
+        done_o_noop_1 = does_o_noop if ((init = 0 and act_step = true and counter = 1));
+        done_o_noop_1 = done_o_noop_1 if !((init = 0 and act_step = true and counter = 1));
+        done_o_noop_2 = done_o_noop_1 if ((init = 0 and act_step = true and counter = 1));
+        done_o_noop_2 = done_o_noop_2 if !((init = 0 and act_step = true and counter = 1));
+        done_x_c_1 = does_x_c if ((init = 0 and act_step = true and counter = 1));
+        done_x_c_1 = done_x_c_1 if !((init = 0 and act_step = true and counter = 1));
+        done_x_c_2 = done_x_c_1 if ((init = 0 and act_step = true and counter = 1));
+        done_x_c_2 = done_x_c_2 if !((init = 0 and act_step = true and counter = 1));
+        done_x_d_1 = does_x_d if ((init = 0 and act_step = true and counter = 1));
+        done_x_d_1 = done_x_d_1 if !((init = 0 and act_step = true and counter = 1));
+        done_x_d_2 = done_x_d_1 if ((init = 0 and act_step = true and counter = 1));
+        done_x_d_2 = done_x_d_2 if !((init = 0 and act_step = true and counter = 1));
+        done_x_noop_1 = does_x_noop if ((init = 0 and act_step = true and counter = 1));
+        done_x_noop_1 = done_x_noop_1 if !((init = 0 and act_step = true and counter = 1));
+        done_x_noop_2 = done_x_noop_1 if ((init = 0 and act_step = true and counter = 1));
+        done_x_noop_2 = done_x_noop_2 if !((init = 0 and act_step = true and counter = 1));
         sees_o_done_1 = next_sees_o_done_1 if ((init = 0 and act_step = true and counter = 3));
         sees_o_done_1 = sees_o_done_1 if !((init = 0 and act_step = true and counter = 3));
+        sees_o_done_2 = next_sees_o_done_2 if ((init = 0 and act_step = true and counter = 3));
+        sees_o_done_2 = sees_o_done_2 if !((init = 0 and act_step = true and counter = 3));
+        next_sees_o_done_2 = true if (sees_o_done_1 = true);
+        next_sees_o_done_2 = false if (sees_o_done_1 = false);
         sees_x_done_1 = next_sees_x_done_1 if ((init = 0 and act_step = true and counter = 3));
         sees_x_done_1 = sees_x_done_1 if !((init = 0 and act_step = true and counter = 3));
+        sees_x_done_2 = next_sees_x_done_2 if ((init = 0 and act_step = true and counter = 3));
+        sees_x_done_2 = sees_x_done_2 if !((init = 0 and act_step = true and counter = 3));
+        next_sees_x_done_2 = true if (sees_x_done_1 = true);
+        next_sees_x_done_2 = false if (sees_x_done_1 = false);
     end Evolution
 end Agent
 
 Agent player_o
-    Lobsvars={init,counter,act_step, sees_o_done_1, legal_o_c, legal_o_d, legal_o_noop, done_o_c_1, done_o_d_1, done_o_noop_1};
+    Lobsvars={init,counter,act_step, sees_o_done_1, sees_o_done_2, legal_o_c, legal_o_d, legal_o_noop, done_o_c_1, done_o_c_2, done_o_d_1, done_o_d_2, done_o_noop_1, done_o_noop_2};
     Vars:
 
     end Vars
@@ -178,7 +202,7 @@ end Agent
 
 
 Agent player_x
-    Lobsvars={init,counter,act_step, sees_x_done_1, legal_x_c, legal_x_d, legal_x_noop, done_x_c_1, done_x_d_1, done_x_noop_1};
+    Lobsvars={init,counter,act_step, sees_x_done_1, sees_x_done_2, legal_x_c, legal_x_d, legal_x_noop, done_x_c_1, done_x_c_2, done_x_d_1, done_x_d_2, done_x_noop_1, done_x_noop_2};
     Vars:
 
     end Vars
@@ -205,13 +229,11 @@ Evaluation
     goal_x_3 if (((Environment.true_cc = true)));
     goal_x_4 if (((Environment.true_dd = true)));
     goal_x_5 if (((Environment.true_dc = true)));
-    t if (Environment.terminal = true and Environment.init = 0 and Environment.counter = 0 and Environment.act_step = true);
+t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
 end Evaluation
 
 InitStates
     Environment.counter = 0 and Environment.ok = 0 and Environment.init = 3 and Environment.act_step = false
-    and Environment.role_o = false
-    and Environment.role_x = false
     and Environment.true_cc = false
     and Environment.next_cc = false
     and Environment.true_cd = false
@@ -230,8 +252,12 @@ InitStates
     and Environment.next_xd = false
     and Environment.sees_o_done_1 = false
     and Environment.next_sees_o_done_1 = false
+    and Environment.sees_o_done_2 = false
+    and Environment.next_sees_o_done_2 = false
     and Environment.sees_x_done_1 = false
     and Environment.next_sees_x_done_1 = false
+    and Environment.sees_x_done_2 = false
+    and Environment.next_sees_x_done_2 = false
     and Environment.legal_o_c = false
     and Environment.legal_o_d = false
     and Environment.legal_o_noop = false
@@ -241,16 +267,23 @@ InitStates
     and Environment.terminal = false
     and Environment.does_o_c = false
     and Environment.done_o_c_1 = false
+    and Environment.done_o_c_2 = false
     and Environment.does_o_d = false
     and Environment.done_o_d_1 = false
+    and Environment.done_o_d_2 = false
     and Environment.does_o_noop = false
     and Environment.done_o_noop_1 = false
+    and Environment.done_o_noop_2 = false
     and Environment.does_x_c = false
     and Environment.done_x_c_1 = false
+    and Environment.done_x_c_2 = false
     and Environment.does_x_d = false
     and Environment.done_x_d_1 = false
+    and Environment.done_x_d_2 = false
     and Environment.does_x_noop = false
-    and Environment.done_x_noop_1 = false;
+    and Environment.done_x_noop_1 = false
+    and Environment.done_x_noop_2 = false
+;
 end InitStates
 
 Groups
@@ -261,5 +294,4 @@ end Fairness
 
 Formulae
     AF t;
-    <<e>> <<x>> <<y>> (Environment, e) (player_x, x) (player_o, y) ((F (t and (goal_x_5 or goal_x_4)) and ([[xa]] (player_x, xa) F (t and (goal_x_3 or goal_x_2 or goal_x_0 or goal_x_4)))) and (F (t and (goal_o_5 or goal_o_4)) and ([[oa]] (player_o, oa) F (t and (goal_o_3 or goal_o_2 or goal_o_0 or goal_o_4)))));
 end Formulae

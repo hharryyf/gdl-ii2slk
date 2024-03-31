@@ -357,7 +357,11 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
     for r in sorted(legal.keys()):
         for act in sorted(legal[r]):
             for i in range(recall):
-                print(f'        done_{r}_{act}_{i+1} = does_{r}_{act} if ((init = 0 and act_step = true and counter = 1));')
+                if i == 0:
+                    print(f'        done_{r}_{act}_{i+1} = does_{r}_{act} if ((init = 0 and act_step = true and counter = 1));')
+                else:
+                    print(f'        done_{r}_{act}_{i+1} = done_{r}_{act}_{i} if ((init = 0 and act_step = true and counter = 1));')
+                    
                 print(f'        done_{r}_{act}_{i+1} = done_{r}_{act}_{i+1} if !((init = 0 and act_step = true and counter = 1));')
     
     
