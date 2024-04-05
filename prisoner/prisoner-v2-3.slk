@@ -365,16 +365,7 @@ Evaluation
     goal_x_7 if (((Environment.true_ll = true)));
     goal_x_8 if (((Environment.true_rll = true)));
     goal_x_9 if (((Environment.true_lr = true)));
-    t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
-    init if (Environment.counter = 0 and Environment.act_step = false and Environment.init = 2);
-    control_x if Environment.true_control_x = true;
-    root if Environment.true_root = true;
-    terminal if Environment.terminal = true;
-    real if (Environment.counter = 0 and Environment.act_step = true and Environment.init = 0);
-    sees_o_xdone_1 if Environment.sees_o_xdone_1 = true;
-    sees_o_right_2 if Environment.sees_o_doneright_2 = true;
-    sees_o_xdone_3 if Environment.sees_o_xdone_3 = true;
-    done_x_right_3 if Environment.done_x_right_3 = true;
+t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
 end Evaluation
 
 InitStates
@@ -483,18 +474,4 @@ end Fairness
 
 Formulae
     AF t;
-    AG (t -> (goal_x_10 or goal_x_4 or goal_x_6 or goal_x_8 or goal_x_7 or goal_x_9));
-    AG (t -> (goal_o_10 or goal_o_4 or goal_o_6 or goal_o_8 or goal_o_7 or goal_o_9));
-    AG (t -> K(player_x, terminal));
-    AG (t -> K(player_o, terminal));
-    AG ((goal_o_6 and t) -> K(player_o, goal_o_6 or goal_o_4));
-    AG ((goal_x_8 and t) -> K(player_x, goal_x_8 or goal_x_10));
-    AG ((goal_x_8 and t) -> K(player_x, goal_x_8));
-    AG ((goal_x_8 and t) -> K(player_x, goal_x_8 or goal_x_10));
-    -- AG ((real and sees_o_xdone_1 and sees_o_doneleft_2) -> K(player_o, done_o_left_1 or done_o_right_1));
-    AG (init -> (K(player_x, root) and K(player_o, root) and K(player_x, control_x) and K(player_o, control_x)));
-    <<e>> <<x>> <<y>> (Environment, e) (player_x, x) (player_o, y) ((F (t and (goal_x_8)) and ([[xa]] (player_x, xa) F (t and (goal_x_0 or goal_x_7 or goal_x_4 or goal_x_6 or goal_x_8)))) and (F (t and (goal_o_8)) and ([[oa]] (player_o, oa) F (t and (goal_o_0 or goal_o_4 or goal_o_6 or goal_o_8 or goal_o_7)))));
-    <<e>> <<x>> <<y>> (Environment, e) (player_x, x) (player_o, y) ((F (t and (goal_x_7)) and ([[xa]] (player_x, xa) F (t and (goal_x_0 or goal_x_7 or goal_x_4 or goal_x_6)))) and (F (t and (goal_o_9)) and ([[oa]] (player_o, oa) F (t and (goal_o_0 or goal_o_4 or goal_o_6 or goal_o_8 or goal_o_7 or goal_o_9)))));
-    <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) (F (t and (goal_x_8 or goal_x_9 or goal_x_10)));
-    AG ((real and sees_o_xdone_1 and sees_o_right_2 and sees_o_xdone_3) -> K(player_x, done_x_right_3));
 end Formulae

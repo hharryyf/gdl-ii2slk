@@ -52,7 +52,7 @@ goal(x, 8) :- true(rll).
 goal(o, 8) :- true(rll).
 goal(x, 4) :- true(rlr).
 goal(o, 10) :- true(rlr).
-goal(x, 10) :- true(rrl).
+goal(x, 5) :- true(rrl).
 goal(o, 4) :- true(rrl).
 goal(x, 6) :- true(rrr).
 goal(o, 6) :- true(rrr).
