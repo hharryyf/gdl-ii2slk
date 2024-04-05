@@ -229,7 +229,10 @@ Evaluation
     goal_x_3 if (((Environment.true_cc = true)));
     goal_x_4 if (((Environment.true_dd = true)));
     goal_x_5 if (((Environment.true_dc = true)));
-t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+    t if (Environment.terminal = true and Environment.act_step = true and Environment.init = 0 and Environment.counter = 0);
+    init if (Environment.counter = 0 and Environment.act_step = false and Environment.init = 2);
+    control_x if Environment.true_control_x = true;
+    terminal if Environment.terminal = true;
 end Evaluation
 
 InitStates
@@ -293,5 +296,12 @@ Fairness
 end Fairness
 
 Formulae
-    AF t;
+    EF t;
+    AG ((t and goal_x_4) -> K(player_x, goal_x_4 or goal_x_5));
+    AG ((t and goal_x_4) -> K(player_x, goal_x_4));
+    AG ((t and goal_x_3) -> K(player_x, goal_x_3 or goal_x_2));
+    AG (t -> K(player_x, terminal));
+    AG (t -> K(player_o, terminal));
+    <<e>> <<x>> <<y>> (Environment, e) (player_x, x) (player_o, y) ((F (t and (goal_x_4)) and ([[xa]] (player_x, xa) F (t and (goal_x_3 or goal_x_2 or goal_x_0 or goal_x_4)))) and (F (t and (goal_o_4)) and ([[oa]] (player_o, oa) F (t and (goal_o_3 or goal_o_2 or goal_o_0 or goal_o_4)))));
+    AG (init -> (K(player_x, control_x) and K(player_o, control_x)));
 end Formulae

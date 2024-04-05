@@ -1,0 +1,62 @@
+role(x).
+role(o).
+
+init(root).
+init(control(x)).
+
+next(control(o)) :- true(control(x)).
+next(control(x)) :- true(control(o)).
+
+legal(o, noop) :- true(control(x)).
+legal(x, noop) :- true(control(o)).
+
+legal(x, left) :- true(control(x)).
+legal(x, right) :- true(control(x)).
+legal(o, left) :- true(control(o)).
+legal(o, right) :- true(control(o)).
+
+sees(x, doneleft) :- does(x, left).
+sees(x, doneright) :- does(x, right).
+sees(x, odone) :- does(x, noop).
+sees(o, xdone) :- does(o, noop).
+sees(o, doneleft) :- does(o, left).
+sees(o, doneright) :- does(o, right).
+
+
+next(l) :- true(root), does(x, left).
+next(r) :- true(root), does(x, right).
+
+next(ll) :- true(l), does(o, left).
+next(rl) :- true(r), does(o, left).
+next(lr) :- true(l), does(o, right).
+next(rr) :- true(r), does(o, right).
+
+terminal :- true(ll).
+terminal :- true(lr).
+
+next(rll) :- true(rl), does(x, left).
+next(rlr) :- true(rl), does(x, right).
+next(rrl) :- true(rr), does(x, left).
+next(rrr) :- true(rr), does(x, right).
+
+terminal :- true(rll).
+terminal :- true(rlr).
+terminal :- true(rrl).
+terminal :- true(rrr).
+
+goal(x, 7) :- true(ll).
+goal(o, 9) :- true(ll).
+goal(x, 9) :- true(lr).
+goal(o, 7) :- true(lr).
+goal(x, 8) :- true(rll).
+goal(o, 8) :- true(rll).
+goal(x, 4) :- true(rlr).
+goal(o, 10) :- true(rlr).
+goal(x, 10) :- true(rrl).
+goal(o, 4) :- true(rrl).
+goal(x, 6) :- true(rrr).
+goal(o, 6) :- true(rrr).
+
+goal(x, 0) :- not true(ll), not true(lr), not true(rll), not true(rlr), not true(rrl), not true(rrr).
+goal(o, 0) :- not true(ll), not true(lr), not true(rll), not true(rlr), not true(rrl), not true(rrr).
+
