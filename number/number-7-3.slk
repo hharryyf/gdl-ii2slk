@@ -481,15 +481,17 @@ InitStates
 end InitStates
 
 Groups
+    g1 = {player_x};
 end Groups
 
 Fairness
 end Fairness
 
 Formulae
-    AF t;
-    <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) F (t and (goal_x_100 or goal_x_83 or goal_x_66));
-    AG (t -> K(player_x, terminal) and K(player_o, terminal));
-    AG (t -> ((goal_x_100 or goal_x_83 or goal_x_66 or goal_x_50 or goal_x_33 or goal_x_16 or goal_x_0) and goal_o_0));
-    AG (t -> K(player_x, goal_x_100 or goal_x_83 or goal_x_66 or goal_x_50 or goal_x_33 or goal_x_16 or goal_x_0) and t -> K(player_o, goal_o_0));
+    -- AF t;
+    <<g1>> F (t and (goal_x_100 or goal_x_83 or goal_x_66));
+    -- <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) F (t and (goal_x_100 or goal_x_83 or goal_x_66));
+    -- AG (t -> K(player_x, terminal) and K(player_o, terminal));
+    -- AG (t -> ((goal_x_100 or goal_x_83 or goal_x_66 or goal_x_50 or goal_x_33 or goal_x_16 or goal_x_0) and goal_o_0));
+    -- AG (t -> K(player_x, goal_x_100 or goal_x_83 or goal_x_66 or goal_x_50 or goal_x_33 or goal_x_16 or goal_x_0) and t -> K(player_o, goal_o_0));
 end Formulae
