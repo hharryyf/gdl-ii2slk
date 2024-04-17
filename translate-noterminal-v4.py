@@ -11,7 +11,7 @@ role = set()
 base = set()
 next = set()
 see = {}
-#goal = {}
+goal = {}
 other = set()
 dependency = {}    
 graph = {}
@@ -202,6 +202,11 @@ def parse_atom(atom: str):
             if ch == '(':
                 break 
             curr += ch
+        if curr == 'goal':
+            nx = atom[4:].replace('(', '').replace(')','').split(',')
+            if nx[0] not in goal:
+                goal[nx[0].strip()] = set()
+            goal[nx[0].strip()].add(int(nx[1].strip()))
         if curr == 'does' or curr == 'legal' or curr == 'sees': # curr == 'goal' or 
             atom_type = curr
             content = parse_content(atom, 2)
@@ -517,6 +522,32 @@ def writeslk(recall:int = 1):
     print()
     print('Formulae')
     print('    AF t;')
+    # exist NE
+    print('<<env>> ', end='')
+    for r in role:
+        print(f'<<{r}>> ', end='')
+    print('(Environment, env)', end = ' ')
+    for r in role:
+        print(f'(player_{r}, {r}) ', end='')
+    i = 1
+    print('(', end='')
+    for r in role:
+        print('(', end='')
+        scores = sorted(goal[r])
+        for j in range(len(scores)):
+            print(f'(F (goal_{r}_{scores[j]} and t) and ([[{r}{j}]] (player_{r}, {r}{j}) F (t and (goal_{r}_{scores[0]} ', end='')
+            for k in range(1, j+1):
+                print(f'or goal_{r}_{scores[k]}', end=' ')
+            if j != len(scores) - 1:
+                print(')))) or ', end='')
+            else:
+                print(')))) ', end='')
+
+        print(') ', end='')
+        if i != len(role):
+            print(' and ', end='')
+        i += 1
+    print(');')
     print('end Formulae')
 
 def construct_dependencies(file):    
