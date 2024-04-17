@@ -3,6 +3,7 @@ import sys
 '''
     Input is a GDL-II file written in lp format, no "or" is allowed in the GDL-II file.
     The GDL-II must be grounded, and acyclic
+    for speed up, you cannot put goal in the body of any rule.
 '''
 
 init = set()
@@ -429,7 +430,7 @@ def print_agent(agent, recall=1):
     print('    Lobsvars={init,counter,act_step', end='')
     if agent in sorted(see):
         for observations in sorted(see[agent]):
-            for i in range(recall):
+            for i in range(recall+1):
                 print(f', seen_{agent}_{observations}_{i+1}', end='')
     
     for atom in sorted(legal[agent]):

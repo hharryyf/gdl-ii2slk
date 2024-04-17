@@ -38,10 +38,10 @@ for i in range(1, num + 1):
 for i in range(1, num + 1):
     for j in range(1, num + 1):
         if i < j:
-            print(f'sees(x, less) :- true(choose({i})), does(x, guess({j})).')
+            print(f'sees(x, less({j})) :- true(choose({i})), does(x, guess({j})).')
     for j in range(num, 0, -1):
         if i > j:
-            print(f'sees(x, great) :- true(choose({i})), does(x, guess({j})).')
+            print(f'sees(x, great({j})) :- true(choose({i})), does(x, guess({j})).')
 
 
 print(f'terminal :- true(correct).')

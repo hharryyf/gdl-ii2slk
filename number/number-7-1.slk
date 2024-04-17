@@ -500,4 +500,12 @@ end Fairness
 Formulae
     AF t;
     <<e>> <<x>> [[y]] (Environment, e) (player_x, x) (player_o, y) F (t and (goal_x_100 or goal_x_83 or goal_x_66));
+    <<env>> <<o>> <<x>> (Environment, env) (player_o, o) (player_x, x) ( ((F (goal_x_0 and t) and ([[x0]] (player_x, x0) F (t and (goal_x_0 )))) ) );
+    <<env>> <<o>> <<x>> (Environment, env) (player_o, o) (player_x, x) (( (F (goal_x_100 and t) and ([[x1]] (player_x, x1) F (t and (goal_x_0 or goal_x_16 or goal_x_33 or goal_x_50 or goal_x_66 or goal_x_83 or goal_x_100))))  ) );
+    <<env>> <<o>> <<x>> (Environment, env) (player_o, o) (player_x, x) (( (F (goal_x_83 and t) and ([[x1]] (player_x, x1) F (t and (goal_x_0 or goal_x_16 or goal_x_33 or goal_x_50 or goal_x_66 or goal_x_83))))  ) );
+    <<env>> <<o>> <<x>> (Environment, env) (player_o, o) (player_x, x) (( (F (goal_x_66 and t) and ([[x1]] (player_x, x1) F (t and (goal_x_0 or goal_x_16 or goal_x_33 or goal_x_50 or goal_x_66))))  ) );
+    <<env>> <<o>> <<x>> (Environment, env) (player_o, o) (player_x, x) (( (F (goal_x_50 and t) and ([[x1]] (player_x, x1) F (t and (goal_x_0 or goal_x_16 or goal_x_33 or goal_x_50))))  ) );
+    <<env>> <<o>> <<x>> (Environment, env) (player_o, o) (player_x, x) (( (F (goal_x_33 and t) and ([[x1]] (player_x, x1) F (t and (goal_x_0 or goal_x_16 or goal_x_33 ))))  ) );
+    <<env>> <<o>> <<x>> (Environment, env) (player_o, o) (player_x, x) (( (F (goal_x_16 and t) and ([[x1]] (player_x, x1) F (t and (goal_x_0 or goal_x_16 ))))  ) );
+    <<env>> <<o>> <<x>> (Environment, env) (player_o, o) (player_x, x) (( (F (goal_x_0 and t) and ([[x1]] (player_x, x1) F (t and (goal_x_0))))  ) );
 end Formulae
