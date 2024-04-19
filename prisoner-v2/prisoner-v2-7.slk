@@ -468,7 +468,6 @@ Formulae
     <<e>> [[x]] [[y]] (Environment, e) (player_x, x) (player_o, y) G (t -> K(player_x, terminal));
     <<e>> [[x]] [[y]] (Environment, e) (player_x, x) (player_o, y) G (t -> K(player_o, terminal));
     <<e>> [[x]] [[y]] (Environment, e) (player_x, x) (player_o, y) G ((goal_o_6 and t) -> K(player_o, goal_o_6 or goal_o_4));
-    
     AG (t -> K(player_x, terminal));
     AG (t -> K(player_o, terminal));
     AG ((goal_o_6 and t) -> K(player_o, goal_o_6 or goal_o_4));

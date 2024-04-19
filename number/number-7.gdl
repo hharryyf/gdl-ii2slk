@@ -18,6 +18,7 @@ legal(x,guess(6)) :- true(control(x)).
 legal(x,guess(7)) :- true(control(x)).
 legal(o, noop) :- true(control(x)).
 legal(x, noop) :- true(control(o)).
+sees(x, noop) :- does(x, noop).
 next(choose(1)) :- true(choose(1)).
 next(choose(2)) :- true(choose(2)).
 next(choose(3)) :- true(choose(3)).

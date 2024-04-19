@@ -43,26 +43,27 @@ next(correct) :- true(choose(4)), does(x, guess(4)).
 sees(x, ok) :- true(choose(4)), does(x, guess(4)).
 next(correct) :- true(choose(5)), does(x, guess(5)).
 sees(x, ok) :- true(choose(5)), does(x, guess(5)).
-sees(x, less) :- true(choose(1)), does(x, guess(2)).
-sees(x, less) :- true(choose(1)), does(x, guess(3)).
-sees(x, less) :- true(choose(1)), does(x, guess(4)).
-sees(x, less) :- true(choose(1)), does(x, guess(5)).
-sees(x, less) :- true(choose(2)), does(x, guess(3)).
-sees(x, less) :- true(choose(2)), does(x, guess(4)).
-sees(x, less) :- true(choose(2)), does(x, guess(5)).
-sees(x, great) :- true(choose(2)), does(x, guess(1)).
-sees(x, less) :- true(choose(3)), does(x, guess(4)).
-sees(x, less) :- true(choose(3)), does(x, guess(5)).
-sees(x, great) :- true(choose(3)), does(x, guess(2)).
-sees(x, great) :- true(choose(3)), does(x, guess(1)).
-sees(x, less) :- true(choose(4)), does(x, guess(5)).
-sees(x, great) :- true(choose(4)), does(x, guess(3)).
-sees(x, great) :- true(choose(4)), does(x, guess(2)).
-sees(x, great) :- true(choose(4)), does(x, guess(1)).
-sees(x, great) :- true(choose(5)), does(x, guess(4)).
-sees(x, great) :- true(choose(5)), does(x, guess(3)).
-sees(x, great) :- true(choose(5)), does(x, guess(2)).
-sees(x, great) :- true(choose(5)), does(x, guess(1)).
+sees(x, noop) :- does(x, noop).
+sees(x, less(2)) :- true(choose(1)), does(x, guess(2)).
+sees(x, less(3)) :- true(choose(1)), does(x, guess(3)).
+sees(x, less(4)) :- true(choose(1)), does(x, guess(4)).
+sees(x, less(5)) :- true(choose(1)), does(x, guess(5)).
+sees(x, less(3)) :- true(choose(2)), does(x, guess(3)).
+sees(x, less(4)) :- true(choose(2)), does(x, guess(4)).
+sees(x, less(5)) :- true(choose(2)), does(x, guess(5)).
+sees(x, great(1)) :- true(choose(2)), does(x, guess(1)).
+sees(x, less(4)) :- true(choose(3)), does(x, guess(4)).
+sees(x, less(5)) :- true(choose(3)), does(x, guess(5)).
+sees(x, great(2)) :- true(choose(3)), does(x, guess(2)).
+sees(x, great(1)) :- true(choose(3)), does(x, guess(1)).
+sees(x, less(5)) :- true(choose(4)), does(x, guess(5)).
+sees(x, great(3)) :- true(choose(4)), does(x, guess(3)).
+sees(x, great(2)) :- true(choose(4)), does(x, guess(2)).
+sees(x, great(1)) :- true(choose(4)), does(x, guess(1)).
+sees(x, great(4)) :- true(choose(5)), does(x, guess(4)).
+sees(x, great(3)) :- true(choose(5)), does(x, guess(3)).
+sees(x, great(2)) :- true(choose(5)), does(x, guess(2)).
+sees(x, great(1)) :- true(choose(5)), does(x, guess(1)).
 terminal :- true(correct).
 goal(x,100) :- true(correct), true(round(2)).
 goal(x,75) :- true(correct), true(round(3)).
