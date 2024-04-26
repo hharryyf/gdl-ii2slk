@@ -513,6 +513,6 @@ Formulae
     -- AF t;
     -- <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100)));
     -- <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_83)));
-    -- <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_83 or goal_x_66)));
-    <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_83 or goal_x_66 or goal_x_50)));
+    <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_83 or goal_x_66)));
+    -- <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_83 or goal_x_66 or goal_x_50)));
 end Formulae
