@@ -1,5 +1,5 @@
 # gdl-ii2slk
-A converter from grounded GDL-II (in ASP-format) to ISPL SLK
+A converter from **grounded** GDL-II (in ASP-format) to ISPL SLK
 
 To translate a GDL-II to ISPL interpreted system run:
 
