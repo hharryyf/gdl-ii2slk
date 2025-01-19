@@ -1,5 +1,5 @@
 # gdl-ii2slk
-A converter from **grounded** GDL-II (in ASP-format) to ISPL SLK
+A converter from **grounded** GDL-II (in ASP-format) to ISPL SLK. The [paper](https://proceedings.kr.org/2024/40/kr2024-0040-he-et-al.pdf) is attached 
 
 Input assumption:
 
