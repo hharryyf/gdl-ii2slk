@@ -1,6 +1,6 @@
-from clyngor import ASP, solve
+#from clyngor import ASP, solve
 import sys
-
+import clingo 
 '''
     Input is a GDL-II file written in lp format, no "or" is allowed in the GDL-II file.
     The GDL-II must be grounded, and acyclic
@@ -303,8 +303,7 @@ def print_environment_vars(maxd:int =3, recall:int = 1):
         for act in sorted(legal[r]):
             for i in range(recall):
                 print(f'        done_{r}_{act}_{i+1}: boolean;')
-                # print(f'        next_done_{r}_{act}_{i+1}: boolean;')
-    
+                
     for atom in sorted(other):
         if atom[:5] != 'goal_':
             print(f'        {atom}: boolean;')
@@ -336,20 +335,36 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
     print()
 
     print(f'        -- print the next for actions')
-    #for r in sorted(legal.keys()):
-    #    for act in sorted(legal[r]):
-    #        for i in range(1, recall + 1, 1):
-    #            if i == 1:
-    #                print(f'        next_done_{r}_{act}_{i} = does_{r}_{act} if (ok = 0);')
-    #            else:
-    #                print(f'        next_done_{r}_{act}_{i} = done_{r}_{act}_{i-1} if (ok = 0);')
     
     print(f'        -- local observation evolution')
     for r in sorted(legal.keys()):
-        for act in sorted(legal[r]):
-            print(f'        does_{r}_{act} = true if (player_{r}.Action = {act} and counter = 0 and act_step = true and terminal = false);')
-            print(f'        does_{r}_{act} = false if (counter = {maxd} and act_step = true);')
-            print(f'        does_{r}_{act} = does_{r}_{act}  if !((counter = {maxd} and act_step = true) or (player_{r}.Action = {act} and counter = 0 and act_step = true and terminal = false));')
+        lgr = sorted(legal[r])
+        illegal = ''
+        for i in range(len(lgr)):
+            act = lgr[i]
+            if i == 0:
+                illegal += f'(player_{r}.Action={act} and legal_{r}_{act}=false)'
+            else:
+                illegal += f' or (player_{r}.Action={act} and legal_{r}_{act}=false)'
+        
+        for i in range(len(lgr)):
+            act = lgr[i]
+            prevbad = ''
+            for j in range(i):
+                if j == 0:
+                    prevbad += f'legal_{r}_{lgr[j]}=false'
+                else:
+                    prevbad += f' and legal_{r}_{lgr[j]}=false'
+
+            false_str = f'(counter = {maxd} and act_step = true)'
+            if i != 0:
+                true_str = f'(counter = 0 and act_step = true and terminal = false and legal_{r}_{act} = true and (player_{r}.Action={act} or (({illegal}) and ({prevbad}))))'
+            else:
+                true_str = f'(counter = 0 and act_step = true and terminal = false and legal_{r}_{act} = true and (player_{r}.Action={act} or ({illegal})))'
+                
+            print(f'        does_{r}_{act} = true if {true_str};')
+            print(f'        does_{r}_{act} = false if {false_str};')
+            print(f'        does_{r}_{act} = does_{r}_{act}  if !({false_str} or {true_str});')
     
     # print the evolutions for true
     for b in sorted(base):
@@ -387,30 +402,25 @@ def print_init(maxd:int = 3, recall:int = 1):
     init_fluent = ''
     for s in initf:
         init_fluent += s + ' '
-    answer = solve(sys.argv[1], inline=f'{init_fluent}')
+
+    with open(sys.argv[1], "r") as g:
+        ASP_program = g.read()
+    ASP_program += init_fluent
+    
+    ctl = clingo.Control(arguments=['-W', 'none'])  # Here you can write the arguments you would pass to clingo by command line.
+    ctl.add("base", [], ASP_program)  # Adds the program to the control object.
+    ctl.ground([("base", [])])  # Grounding...
     init_true = set()
-    for ans in answer:
-        #print(ans)
-        for c in ans:
-            #print(c)
-            le = 0
-            if len(c) == 2:
-                le = len(c[1])
-            s = c[0]
-            if le > 0:
-                s = s + '('
-            for i in range(le):
-                if i > 0:
-                    s += ','
-                s += str(c[1][i])
-            if le > 0:
-                s += ')'
-            init_true.add(clean(s))
-    #exit(1)
+    # Solving...
+    with ctl.solve(yield_=True) as solution_iterator:
+        for model in solution_iterator:
+            # Model is an instance of clingo.solving.Model class 
+            # Reference: https://potassco.org/clingo/python-api/current/clingo/solving.html#clingo.solving.Model
+            for s in str(model).split():
+                init_true.add(clean(s))
+
     print('InitStates')
     print(f'    Environment.counter = 0 and Environment.ok = 0 and Environment.act_step = true')
-    #for r in sorted(role):
-    #    print(f'    and Environment.role_{r} = false')
     for atom in sorted(base):
         if atom in init:
             print(f'    and Environment.true_{atom} = true')
@@ -431,7 +441,6 @@ def print_init(maxd:int = 3, recall:int = 1):
                     else:
                         print(f'    and Environment.sees_{r}_{observations} = false')
                 print(f'    and Environment.seen_{r}_{observations}_{i+1} = false')
-                # print(f'    and Environment.sees_{r}_{observations}_{i+1}_obs = false')
                 
     for r in sorted(legal.keys()):
         for atom in sorted(legal[r]):
@@ -450,9 +459,7 @@ def print_init(maxd:int = 3, recall:int = 1):
             print(f'    and Environment.does_{r}_{act} = false')
             for i in range(recall):
                 print(f'    and Environment.done_{r}_{act}_{i+1} = false')
-                # print(f'    and Environment.next_done_{r}_{act}_{i+1} = false')
-                
-    # print other derived predicates
+    
     for atom in sorted(other):
         if atom[:5] != 'goal_':
             if atom in init_true:
@@ -470,11 +477,8 @@ def print_agent(agent, recall=1):
             for i in range(recall+1):
                 print(f', seen_{agent}_{observations}_{i+1}', end='')
     
-    for atom in sorted(legal[agent]):
-        print(f', legal_{agent}_{atom}', end='')
-    # print the terminal
-    #print(f', terminal_obs', end='')
-    # print the does
+    #for atom in sorted(legal[agent]):
+    #    print(f', legal_{agent}_{atom}', end='')
     for act in sorted(legal[agent]):
         for i in range(recall):
             print(f', done_{agent}_{act}_{i+1}', end='')
@@ -488,12 +492,8 @@ def print_agent(agent, recall=1):
     print('none};')
     print('    Protocol:')
     for act in sorted(legal[agent]):
-        print(f'        (Environment.counter = 0 and Environment.act_step = true and Environment.legal_{agent}_{act} = true): ' + '{' + f'{act}' + '};')
+        print(f'        (Environment.counter = 0 and Environment.act_step = true): ' + '{' + f'{act}' + '};')
     print('        Other : {none};')
-    #print('        (Environment.counter = 0 and Environment.act_step = true ', end='')
-    #for act in sorted(legal[agent]):
-    #    print(f'and Environment.legal_{agent}_{act} = false ', end='')
-    #print(') : {none};')
     print('    end Protocol')
     print('    Evolution:\n\n    end Evolution')
     print('end Agent')
