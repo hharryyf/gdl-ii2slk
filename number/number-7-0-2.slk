@@ -505,8 +505,12 @@ Fairness
 end Fairness
 
 Formulae
+    <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (X X X X (<<xp>>  [[op]] (player_x,xp) (player_o, op) X X X X t));
+    <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (X X X X (<<xp>>  [[op]] (player_x,xp) (player_o, op) X X X X t) -> K(player_x, <<xp>>  [[op]] (player_x,xp) (player_o, op) X X X X t));
+    <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (X X X X X X X X t);
     <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_83 or goal_x_66 or goal_x_50)));
     <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_83 or goal_x_66)));
     <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_83)));
     <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100)));
+    [[o]] <<env>> <<x>>  (player_o, o) (Environment, env) (player_x, x)(F (t and (goal_x_100)));
 end Formulae

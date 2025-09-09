@@ -309,6 +309,7 @@ Evaluation
     goal_x_25 if (((Environment.true_correct = true) and (Environment.true_round_5 = true)));
     goal_x_50 if (((Environment.true_correct = true) and (Environment.true_round_4 = true)));
     goal_x_75 if (((Environment.true_correct = true) and (Environment.true_round_3 = true)));
+    real if (Environment.act_step = true and Environment.counter = 0);
 t if (Environment.terminal = true and Environment.act_step = true and Environment.counter = 0);
 end Evaluation
 
@@ -399,7 +400,9 @@ Fairness
 end Fairness
 
 Formulae
+    -- <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) t or ;
     <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100)));
+    K(player_x, <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_75 or goal_x_25))));
     <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_75)));
     <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_75 or goal_x_50)));
     <<env>> <<x>> [[o]] (Environment, env) (player_x, x) (player_o, o) (F (t and (goal_x_100 or goal_x_75 or goal_x_50 or goal_x_25)));

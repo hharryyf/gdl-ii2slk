@@ -455,7 +455,10 @@ Fairness
 end Fairness
 Formulae
     AF t;
-    AG (real -> (AX AX AX AX real));
+    -- [[e]] [[x]] [[y]] (Environment, e) (player_x, x) (player_o, y) (X X (real and G real));
+    [[e]] [[x]] [[y]] (Environment, e) (player_x, x) (player_o, y) X X X X real;
+    [[e]] [[x]] [[y]] (Environment, e) (player_x, x) (player_o, y) X X real;
+    [[e]] [[x]] [[y]] (Environment, e) (player_x, x) (player_o, y) G (real -> X X X X real);
     AG (t -> (goal_x_4 or goal_x_6 or goal_x_8 or goal_x_7 or goal_x_9 or goal_x_5));
     AG (t -> (goal_o_10 or goal_o_4 or goal_o_6 or goal_o_8 or goal_o_7 or goal_o_9));
     [[e]] [[x]] [[y]] (Environment, e) (player_x, x) (player_o, y) G (real -> (terminal -> K(player_x, terminal)));
