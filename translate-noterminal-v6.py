@@ -362,12 +362,12 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
         for act in sorted(legal[r]):
             print(f'        does_{r}_{act} = true if (player_{r}.Action = {act} and counter = 0 and act_step = true and terminal = false and !(counter = 0 and act_step = true and ({no_play})));')
             print(f'        does_{r}_{act} = false if (counter = {maxd} and act_step = true);')
-            print(f'        does_{r}_{act} = does_{r}_{act}  if !((counter = {maxd} and act_step = true) or (player_{r}.Action = {act} and counter = 0 and act_step = true and terminal = false and !(counter = 0 and act_step = true and ({no_play}))));')
+            # print(f'        does_{r}_{act} = does_{r}_{act}  if !((counter = {maxd} and act_step = true) or (player_{r}.Action = {act} and counter = 0 and act_step = true and terminal = false and !(counter = 0 and act_step = true and ({no_play}))));')
     
     # print the evolutions for true
     for b in sorted(base):
             print(f'        true_{b} = next_{b} if ((act_step = true and counter = {maxd}));')
-            print(f'        true_{b} = true_{b} if !((act_step = true and counter = {maxd}));')
+            # print(f'        true_{b} = true_{b} if !((act_step = true and counter = {maxd}));')
 
 
     # print the evolutions for recall
@@ -387,10 +387,10 @@ def print_evolutions(maxd:int = 3, recall:int = 1):
             for i in range(recall+1):
                 if i == 0:
                     print(f'        seen_{r}_{observations}_{i+1} = sees_{r}_{observations} if ((act_step = true and counter = {maxd}));')
-                    print(f'        seen_{r}_{observations}_{i+1} = seen_{r}_{observations}_{i+1} if !((act_step = true and counter = {maxd}));')
+                    #print(f'        seen_{r}_{observations}_{i+1} = seen_{r}_{observations}_{i+1} if !((act_step = true and counter = {maxd}));')
                 else:
                     print(f'        seen_{r}_{observations}_{i+1} = seen_{r}_{observations}_{i} if ((act_step = true and counter = {maxd}));')
-                    print(f'        seen_{r}_{observations}_{i+1} = seen_{r}_{observations}_{i+1} if !((act_step = true and counter = {maxd}));')
+                    #print(f'        seen_{r}_{observations}_{i+1} = seen_{r}_{observations}_{i+1} if !((act_step = true and counter = {maxd}));')
     
 
     print('    end Evolution')
