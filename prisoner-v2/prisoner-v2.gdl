@@ -1,9 +1,13 @@
 role(x).
 role(o).
 
+init(r0).
 init(root).
 init(control(x)).
 
+next(r1) :- true(r0).
+next(r2) :- true(r1).
+next(r3) :- true(r2).
 next(control(o)) :- true(control(x)).
 next(control(x)) :- true(control(o)).
 
