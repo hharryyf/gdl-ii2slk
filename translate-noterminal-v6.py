@@ -588,7 +588,7 @@ def writeslk(recall:int = 1):
     print()
     print('Formulae')
     print('    AF t;')
-    # exist NE
+    #exist NE
     # print('<<env>> ', end='')
     # for r in role:
     #     print(f'<<{r}>> ', end='')
@@ -601,13 +601,16 @@ def writeslk(recall:int = 1):
     #     print('(', end='')
     #     scores = sorted(goal[r])
     #     for j in range(len(scores)):
-    #         print(f'(F (goal_{r}_{scores[j]} and t) and ([[{r}{j}]] (player_{r}, {r}{j}) F (t and (goal_{r}_{scores[0]} ', end='')
-    #         for k in range(1, j+1):
-    #             print(f'or goal_{r}_{scores[k]}', end=' ')
-    #         if j != len(scores) - 1:
-    #             print(')))) or ', end='')
-    #         else:
-    #             print(')))) ', end='')
+    #         if j == len(scores) - 1:
+    #             print(f'(F (goal_{r}_{scores[j]} and t)) ', end='')
+    #         else:    
+    #             print(f'(F (goal_{r}_{scores[j]} and t) and ([[{r}{j}]] (player_{r}, {r}{j}) ! (F (t and (goal_{r}_{scores[j+1]} ', end='')
+    #             for k in range(j+2, len(scores)):
+    #                 print(f'or goal_{r}_{scores[k]}', end=' ')
+    #             if j != len(scores) - 1:
+    #                 print('))))) or ', end='')
+    #             else:
+    #                 print('))))) ', end='')
 
     #     print(') ', end='')
     #     if i != len(role):

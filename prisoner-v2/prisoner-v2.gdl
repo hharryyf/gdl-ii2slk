@@ -1,13 +1,9 @@
 role(x).
 role(o).
 
-init(r0).
 init(root).
 init(control(x)).
 
-next(r1) :- true(r0).
-next(r2) :- true(r1).
-next(r3) :- true(r2).
 next(control(o)) :- true(control(x)).
 next(control(x)) :- true(control(o)).
 
@@ -48,18 +44,18 @@ terminal :- true(rlr).
 terminal :- true(rrl).
 terminal :- true(rrr).
 
-goal(x, 7) :- true(ll).
-goal(o, 9) :- true(ll).
-goal(x, 9) :- true(lr).
-goal(o, 7) :- true(lr).
-goal(x, 8) :- true(rll).
-goal(o, 8) :- true(rll).
-goal(x, 4) :- true(rlr).
-goal(o, 10) :- true(rlr).
-goal(x, 5) :- true(rrl).
-goal(o, 4) :- true(rrl).
-goal(x, 6) :- true(rrr).
-goal(o, 6) :- true(rrr).
+goal(x, 70) :- true(ll).
+goal(o, 90) :- true(ll).
+goal(x, 100) :- true(lr).
+goal(o, 70) :- true(lr).
+goal(x, 80) :- true(rll).
+goal(o, 80) :- true(rll).
+goal(x, 40) :- true(rlr).
+goal(o, 100) :- true(rlr).
+goal(x, 50) :- true(rrl).
+goal(o, 40) :- true(rrl).
+goal(x, 60) :- true(rrr).
+goal(o, 60) :- true(rrr).
 
 goal(x, 0) :- not true(ll), not true(lr), not true(rll), not true(rlr), not true(rrl), not true(rrr).
 goal(o, 0) :- not true(ll), not true(lr), not true(rll), not true(rlr), not true(rrl), not true(rrr).

@@ -58,6 +58,7 @@ next(correct) :- true(choose(6)), does(x, guess(6)).
 sees(x, ok) :- true(choose(6)), does(x, guess(6)).
 next(correct) :- true(choose(7)), does(x, guess(7)).
 sees(x, ok) :- true(choose(7)), does(x, guess(7)).
+sees(o,noop).
 sees(x, less(2)) :- true(choose(1)), does(x, guess(2)).
 sees(x, less(3)) :- true(choose(1)), does(x, guess(3)).
 sees(x, less(4)) :- true(choose(1)), does(x, guess(4)).
