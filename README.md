@@ -14,9 +14,11 @@ Note that 2) and 3) are introduced for performance reasons
 To translate a GDL-II to ISPL interpreted system run:
 
 ```
-python translate-noterminal-v5.py [path to GDL-II file] [recall depth] > model.slk
+python translate-noterminal-v6.py [path to GDL-II file] [recall depth] > model.slk
 
 ```
+
+You can then fill the formulas you want to model-checked against in the .slk file.
 
 To perform model checking run:
 ```
@@ -24,3 +26,17 @@ To perform model checking run:
 
 ```
 
+To reproduce the experiments, just run:
+
+```
+./mcmas-slk_64 prisoner-v2/prisoner-v2-0.slk
+
+./mcmas-slk_64 number/number-5-0-1.slk
+
+./mcmas-slk_64 number/number-6-0-1.slk
+
+./mcmas-slk_64 number/number-7-0-5.slk
+
+./mcmas-slk_64 number/number-8-0-1.slk
+
+```
